@@ -430,6 +430,8 @@ function initMain() {
                 overlay.classList.remove('active');
                 document.body.style.overflow = '';
                 localStorage.setItem('cookieConsentAccepted', 'true');
+            });
+        }
     }
 
 } // End of initMain
