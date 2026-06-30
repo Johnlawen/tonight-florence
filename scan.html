@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Florence Tonight — Ticket Scanner</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #030303; --bg-light: #0a0a0a; --bg-card: #0f0f0f;
+      --text-primary: #ffffff; --text-secondary: #9e9e9e;
+      --accent-gold: #c6a87c; --accent-purple: #6a42b0;
+      --border: #1a1a1a; --green: #4CAF50; --red: #f44336;
+      --font-heading: 'Playfair Display', serif;
+      --font-body: 'Inter', sans-serif;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html, body { background:var(--bg); color:var(--text-primary); font-family:var(--font-body); min-height:100vh; overflow-x:hidden; }
+
+    /* ── LOGIN ── */
+    .login-screen {
+      min-height:100vh; display:flex; flex-direction:column;
+      justify-content:center; align-items:center; padding:40px 24px;
+    }
+    .login-brand { text-align:center; margin-bottom:48px; }
+    .login-brand h1 {
+      font-family:var(--font-heading); font-size:2rem; font-weight:400; letter-spacing:2px;
+    }
+    .login-brand h1 span { color:var(--accent-purple); }
+    .login-brand p { font-size:11px; color:var(--text-secondary); letter-spacing:4px; text-transform:uppercase; margin-top:8px; }
+    .pin-label { font-size:12px; color:var(--text-secondary); letter-spacing:2px; text-transform:uppercase; margin-bottom:12px; font-weight:500; }
+    .pin-input {
+      width:200px; text-align:center; background:var(--bg-card); border:1px solid var(--border);
+      color:var(--text-primary); font-size:32px; font-family:var(--font-heading); letter-spacing:12px;
+      padding:16px; transition:border-color 0.3s; border-radius:4px;
+    }
+    .pin-input:focus { outline:none; border-color:var(--accent-purple); }
+    .pin-input::placeholder { color:#333; letter-spacing:8px; font-size:20px; }
+    .pin-btn {
+      margin-top:20px; background:var(--accent-purple); color:#fff; border:none; padding:14px 48px;
+      font-family:var(--font-body); font-weight:600; font-size:12px; letter-spacing:2px;
+      text-transform:uppercase; cursor:pointer; transition:all 0.3s; border-radius:4px;
+    }
+    .pin-btn:hover { background:#5a3296; }
+    .pin-error { color:var(--red); font-size:13px; margin-top:12px; display:none; }
+
+    /* ── SCANNER ── */
+    .scanner-screen { display:none; min-height:100vh; flex-direction:column; }
+    .scanner-header {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:16px 20px; border-bottom:1px solid var(--border); background:var(--bg-light);
+    }
+    .scanner-logo { font-family:var(--font-heading); font-size:18px; font-weight:400; letter-spacing:1px; }
+    .scanner-logo span { color:var(--accent-purple); }
+    .scanner-badge {
+      font-size:10px; font-weight:600; letter-spacing:2px; padding:6px 14px; text-transform:uppercase;
+      border-radius:4px;
+    }
+    .scanner-badge.ready { background:rgba(76,175,80,0.15); border:1px solid var(--green); color:var(--green); }
+    .scanner-badge.checking { background:rgba(198,168,124,0.15); border:1px solid var(--accent-gold); color:var(--accent-gold); }
+    .scanner-body { flex:1; display:flex; flex-direction:column; align-items:center; padding:20px; }
+    .camera-box {
+      width:100%; max-width:400px; aspect-ratio:1; background:var(--bg-card);
+      border:2px solid var(--border); position:relative; overflow:hidden; margin-bottom:20px;
+      border-radius:8px;
+    }
+    .camera-box video { width:100%; height:100%; object-fit:cover; }
+    .scan-line {
+      position:absolute; top:0; left:10%; width:80%; height:3px;
+      background:linear-gradient(90deg, transparent, var(--accent-purple), transparent);
+      animation:scanMove 2s ease-in-out infinite; box-shadow:0 0 15px var(--accent-purple);
+    }
+    @keyframes scanMove { 0%,100% { top:10%; } 50% { top:85%; } }
+    .corner { position:absolute; width:30px; height:30px; border-color:var(--accent-purple); border-style:solid; }
+    .corner.tl { top:10px; left:10px; border-width:3px 0 0 3px; }
+    .corner.tr { top:10px; right:10px; border-width:3px 3px 0 0; }
+    .corner.bl { bottom:10px; left:10px; border-width:0 0 3px 3px; }
+    .corner.br { bottom:10px; right:10px; border-width:0 3px 3px 0; }
+    .scan-instruction { font-size:12px; color:var(--text-secondary); letter-spacing:2px; text-transform:uppercase; text-align:center; }
+    .scan-count {
+      margin-top:16px; font-size:11px; color:var(--text-secondary); letter-spacing:1px;
+      background:var(--bg-card); border:1px solid var(--border); padding:8px 20px; border-radius:4px;
+    }
+    .scan-count strong { color:var(--accent-gold); }
+
+    /* ── RESULT ── */
+    .result-overlay {
+      position:fixed; inset:0; z-index:9999; display:none;
+      flex-direction:column; justify-content:center; align-items:center; padding:30px;
+    }
+    .result-overlay.show { display:flex; animation:resultFade 0.3s ease; }
+    @keyframes resultFade { from{opacity:0;} to{opacity:1;} }
+    .result-overlay.valid { background:rgba(10,80,10,0.95); }
+    .result-overlay.invalid { background:rgba(100,10,10,0.95); }
+    .result-icon { font-size:80px; margin-bottom:16px; }
+    .result-status {
+      font-family:var(--font-heading); font-size:32px; font-weight:600;
+      letter-spacing:2px; margin-bottom:8px;
+    }
+    .result-message { font-size:14px; color:rgba(255,255,255,0.7); text-align:center; margin-bottom:30px; max-width:340px; }
+    .result-details {
+      background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.1);
+      padding:20px 24px; width:100%; max-width:340px; margin-bottom:30px; border-radius:8px;
+    }
+    .result-row { display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.06); }
+    .result-row:last-child { border-bottom:none; }
+    .result-label { font-size:10px; color:rgba(255,255,255,0.4); letter-spacing:2px; text-transform:uppercase; }
+    .result-value { font-size:14px; color:var(--text-primary); font-weight:500; text-align:right; }
+    .result-close {
+      background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); color:#fff;
+      padding:14px 48px; font-family:var(--font-body); font-weight:600; font-size:12px;
+      letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:all 0.3s; border-radius:4px;
+    }
+    .result-close:hover { background:rgba(255,255,255,0.25); }
+  </style>
+</head>
+<body>
+
+  <!-- LOGIN -->
+  <div class="login-screen" id="loginScreen">
+    <div class="login-brand">
+      <h1>FLORENCE <span>TONIGHT</span></h1>
+      <p>Ticket Scanner</p>
+    </div>
+    <p class="pin-label">Enter Staff PIN</p>
+    <input type="password" class="pin-input" id="pinInput" maxlength="4" placeholder="····" inputmode="numeric" autocomplete="off">
+    <button class="pin-btn" id="pinBtn" onclick="checkPin()">Unlock Scanner</button>
+    <p class="pin-error" id="pinError">Incorrect PIN. Try again.</p>
+  </div>
+
+  <!-- SCANNER -->
+  <div class="scanner-screen" id="scannerScreen">
+    <div class="scanner-header">
+      <div class="scanner-logo">Florence <span>Tonight</span></div>
+      <div class="scanner-badge ready" id="statusBadge">● Ready</div>
+    </div>
+    <div class="scanner-body">
+      <div class="camera-box" id="cameraBox">
+        <video id="cameraFeed" autoplay playsinline muted></video>
+        <div class="scan-line"></div>
+        <div class="corner tl"></div>
+        <div class="corner tr"></div>
+        <div class="corner bl"></div>
+        <div class="corner br"></div>
+      </div>
+      <p class="scan-instruction">Point camera at the ticket QR code</p>
+      <div class="scan-count">Scanned today: <strong id="scanCount">0</strong></div>
+    </div>
+  </div>
+
+  <!-- RESULT OVERLAY -->
+  <div class="result-overlay" id="resultOverlay">
+    <div class="result-icon" id="resultIcon"></div>
+    <div class="result-status" id="resultStatus"></div>
+    <p class="result-message" id="resultMessage"></p>
+    <div class="result-details" id="resultDetails"></div>
+    <button class="result-close" onclick="closeResult()">Scan Next</button>
+  </div>
+
+  <script src="https://unpkg.com/jsqr@1.4.0/dist/jsQR.js"></script>
+  <script>
+    // ── CONFIG — Change this PIN for your staff ──
+    const STAFF_PIN = '1234';
+    let scanning = false;
+    let lastScanned = '';
+    let lastScanTime = 0;
+    let scanCount = 0;
+
+    document.getElementById('pinInput').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') checkPin();
+    });
+
+    function checkPin() {
+      const pin = document.getElementById('pinInput').value;
+      if (pin === STAFF_PIN) {
+        document.getElementById('loginScreen').style.display = 'none';
+        document.getElementById('scannerScreen').style.display = 'flex';
+        startCamera();
+      } else {
+        document.getElementById('pinError').style.display = 'block';
+        document.getElementById('pinInput').value = '';
+        document.getElementById('pinInput').focus();
+      }
+    }
+
+    async function startCamera() {
+      const video = document.getElementById('cameraFeed');
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: { facingMode: 'environment', width: { ideal: 1280 }, height: { ideal: 720 } }
+        });
+        video.srcObject = stream;
+        video.play();
+        scanning = true;
+        scanFrame();
+      } catch (err) {
+        alert('Camera access denied. Please allow camera access to scan tickets.');
+      }
+    }
+
+    function scanFrame() {
+      if (!scanning) return;
+      const video = document.getElementById('cameraFeed');
+      if (video.readyState !== video.HAVE_ENOUGH_DATA) { requestAnimationFrame(scanFrame); return; }
+
+      const canvas = document.createElement('canvas');
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(video, 0, 0);
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const code = jsQR(imageData.data, imageData.width, imageData.height, { inversionAttempts: 'dontInvert' });
+
+      if (code && code.data) {
+        const now = Date.now();
+        if (code.data !== lastScanned || (now - lastScanTime) > 5000) {
+          lastScanned = code.data;
+          lastScanTime = now;
+          handleScan(code.data);
+        }
+      }
+      requestAnimationFrame(scanFrame);
+    }
+
+    async function handleScan(url) {
+      if (navigator.vibrate) navigator.vibrate(200);
+      setBadge('checking');
+
+      try {
+        const urlObj = new URL(url);
+        const ticketId = urlObj.searchParams.get('id');
+        const sig = urlObj.searchParams.get('sig');
+
+        if (!ticketId || !sig) { showResult(false, 'INVALID', 'This QR code is not a valid Florence Tonight ticket.', {}); return; }
+
+        const apiUrl = urlObj.origin + urlObj.pathname;
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: ticketId, sig: sig })
+        });
+        const data = await response.json();
+
+        if (data.valid) {
+          scanCount++;
+          document.getElementById('scanCount').textContent = scanCount;
+          showResult(true, 'VALID', data.message, data.ticket || {});
+        } else {
+          showResult(false, data.status === 'already_used' ? 'ALREADY USED' : 'INVALID', data.message, data.ticket || {});
+        }
+      } catch (err) {
+        showResult(false, 'ERROR', 'Could not verify ticket. Check your connection.', {});
+      }
+    }
+
+    function showResult(valid, status, message, ticket) {
+      const overlay = document.getElementById('resultOverlay');
+      overlay.className = 'result-overlay show ' + (valid ? 'valid' : 'invalid');
+      document.getElementById('resultIcon').textContent = valid ? '✅' : '❌';
+      document.getElementById('resultStatus').textContent = status;
+      document.getElementById('resultMessage').textContent = message;
+
+      let html = '';
+      if (ticket.customerName) html += row('Name', ticket.customerName);
+      if (ticket.eventName) html += row('Event', ticket.eventName);
+      if (ticket.quantity) html += row('Qty', ticket.quantity + ' ticket(s)');
+      if (ticket.ticketId) html += row('Ticket ID', ticket.ticketId);
+      if (ticket.checkedInAt) html += row('Checked In', new Date(ticket.checkedInAt).toLocaleTimeString());
+      if (ticket.purchasedAt) html += row('Purchased', new Date(ticket.purchasedAt).toLocaleDateString());
+      document.getElementById('resultDetails').innerHTML = html || '<p style="color:rgba(255,255,255,0.3);font-size:12px;text-align:center;">No details available</p>';
+
+      if (navigator.vibrate) navigator.vibrate(valid ? [100] : [300, 100, 300]);
+    }
+
+    function row(label, value) {
+      return '<div class="result-row"><span class="result-label">' + label + '</span><span class="result-value">' + value + '</span></div>';
+    }
+
+    function closeResult() {
+      document.getElementById('resultOverlay').className = 'result-overlay';
+      setBadge('ready');
+      lastScanned = '';
+    }
+
+    function setBadge(state) {
+      const badge = document.getElementById('statusBadge');
+      if (state === 'ready') { badge.textContent = '● Ready'; badge.className = 'scanner-badge ready'; }
+      else { badge.textContent = '● Checking...'; badge.className = 'scanner-badge checking'; }
+    }
+  </script>
+</body>
+</html>

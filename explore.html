@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Florence Tonight | Explore</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./lang.js" defer></script>
+</head>
+
+<body style="background: var(--bg-color);">
+    <!-- NAVBAR -->
+    <nav class="navbar scrolled" id="navbar" style="position: static; border-bottom: 1px solid var(--border-color);">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html" class="logo" style="text-decoration:none;">
+                    <span class="ft-logo">F<sub>T</sub></span>
+                    <span class="logo-text">FLORENCE<br><span class="highlight-purple">TONIGHT</span></span>
+                </a>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="explore.html">THIS WEEK</a></li>
+                <li><a href="guides.html"><span data-i18n="nav.guides">GUIDES</span></a></li>
+                <li><a href="hidden-gems.html"><span data-i18n="nav.hidden">HIDDEN</span></a></li>
+                <li><a href="aperitivo.html">APERITIVO</a></li>
+                <li><a href="events.html"><span data-i18n="nav.events">EVENTS</span></a></li>
+                <li><a href="after-dark.html"><span data-i18n="nav.afterdark">AFTER DARK</span></a></li>
+                <li><a href="index.html#about">ABOUT</a></li>
+            </ul>
+
+            <div class="nav-action" style="display:flex;align-items:center;gap:0.5rem;">
+                <a href="plan.html" class="btn btn-outline"><span data-i18n="nav.plan">PLAN YOUR NIGHT</span> <span>&rarr;</span></a>
+                <button id="lang-toggle-btn" title="Switch to Italian"><span class="lang-flag">🇮🇹</span><span class="lang-label">IT</span></button>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- EXPLORE HEADER -->
+    <section class="explore-header-section">
+        <div class="explore-container">
+            <div class="breadcrumb">
+                <a href="index.html"><span data-i18n="nav.home">HOME</span></a> &gt; <span>Explore Tonight</span>
+            </div>
+
+            <div class="explore-header-top">
+                <div class="explore-header-left">
+                    <span class="section-kicker" style="color:var(--accent-purple);">EXPLORE TONIGHT</span>
+                    <h1 class="hero-title explore-title">Tonight<br>in Florence<span class="highlight-purple">.</span></h1>
+                    <p class="explore-subtitle">Curated events happening around the city<br>tonight. Choose your vibe.</p>
+                </div>
+                <div class="explore-header-right">
+                    <div class="date-selector">
+                        <div class="date-day"><i data-lucide="calendar"></i> SATURDAY</div>
+                        <div class="date-date">June 15 <i data-lucide="chevron-down"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TABS & FILTER -->
+            <div class="explore-controls">
+                <div class="explore-tabs">
+                    <div class="explore-tab active">
+                        <i data-lucide="home"></i> All Events
+                    </div>
+                </div>
+                <div class="explore-filter">
+                    Sort by: <span style="color:var(--accent-gold);">Time <i data-lucide="chevron-down"></i></span>
+                </div>
+            </div>
+
+            <!-- EVENT LIST -->
+            <div class="event-list">
+                <!-- ITEM 1 -->
+                <a href="#" class="list-item">
+                    <div class="list-col-time">
+                        <div class="list-time-top">7:00 PM</div>
+                        <div class="list-time-bottom">- 2:00 AM</div>
+                    </div>
+                    <div class="list-col-main">
+                        <h3 class="list-title">LA LOGGIA ROOFTOP</h3>
+                        <p class="list-desc">COCKTAILS & VIEWS</p>
+                    </div>
+                    <div class="list-col-meta">
+                        <div class="list-category">ROOFTOP</div>
+                        <div class="list-location"><i data-lucide="map-pin"></i> VIA DELLA LOGGIA, 6</div>
+                    </div>
+                    <div class="list-col-arrow">&rarr;</div>
+                </a>
+
+                <!-- ITEM 2 -->
+                <a href="#" class="list-item">
+                    <div class="list-col-time">
+                        <div class="list-time-top">11:00 PM</div>
+                        <div class="list-time-bottom">- 4:00 AM</div>
+                    </div>
+                    <div class="list-col-main">
+                        <h3 class="list-title">YAB CLUB</h3>
+                        <p class="list-desc">HIP HOP & INTERNATIONAL</p>
+                    </div>
+                    <div class="list-col-meta">
+                        <div class="list-category">CLUB</div>
+                        <div class="list-location"><i data-lucide="map-pin"></i> VIA DE' BARDI, 16</div>
+                    </div>
+                    <div class="list-col-arrow">&rarr;</div>
+                </a>
+
+                <!-- ITEM 3 -->
+                <a href="#" class="list-item">
+                    <div class="list-col-time">
+                        <div class="list-time-top">7:00 PM</div>
+                        <div class="list-time-bottom">- 11:00 PM</div>
+                    </div>
+                    <div class="list-col-main">
+                        <h3 class="list-title">SE&bull;STO ON ARNOLFO</h3>
+                        <p class="list-desc">APERITIVO & MUSIC</p>
+                    </div>
+                    <div class="list-col-meta">
+                        <div class="list-category">APERITIVO</div>
+                        <div class="list-location"><i data-lucide="map-pin"></i> PIAZZA S. SPIRITO, 10</div>
+                    </div>
+                    <div class="list-col-arrow">&rarr;</div>
+                </a>
+
+                <!-- ITEM 4 -->
+                <a href="#" class="list-item">
+                    <div class="list-col-time">
+                        <div class="list-time-top">11:00 PM</div>
+                        <div class="list-time-bottom">- 5:00 AM</div>
+                    </div>
+                    <div class="list-col-main">
+                        <h3 class="list-title">SPACE CLUB</h3>
+                        <p class="list-desc">TECHNO & HOUSE</p>
+                    </div>
+                    <div class="list-col-meta">
+                        <div class="list-category">CLUB</div>
+                        <div class="list-location"><i data-lucide="map-pin"></i> VIA PALAZZUOLO, 37</div>
+                    </div>
+                    <div class="list-col-arrow">&rarr;</div>
+                </a>
+
+                <!-- ITEM 5 -->
+                <a href="#" class="list-item">
+                    <div class="list-col-time">
+                        <div class="list-time-top">10:00 PM</div>
+                        <div class="list-time-bottom">- 4:00 AM</div>
+                    </div>
+                    <div class="list-col-main">
+                        <h3 class="list-title">BABYLONE CLUB</h3>
+                        <p class="list-desc">R&B & LATIN VIBES</p>
+                    </div>
+                    <div class="list-col-meta">
+                        <div class="list-category">CLUB</div>
+                        <div class="list-location"><i data-lucide="map-pin"></i> VIA BORGO OGNISSANTI, 12</div>
+                    </div>
+                    <div class="list-col-arrow">&rarr;</div>
+                </a>
+
+                <!-- ITEM 6 -->
+                <a href="#" class="list-item">
+                    <div class="list-col-time">
+                        <div class="list-time-top">9:00 PM</div>
+                        <div class="list-time-bottom">- 3:00 AM</div>
+                    </div>
+                    <div class="list-col-main">
+                        <h3 class="list-title">XO CLUB</h3>
+                        <p class="list-desc">LUXURY NIGHTLIFE</p>
+                    </div>
+                    <div class="list-col-meta">
+                        <div class="list-category">CLUB</div>
+                        <div class="list-location"><i data-lucide="map-pin"></i> LUNGARNO CORSINI, 4</div>
+                    </div>
+                    <div class="list-col-arrow">&rarr;</div>
+                </a>
+            </div>
+
+            <div class="explore-action" style="text-align: center; margin-top: 3rem;">
+                <a href="events.html" class="btn btn-outline" style="border-color:var(--accent-gold); color:var(--accent-gold);">VIEW FULL CALENDAR &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- STAY IN THE KNOW FOOTER -->
+    <section class="explore-footer-sub">
+        <div class="explore-container sub-flex">
+            <div class="sub-left">
+                <span class="section-kicker" style="color:var(--accent-purple);">STAY IN THE KNOW</span>
+                <h2 style="font-family:var(--font-heading); font-size:2rem; margin:0.5rem 0;">Never miss a night<br>worth remembering.</h2>
+                <p style="color:var(--text-secondary); font-size:0.8rem; max-width:300px;">Weekly picks, hidden gems, and<br>exclusive invitations&mdash;straight to your inbox.</p>
+            </div>
+            <div class="sub-mid">
+                <form class="subscribe-form" style="margin:0; width:100%; max-width:400px; display:flex;">
+                    <input type="email" placeholder="Your email" required style="flex:1; background:transparent; border:1px solid #333; color:#fff; padding:0.8rem;">
+                    <button type="submit" class="btn-submit" style="background:var(--accent-purple); border:none; padding:0 1.5rem; color:#fff;">&rarr;</button>
+                </form>
+            </div>
+            <div class="sub-right">
+                <img src="./images/events.png" alt="Florence Skyline">
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer" style="padding-top:1rem; border-top:1px solid var(--border-color);">
+        <div class="footer-container">
+            <div class="logo">
+                <span class="ft-logo">F<sub>T</sub></span>
+                <span class="logo-text">FLORENCE<br><span class="highlight-purple">TONIGHT</span></span>
+            </div>
+
+            <ul class="footer-links" style="margin:0 auto;">
+                <li><a href="index.html#about">ABOUT</a></li>
+                <li><a href="index.html#contact">CONTACT</a></li>
+                <li><a href="index.html#partnerships">PARTNERSHIPS</a></li>
+                <li><a href="index.html#venue">SUBMIT A VENUE</a></li>
+                <li><a href="index.html#privacy">PRIVACY</a></li>
+            </ul>
+
+            <div class="social-links">
+                <a href="#"><i data-lucide="instagram"></i></a>
+                <a href="#"><i data-lucide="video"></i></a>
+                <a href="#"><i data-lucide="facebook"></i></a>
+                <a href="#"><i data-lucide="mail"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./main.js"></script>
+</body>
+</html>

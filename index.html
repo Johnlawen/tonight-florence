@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Florence Tonight | Your Guide to Florence's Best Nights</title>
+    <meta name="description"
+        content="Real people. Real nights. The only guide you need for Florence nightlife, aperitivo, events, and hidden gems.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link rel="stylesheet" href="./style.css">
+    <script src="./lang.js" defer></script>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="ft-logo">F<sub>T</sub></span>
+                <span class="logo-text">FLORENCE<br><span class="highlight-purple">TONIGHT</span></span>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="index.html" data-i18n="nav.home">HOME</a></li>
+                <li><a href="guides.html" data-i18n="nav.guides">GUIDES</a></li>
+                <li><a href="hidden-gems.html" data-i18n="nav.hidden">HIDDEN</a></li>
+                <li><a href="aperitivo.html" data-i18n="nav.aperitivo">APERITIVO</a></li>
+                <li><a href="events.html" data-i18n="nav.events">EVENTS</a></li>
+                <li><a href="after-dark.html" data-i18n="nav.afterdark">AFTER DARK</a></li>
+                <li><a href="#about" data-i18n="nav.about">ABOUT</a></li>
+            </ul>
+
+            <div class="nav-action" style="display:flex;align-items:center;gap:0.5rem;">
+                <a href="plan.html" class="btn btn-outline" data-i18n="nav.plan">PLAN YOUR NIGHT <span>&rarr;</span></a>
+                <button id="lang-toggle-btn" title="Switch to Italian"><span class="lang-flag">🇮🇹</span><span
+                        class="lang-label">IT</span></button>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <!-- Background image applied via CSS -->
+        <div class="hero-bg-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title"><span data-i18n="hero.line1">YOUR GUIDE TO</span><br><span
+                    data-i18n="hero.line2">FLORENCE'S</span><br><span class="highlight-purple"
+                    data-i18n="hero.line3">BEST NIGHTS.</span>
+            </h1>
+            <p class="hero-subtitle" data-i18n="hero.subtitle">Real people. Real nights.<br>The only guide you need.</p>
+            <a href="explore.html" class="btn btn-outline btn-large"><span data-i18n="hero.cta">EXPLORE THIS WEEK</span>
+                <span>&rarr;</span></a>
+        </div>
+    </section>
+
+    <!-- FEATURES STRIP -->
+    <section class="features-strip">
+        <a href="events.html" class="feature-item">
+            <div class="feature-icon"><i data-lucide="calendar"></i></div>
+            <h3 data-i18n="feat.thisweek">THIS WEEK</h3>
+            <p data-i18n="feat.thisweek.sub">What's on</p>
+        </a>
+        <a href="aperitivo.html" class="feature-item">
+            <div class="feature-icon"><i data-lucide="wine"></i></div>
+            <h3 data-i18n="feat.aperitivo">APERITIVO</h3>
+            <p data-i18n="feat.aperitivo.sub">Eat. Drink. Connect.</p>
+        </a>
+        <a href="hidden-gems.html" class="feature-item">
+            <div class="feature-icon"><i data-lucide="map-pin"></i></div>
+            <h3 data-i18n="feat.hidden">HIDDEN GEMS</h3>
+            <p data-i18n="feat.hidden.sub">The spots locals love</p>
+        </a>
+        <a href="after-dark.html" class="feature-item">
+            <div class="feature-icon"><i data-lucide="users"></i></div>
+            <h3 data-i18n="feat.crowd">CROWD</h3>
+            <p data-i18n="feat.crowd.sub">See who's out</p>
+        </a>
+        <a href="events.html" class="feature-item">
+            <div class="feature-icon"><i data-lucide="headphones"></i></div>
+            <h3 data-i18n="feat.events">EVENTS</h3>
+            <p data-i18n="feat.events.sub">Clubs, parties & more</p>
+        </a>
+        <a href="guides.html" class="feature-item">
+            <div class="feature-icon"><i data-lucide="camera"></i></div>
+            <h3 data-i18n="feat.featured">FEATURED</h3>
+            <p data-i18n="feat.featured.sub">The highlights</p>
+        </a>
+        <a href="#partnerships" class="feature-item">
+            <div class="feature-icon"><i data-lucide="gem"></i></div>
+            <h3 data-i18n="feat.partners">PARTNERS</h3>
+            <p data-i18n="feat.partners.sub">Work with us</p>
+        </a>
+    </section>
+
+    <!-- EVENTS SECTION -->
+    <section class="events-section" id="events">
+        <div class="events-container">
+            <div class="events-header">
+                <span class="section-kicker" data-i18n="events.kicker">THIS WEEK IN FLORENCE</span>
+                <h2 class="section-title" data-i18n="events.title">HANDPICKED<br>EVENTS &<br>EXPERIENCES.</h2>
+                <p class="section-desc" data-i18n="events.desc">From rooftop cocktails to secret parties,<br>we find the
+                    nights worth remembering.</p>
+                <a href="#full-guide" class="btn btn-outline"><span data-i18n="events.btn">VIEW FULL GUIDE</span>
+                    <span>&rarr;</span></a>
+            </div>
+
+            <div class="events-carousel">
+                <!-- Card 1 -->
+                <div class="event-card">
+                    <div class="card-image">
+                        <img src="./images/la_loggia.png" alt="La Loggia Rooftop">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-tag">ROOFTOP</span>
+                        <h3 class="card-title">LA LOGGIA<br>ROOFTOP</h3>
+                        <p class="card-subtitle">COCKTAILS & VIEWS</p>
+                        <p class="card-subtitle">ALL AGES</p>
+                        </p>
+                        <p class="card-meta">
+                            <span class="icon-pin"></span> VIA DELLA LOGGIA, 6<br>
+                            Friday - Saturday<br>
+                            7PM - 2AM
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="event-card">
+                    <div class="card-image">
+                        <img src="./images/yab.jpg" alt="Yab Club">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-tag">CLUB</span>
+                        <h3 class="card-title">YAB CLUB</h3>
+                        <p class="card-subtitle">HIP HOP & INTERNATIONAL</p>
+
+                        <p class="card-subtitle">+18 ONLY</p>
+                        <p class="card-meta">
+                            <span class="icon-pin"></span> VIA DE' BARDI, 16<br>
+                            Friday<br>
+                            11PM - 4AM
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="event-card">
+                    <div class="card-image">
+                        <img src="./images/sesto_arnol.png" alt="Se.sto On Arno">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-tag">APERITIVO</span>
+                        <h3 class="card-title">SE&bull;STO<br>ON ARNOLFO</h3>
+                        <p class="card-subtitle">APERITIVO & MUSIC</p>
+                        <p class="card-subtitle">ALL AGES</p>
+
+                        <p class="card-meta">
+                            <span class="icon-pin"></span> PIAZZA S. SPIRITO, 10<br>
+                            Daily<br>
+                            7PM - 11PM
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="event-card">
+                    <div class="card-image">
+                        <img src="./images/space2.jpg" alt="Space Club">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-tag">CLUB</span>
+                        <h3 class="card-title">SPACE<br>CLUB</h3>
+                        <p class="card-subtitle">TECHNO & HOUSE</p>
+                        <p class="card-subtitle">+18 ONLY</p>
+                        <p class="card-meta">
+                            <span class="icon-pin"></span> VIA PALAZZUOLO, 37<br>
+                            Saturday<br>
+                            11PM - 5AM
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="event-card">
+                    <div class="card-image">
+                        <img src="./images/babylone_club.png" alt="Babylone Club">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-tag">CLUB</span>
+                        <h3 class="card-title">BABYLONE<br>CLUB</h3>
+                        <p class="card-subtitle">R&B & LATIN VIBES</p>
+                        <p class="card-subtitle">+18 ONLY</p>
+                        <p class="card-meta">
+                            <span class="icon-pin"></span> VIA BORGO OGNISSANTI, 12<br>
+                            Friday - Saturday<br>
+                            10PM - 4AM
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="event-card">
+                    <div class="card-image">
+                        <img src="./images/xoo.png" alt="XO Club">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-tag">CLUB</span>
+                        <h3 class="card-title">XO<br>CLUB</h3>
+                        <p class="card-subtitle">LUXURY NIGHTLIFE</p>
+                        <p class="card-subtitle">+18 ONLY</p>
+                        <p class="card-meta">
+                            <span class="icon-pin"></span> LUNGARNO CORSINI, 4<br>
+                            Thursday - Sunday<br>
+                            9PM - 3AM
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Navigation Arrow -->
+                <div class="carousel-nav">
+                    <button class="nav-arrow" id="carousel-next" aria-label="Next events">&rarr;</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEWSLETTER SECTION -->
+    <section class="newsletter-section">
+        <div class="newsletter-image">
+            <img src="./images/real_people.png" alt="Real Florence">
+        </div>
+
+        <div class="newsletter-middle">
+            <span class="section-kicker" data-i18n="news.kicker">FLORENCE AFTER DARK</span>
+            <h2 class="section-title" data-i18n="news.title">REAL PEOPLE.<br>REAL STYLE.<br>REAL FLORENCE.</h2>
+            <p class="section-desc" data-i18n="news.desc">We don't just list places.<br>We live them. Every night.</p>
+            <a href="#join" class="btn btn-outline"><span data-i18n="news.join">JOIN THE NIGHT</span>
+                <span>&rarr;</span></a>
+        </div>
+
+        <div class="newsletter-right">
+            <span class="section-kicker" data-i18n="news.right.kicker">DON'T MISS A NIGHT</span>
+            <h2 class="section-title small" data-i18n="news.right.title">GET THE INSIDE<br>GUIDE.</h2>
+            <p class="section-desc" data-i18n="news.right.desc">New events. Hidden gems.<br>Exclusive invites. Every
+                week.</p>
+
+            <form class="subscribe-form">
+                <input type="email" data-i18n-placeholder="common.email.placeholder" placeholder="Your email" required>
+                <button type="submit" class="btn-submit">&rarr;</button>
+            </form>
+
+            <div class="social-links">
+                <a href="https://www.instagram.com/florencetonight/?hl=en" target="_blank" rel="noopener noreferrer"><i
+                        data-lucide="instagram"></i></a>
+                <a href="#tiktok"><i data-lucide="video"></i></a>
+                <a href="#email"><i data-lucide="mail"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="logo">
+                <span class="ft-logo">F<sub>T</sub></span>
+                <span class="logo-text">FLORENCE<br><span class="highlight-purple">TONIGHT</span></span>
+            </div>
+
+            <ul class="footer-links">
+                <li><a href="#about" data-i18n="footer.about">ABOUT</a></li>
+                <li><a href="#contact" data-i18n="footer.contact">CONTACT</a></li>
+                <li><a href="https://www.instagram.com/florencetonight/?hl=en" target="_blank" rel="noopener noreferrer"
+                        data-i18n="footer.instagram">INSTAGRAM</a></li>
+                <li><a href="#partnerships" data-i18n="footer.partnerships">PARTNERSHIPS</a></li>
+                <li><a href="#privacy" data-i18n="footer.privacy">PRIVACY</a></li>
+            </ul>
+
+            <div class="copyright" data-i18n="footer.copy">
+                &copy; 2026 Florence Tonight<br>All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- EVENT MODAL -->
+    <div id="event-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="event-modal-close">&times;</span>
+            <div class="modal-body">
+                <div class="modal-image-container">
+                    <img id="modal-image" src="" alt="Event Flyer">
+                </div>
+                <div class="modal-info">
+                    <h2 id="modal-title" class="modal-title"></h2>
+                    <p id="modal-subtitle" class="modal-subtitle"></p>
+                    <p class="card-subtitle">Caption Of The Night</p>
+                    <div class="modal-actions">
+                        <button id="btn-book-ticket" class="btn btn-outline">BOOK TICKET</button>
+                        <button id="btn-book-table" class="btn btn-primary">BOOK TABLE</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOOKING FORM MODAL -->
+    <div id="booking-modal" class="modal">
+        <div class="modal-content booking-modal-content">
+            <span class="close-modal" id="booking-modal-close">&times;</span>
+
+            <div class="booking-header">
+                <span id="booking-type-label" class="section-kicker">BOOK TICKET</span>
+                <h2 id="booking-event-name" class="booking-title"></h2>
+            </div>
+
+            <form id="booking-form" class="booking-form" onsubmit="return false;">
+
+                <!-- Name Row -->
+                <div class="booking-row">
+                    <div class="booking-field">
+                        <label for="booking-firstname">First Name</label>
+                        <input type="text" id="booking-firstname" placeholder="e.g. Marco" required>
+                    </div>
+                    <div class="booking-field">
+                        <label for="booking-lastname">Last Name</label>
+                        <input type="text" id="booking-lastname" placeholder="e.g. Rossi" required>
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div class="booking-field">
+                    <label for="booking-email">Email Address</label>
+                    <input type="email" id="booking-email" placeholder="your@email.com" required>
+                </div>
+
+                <!-- Gender -->
+                <div class="booking-field">
+                    <label>Gender</label>
+                    <div class="gender-options">
+                        <label class="gender-option">
+                            <input type="radio" name="booking-gender" value="male" checked>
+                            <span class="gender-pill">&#9794; Male</span>
+                        </label>
+                        <label class="gender-option">
+                            <input type="radio" name="booking-gender" value="female">
+                            <span class="gender-pill">&#9792; Female</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Persons / Tickets -->
+                <div class="booking-field">
+                    <label id="qty-label">Number of Tickets</label>
+                    <div class="qty-control">
+                        <button type="button" class="qty-btn" id="qty-minus">&#8722;</button>
+                        <span id="qty-display" class="qty-value">1</span>
+                        <button type="button" class="qty-btn" id="qty-plus">&#43;</button>
+                    </div>
+                </div>
+
+                <!-- Live Price -->
+                <div class="booking-price-box">
+                    <span class="price-label">TOTAL PRICE</span>
+                    <span id="booking-total-price" class="price-value">&euro;20</span>
+                </div>
+
+                <button type="submit" class="btn btn-primary booking-submit" id="booking-submit-btn">
+                    CONFIRM BOOKING &rarr;
+                </button>
+
+                <p class="booking-note">You will receive a confirmation email within 24 hours.</p>
+            </form>
+        </div>
+    </div>
+
+    <!-- BOOKING SUCCESS MESSAGE -->
+    <div id="booking-success" class="booking-success-overlay">
+        <div class="booking-success-box">
+            <div class="success-icon">&#10003;</div>
+            <h3>Booking Confirmed!</h3>
+            <p id="success-message">Your request has been sent. Check your email for details.</p>
+            <button class="btn btn-primary" id="success-close-btn">DONE</button>
+        </div>
+    </div>
+
+    <script src="./main.js"></script>
+    <script src="./content-loader.js"></script>
+</body>
+
+</html>

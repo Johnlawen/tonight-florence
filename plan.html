@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Florence Tonight | Plan Your Night</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./lang.js" defer></script>
+</head>
+
+<body style="background: var(--bg-color);">
+    <!-- NAVBAR -->
+    <nav class="navbar scrolled" id="navbar" style="position: absolute; background: transparent; border-bottom: 1px solid rgba(255,255,255,0.1);">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html" class="logo" style="text-decoration:none;">
+                    <span class="ft-logo">F<sub>T</sub></span>
+                    <span class="logo-text">FLORENCE<br><span class="highlight-purple">TONIGHT</span></span>
+                </a>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="explore.html">THIS WEEK</a></li>
+                <li><a href="guides.html"><span data-i18n="nav.guides">GUIDES</span></a></li>
+                <li><a href="hidden-gems.html"><span data-i18n="nav.hidden">HIDDEN</span></a></li>
+                <li><a href="aperitivo.html">APERITIVO</a></li>
+                <li><a href="events.html"><span data-i18n="nav.events">EVENTS</span></a></li>
+                <li><a href="after-dark.html"><span data-i18n="nav.afterdark">AFTER DARK</span></a></li>
+                <li><a href="index.html#about">ABOUT</a></li>
+            </ul>
+
+            <div class="nav-action" style="display:flex;align-items:center;gap:0.5rem;">
+                <a href="plan.html" class="btn btn-outline" style="color:var(--accent-gold); border-color:var(--accent-gold);"><span data-i18n="nav.plan">PLAN YOUR NIGHT</span> <span>&rarr;</span></a>
+                <button id="lang-toggle-btn" title="Switch to Italian"><span class="lang-flag">🇮🇹</span><span class="lang-label">IT</span></button>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- PLAN HERO -->
+    <section class="plan-hero">
+        <div class="plan-hero-bg"></div>
+        <div class="plan-hero-content">
+            <h1 class="hero-title plan-title">We're here to<br>help you make it<br>unforgettable<span class="highlight-purple">.</span></h1>
+            <p class="plan-subtitle">Have a question, looking for a recommendation,<br>or planning something special? Send us a<br>message and we'll get back to you soon.</p>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="plan-section">
+        <div class="plan-container">
+            <div class="plan-grid">
+                <!-- LEFT COLUMN: FORM -->
+                <div class="plan-col form-col">
+                    <span class="section-kicker" style="color:var(--accent-purple);">SEND US A MESSAGE</span>
+                    <p style="color:var(--text-secondary); font-size:0.85rem; margin-bottom:2rem;">Fill out the form below and we'll get back to you as soon as possible.</p>
+                    
+                    <form class="plan-form">
+                        <div class="form-group">
+                            <label>YOUR NAME <span class="highlight-gold">*</span></label>
+                            <input type="text" placeholder="Enter your name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>EMAIL ADDRESS <span class="highlight-gold">*</span></label>
+                            <input type="email" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label>SUBJECT <span class="highlight-gold">*</span></label>
+                            <div class="select-wrapper">
+                                <select required>
+                                    <option value="" disabled selected>Choose a subject</option>
+                                    <option value="reservation">Restaurant/Rooftop Reservation</option>
+                                    <option value="events">Event Recommendations</option>
+                                    <option value="private">Private Parties</option>
+                                    <option value="collab">Collaborations</option>
+                                    <option value="other">Other</option>
+                                </select>
+                                <i data-lucide="chevron-down" class="select-icon"></i>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>YOUR MESSAGE <span class="highlight-gold">*</span></label>
+                            <textarea placeholder="Tell us how we can help..." rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-gold-outline w-100" style="justify-content:center; padding:1rem; margin-top:1rem; font-weight:600;">SEND MESSAGE &rarr;</button>
+                        <p style="color:var(--text-secondary); font-size:0.75rem; margin-top:1.5rem;">We typically respond within 24 hours.</p>
+                    </form>
+                </div>
+
+                <!-- RIGHT COLUMN: INFO -->
+                <div class="plan-col info-col">
+                    <div class="info-block">
+                        <span class="section-kicker" style="color:var(--accent-purple);">GET IN TOUCH</span>
+                        <div class="info-item">
+                            <div class="info-icon"><i data-lucide="mail"></i></div>
+                            <div class="info-text">
+                                <h4>Email Us</h4>
+                                <a href="mailto:hello@florencetonight.com">hello@florencetonight.com</a>
+                                <p>We're here to help.</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon"><i data-lucide="message-circle"></i></div>
+                            <div class="info-text">
+                                <h4>WhatsApp</h4>
+                                <a href="tel:+393451234567">+39 345 123 4567</a>
+                                <p>Quick questions? Text us.</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon"><i data-lucide="map-pin"></i></div>
+                            <div class="info-text">
+                                <h4>Based in Florence</h4>
+                                <p>Local tips. Real connections.<br>Always curated with care.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-block" style="border-top:1px solid #1a1a1a; padding-top:2rem; margin-top:2rem;">
+                        <span class="section-kicker" style="color:var(--accent-purple);">WE CAN HELP WITH</span>
+                        <ul class="help-list">
+                            <li><i data-lucide="check" style="color:var(--accent-gold);"></i> Restaurant & rooftop reservations</li>
+                            <li><i data-lucide="check" style="color:var(--accent-gold);"></i> Event recommendations</li>
+                            <li><i data-lucide="check" style="color:var(--accent-gold);"></i> Private parties & special occasions</li>
+                            <li><i data-lucide="check" style="color:var(--accent-gold);"></i> Venue bookings & collaborations</li>
+                            <li><i data-lucide="check" style="color:var(--accent-gold);"></i> General questions about Florence</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQS -->
+            <div class="faq-section" style="margin-top:4rem; border:1px solid #1a1a1a; padding:2.5rem;">
+                <span class="section-kicker" style="color:var(--accent-purple);">FREQUENTLY ASKED QUESTIONS</span>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>How do you choose the events you feature?</span>
+                            <i data-lucide="plus"></i>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Can you help me book a table or a venue?</span>
+                            <i data-lucide="plus"></i>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Do you promote private events or venues?</span>
+                            <i data-lucide="plus"></i>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" style="color:var(--accent-gold); font-size:0.75rem; font-weight:600; letter-spacing:1px; text-transform:uppercase; margin-top:2rem; display:inline-block;">VIEW ALL FAQS &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- STAY IN THE KNOW FOOTER -->
+    <section class="explore-footer-sub">
+        <div class="explore-container sub-flex" style="max-width:1100px;">
+            <div class="sub-left">
+                <span class="section-kicker" style="color:var(--accent-purple);">STAY IN THE KNOW</span>
+                <h2 style="font-family:var(--font-heading); font-size:2rem; margin:0.5rem 0;">Never miss a night<br>worth remembering.</h2>
+                <p style="color:var(--text-secondary); font-size:0.8rem; max-width:300px;">Weekly picks, hidden gems, and<br>exclusive invitations&mdash;straight to your inbox.</p>
+            </div>
+            <div class="sub-mid">
+                <form class="subscribe-form" style="margin:0; width:100%; max-width:400px; display:flex;">
+                    <input type="email" placeholder="Your email" required style="flex:1; background:transparent; border:1px solid #333; color:#fff; padding:0.8rem;">
+                    <button type="submit" class="btn-submit" style="background:var(--accent-purple); border:none; padding:0 1.5rem; color:#fff;">&rarr;</button>
+                </form>
+            </div>
+            <div class="sub-right">
+                <img src="./images/events.png" alt="Florence Skyline">
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer" style="padding-top:1rem; border-top:1px solid var(--border-color);">
+        <div class="footer-container" style="max-width:1100px;">
+            <div class="logo">
+                <span class="ft-logo">F<sub>T</sub></span>
+                <span class="logo-text">FLORENCE<br><span class="highlight-purple">TONIGHT</span></span>
+            </div>
+
+            <ul class="footer-links" style="margin:0 auto;">
+                <li><a href="index.html#about">ABOUT</a></li>
+                <li><a href="index.html#contact">CONTACT</a></li>
+                <li><a href="index.html#partnerships">PARTNERSHIPS</a></li>
+                <li><a href="index.html#venue">SUBMIT A VENUE</a></li>
+                <li><a href="index.html#privacy">PRIVACY</a></li>
+            </ul>
+
+            <div class="social-links">
+                <a href="#"><i data-lucide="instagram"></i></a>
+                <a href="#"><i data-lucide="video"></i></a>
+                <a href="#"><i data-lucide="facebook"></i></a>
+                <a href="#"><i data-lucide="mail"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./main.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

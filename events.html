@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Florence Tonight | Events</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="./style.css">`n    <script src="./lang.js" defer></script>
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html" class="logo" style="text-decoration:none;">
+                    <span class="ft-logo">F<sub>T</sub></span>
+                    <span class="logo-text">FLORENCE<br><span class="highlight-purple">TONIGHT</span></span>
+                </a>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="index.html"><span data-i18n="nav.home">HOME</span></a></li>
+                <li><a href="guides.html"><span data-i18n="nav.guides">GUIDES</span></a></li>
+                <li><a href="hidden-gems.html"><span data-i18n="nav.hidden">HIDDEN</span></a></li>
+                <li><a href="aperitivo.html">APERITIVO</a></li>
+                <li><a href="events.html" class="active-nav"
+                        style="color:var(--accent-gold); border-bottom: 1px solid var(--accent-gold); padding-bottom: 4px;">EVENTS</a>
+                </li>
+                <li><a href="after-dark.html"><span data-i18n="nav.afterdark">AFTER DARK</span></a></li>
+                <li><a href="index.html#about">ABOUT</a></li>
+            </ul>
+
+            <div class="nav-action" style="display:flex;align-items:center;gap:0.5rem;">
+                <a href="plan.html" class="btn btn-outline"><span data-i18n="nav.plan">PLAN YOUR NIGHT</span> <span>&rarr;</span></a>
+                <button id="lang-toggle-btn" title="Switch to Italian"><span class="lang-flag">????</span><span class="lang-label">IT</span></button>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="guides-hero hg-hero">
+        <div class="hero-bg-overlay events-hero-bg"></div>
+        <div class="hero-content guides-hero-content">
+            <span class="section-kicker" style="color:var(--accent-purple);">WHAT'S ON IN FLORENCE.</span>
+            <h1 class="hero-title" style="margin-bottom:1rem;">Your calendar<br>for unforgettable<br><i>nights.</i></h1>
+            <p class="hero-subtitle" style="max-width:350px; color:#fff;">The best events, parties, live music,
+                exhibitions, and experiences happening in Florence, all in one place.</p>
+            <a href="#featured" class="btn btn-outline"
+                style="border-color:var(--accent-gold); color:var(--accent-gold); margin-top:1.5rem;">BROWSE THIS WEEK'S
+                EVENTS <span>&rarr;</span></a>
+        </div>
+    </section>
+
+    <!-- FEATURED EVENTS -->
+    <section class="guides-section" id="featured" style="background:var(--bg-color);">
+        <div class="section-header-flex">
+            <span class="section-kicker" style="color:var(--accent-gold);">FEATURED EVENTS</span>
+            <a href="#" class="view-all">VIEW ALL EVENTS &rarr;</a>
+        </div>
+        <div class="guides-grid-4">
+            <div class="event-card feat-card">
+                <div class="date-badge">
+                    <span class="day">FRI</span>
+                    <span class="date">16</span>
+                </div>
+                <div class="card-image feat-img">
+                    <img src="./images/real_people.png" alt="Jazz">
+                </div>
+                <div class="card-content" style="padding:1.5rem;">
+                    <span class="card-tag" style="color:var(--accent-purple);">LIVE MUSIC</span>
+                    <h3 class="card-title" style="font-size:1.2rem; margin-bottom:1.5rem;">Jazz Under the Stars</h3>
+                    <div class="feat-meta">
+                        <p style="display:flex; align-items:center; gap:0.5rem;"><i data-lucide="clock"
+                                style="width:14px;"></i> 9:00 PM - 12:00 AM</p>
+                        <div class="loc-bookmark">
+                            <p style="display:flex; align-items:center; gap:0.5rem;"><i data-lucide="map-pin"
+                                    style="width:14px;"></i> Piazza della Passera</p>
+                            <i data-lucide="bookmark" style="color:var(--accent-gold); cursor:pointer;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="event-card feat-card">
+                <div class="date-badge">
+                    <span class="day">SAT</span>
+                    <span class="date">17</span>
+                </div>
+                <div class="card-image feat-img">
+                    <img src="./images/aperitvo.png" alt="Drinks">
+                </div>
+                <div class="card-content" style="padding:1.5rem;">
+                    <span class="card-tag" style="color:var(--accent-purple);">APERITIVO</span>
+                    <h3 class="card-title" style="font-size:1.2rem; margin-bottom:1.5rem;">Sunset Drinks<br>at La
+                        Terrazza</h3>
+                    <div class="feat-meta">
+                        <p style="display:flex; align-items:center; gap:0.5rem;"><i data-lucide="clock"
+                                style="width:14px;"></i> 7:00 PM - 10:00 PM</p>
+                        <div class="loc-bookmark">
+                            <p style="display:flex; align-items:center; gap:0.5rem;"><i data-lucide="map-pin"
+                                    style="width:14px;"></i> La Terrazza Rooftop</p>
+                            <i data-lucide="bookmark" style="color:var(--accent-gold); cursor:pointer;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="event-card feat-card">
+                <div class="date-badge">
+                    <span class="day">SAT</span>
+                    <span class="date">17</span>
+                </div>
+                <div class="card-image feat-img">
+                    <img src="./images/space_club.png" alt="Club">
+                </div>
+                <div class="card-content" style="padding:1.5rem;">
+                    <span class="card-tag" style="color:var(--accent-purple);">CLUB NIGHT</span>
+                    <h3 class="card-title" style="font-size:1.2rem; margin-bottom:1.5rem;">Move On Friday</h3>
+                    <div class="feat-meta">
+                        <p style="display:flex; align-items:center; gap:0.5rem;"><i data-lucide="clock"
+                                style="width:14px;"></i> 11:00 PM - 5:00 AM</p>
+                        <div class="loc-bookmark">
+                            <p style="display:flex; align-items:center; gap:0.5rem;"><i data-lucide="map-pin"
+                                    style="width:14px;"></i> Club Tenax</p>
+                            <i data-lucide="bookmark" style="color:var(--accent-gold); cursor:pointer;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="event-card feat-card">
+                <div class="date-badge">
+                    <span class="day">SUN</span>
+                    <span class="date">18</span>
+                </div>
+                <div class="card-image feat-img">
+                    <img src="./images/guides.png" alt="Art">
+                </div>
+                <div class="card-content" style="padding:1.5rem;">
+                    <span class="card-tag" style="color:var(--accent-purple);">ART & CULTURE</span>
+                    <h3 class="card-title" style="font-size:1.2rem; margin-bottom:1.5rem;">Uffizi Night<br>Opening</h3>
+                    <div class="feat-meta">
+                        <p style="display:flex; align-items:center; gap:0.5rem;"><i data-lucide="clock"
+                                style="width:14px;"></i> 8:15 PM - 11:00 PM</p>
+                        <div class="loc-bookmark">
+                            <p style="display:flex; align-items:center; gap:0.5rem;"><i data-lucide="map-pin"
+                                    style="width:14px;"></i> Uffizi Gallery</p>
+                            <i data-lucide="bookmark" style="color:var(--accent-gold); cursor:pointer;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- THIS WEEK'S CALENDAR (Reused from Index) -->
+    <section class="events-section" style="background:var(--bg-light); border-top:1px solid var(--border-color);">
+        <div class="events-container">
+            <div class="events-header">
+                <span class="section-kicker" style="color:var(--accent-gold);">THIS WEEK'S CALENDAR</span>
+                <h2 class="section-title">HANDPICKED<br>EVENTS &<br>EXPERIENCES.</h2>
+                <p class="section-desc">From rooftop cocktails to secret parties,<br>we find the nights worth
+                    remembering.</p>
+                <a href="#full-guide" class="btn btn-outline"
+                    style="border-color:var(--accent-gold); color:var(--accent-gold);">VIEW FULL CALENDAR
+                    <span>&rarr;</span></a>
+            </div>
+
+            <div class="events-carousel">
+                <!-- Card 1 -->
+                <div class="event-card">
+                    <div class="card-image">
+                        <img src="./images/la_loggia.png" alt="La Loggia Rooftop">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-tag">ROOFTOP</span>
+                        <h3 class="card-title">LA LOGGIA<br>ROOFTOP</h3>
+                        <p class="card-subtitle">COCKTAILS & VIEWS</p>
+                        <p class="card-subtitle">ALL AGES</p>
+                        <p class="card-meta">
+                            <span class="icon-pin"></span> VIA DELLA LOGGIA, 6<br>
+                            Friday - Saturday<br>
+                            7PM - 2AM
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="event-card">
+                    <div class="card-image">
+                        <img src="./images/yab.jpg" alt="Yab Club">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-tag">CLUB</span>
+                        <h3 class="card-title">YAB CLUB</h3>
+                        <p class="card-subtitle">HIP HOP & INTERNATIONAL</p>
+                        <p class="card-subtitle">+18 ONLY</p>
+                        <p class="card-meta">
+                            <span class="icon-pin"></span> VIA DE' BARDI, 16<br>
+                            Friday<br>
+                            11PM - 4AM
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="event-card">
+                    <div class="card-image">
+                        <img src="./images/sesto_arnol.png" alt="Se.sto On Arno">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-tag">APERITIVO</span>
+                        <h3 class="card-title">SE&bull;STO<br>ON ARNOLFO</h3>
+                        <p class="card-subtitle">APERITIVO & MUSIC</p>
+                        <p class="card-subtitle">ALL AGES</p>
+                        <p class="card-meta">
+                            <span class="icon-pin"></span> PIAZZA S. SPIRITO, 10<br>
+                            Daily<br>
+                            7PM - 11PM
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="event-card">
+                    <div class="card-image">
+                        <img src="./images/space2.jpg" alt="Space Club">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-tag">CLUB</span>
+                        <h3 class="card-title">SPACE<br>CLUB</h3>
+                        <p class="card-subtitle">TECHNO & HOUSE</p>
+                        <p class="card-subtitle">+18 ONLY</p>
+                        <p class="card-meta">
+                            <span class="icon-pin"></span> VIA PALAZZUOLO, 37<br>
+                            Saturday<br>
+                            11PM - 5AM
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="event-card">
+                    <div class="card-image">
+                        <img src="./images/babylone_club.png" alt="Babylone Club">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-tag">CLUB</span>
+                        <h3 class="card-title">BABYLONE<br>CLUB</h3>
+                        <p class="card-subtitle">R&B & LATIN VIBES</p>
+                        <p class="card-subtitle">+18 ONLY</p>
+                        <p class="card-meta">
+                            <span class="icon-pin"></span> VIA BORGO OGNISSANTI, 12<br>
+                            Friday - Saturday<br>
+                            10PM - 4AM
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="event-card">
+                    <div class="card-image">
+                        <img src="./images/xoo.png" alt="XO Club">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-tag">CLUB</span>
+                        <h3 class="card-title">XO<br>CLUB</h3>
+                        <p class="card-subtitle">LUXURY NIGHTLIFE</p>
+                        <p class="card-subtitle">+18 ONLY</p>
+                        <p class="card-meta">
+                            <span class="icon-pin"></span> LUNGARNO CORSINI, 4<br>
+                            Thursday - Sunday<br>
+                            9PM - 3AM
+                        </p>
+                    </div>
+                </div>
+
+                <div class="carousel-nav">
+                    <button class="nav-arrow" id="carousel-next" aria-label="Next events">&rarr;</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMING SOON -->
+    <section class="guides-section" style="border-top:1px solid var(--border-color); background:var(--bg-color);">
+        <div class="section-header-flex">
+            <span class="section-kicker" style="color:var(--accent-gold);">COMING SOON</span>
+            <a href="#" class="view-all">SEE WHAT'S AHEAD &rarr;</a>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;" id="events-coming-grid">
+            <div class="coming-card" style="background-image: url('./images/featured\ events.png');">
+                <div class="coming-overlay">
+                    <p style="font-size:0.75rem; margin-bottom:0.25rem;">JUN</p>
+                    <h4 style="font-size:1.1rem; margin-bottom:1rem; font-weight:600;">28 - 30</h4>
+                    <h3 style="font-family:var(--font-heading); font-size:1.5rem; margin-bottom:0.5rem;">Firenze Rocks
+                        2024</h3>
+                    <p style="font-size:0.8rem; color:var(--text-secondary);">The city's biggest music festival returns
+                        this summer.</p>
+                </div>
+            </div>
+            <div class="coming-card" style="background-image: url('./images/hidden\ gem.png');">
+                <div class="coming-overlay">
+                    <p style="font-size:0.75rem; margin-bottom:0.25rem;">JUL</p>
+                    <h4 style="font-size:1.1rem; margin-bottom:1rem; font-weight:600;">12 - AUG<br>04</h4>
+                    <h3 style="font-family:var(--font-heading); font-size:1.5rem; margin-bottom:0.5rem;">Estate
+                        Fiorentina</h3>
+                    <p style="font-size:0.8rem; color:var(--text-secondary);">A full month of concerts, theater, and
+                        open-air magic.</p>
+                </div>
+            </div>
+            <div class="coming-card" style="background-image: url('./images/aperitvo.png');">
+                <div class="coming-overlay">
+                    <p style="font-size:0.75rem; margin-bottom:0.25rem;">SEP</p>
+                    <h4 style="font-size:1.1rem; margin-bottom:1rem; font-weight:600;">10 - 15</h4>
+                    <h3 style="font-family:var(--font-heading); font-size:1.5rem; margin-bottom:0.5rem;">White
+                        Party<br>Florence</h3>
+                    <p style="font-size:0.8rem; color:var(--text-secondary);">The iconic all-white celebration is back.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STAY IN THE KNOW -->
+    <section class="guides-footer-subscribe"
+        style="background:var(--bg-light); border-top:1px solid var(--border-color);">
+        <div class="sub-left" style="display:flex; gap:2rem; align-items:center;">
+            <i data-lucide="calendar" style="width:60px; height:60px; color:var(--accent-gold);"></i>
+            <div>
+                <h2 style="font-family:var(--font-heading); font-size:1.8rem; margin:0.5rem 0;">Have an event to share?
+                </h2>
+                <p style="color:var(--text-secondary); font-size:0.8rem; max-width:300px; margin-bottom:1.5rem;">Get
+                    your event in front of thousands of locals and travelers looking for the best things to do.</p>
+                <a href="#" class="btn btn-outline"
+                    style="border-color:var(--accent-gold); color:var(--accent-gold);">SUBMIT AN EVENT &rarr;</a>
+            </div>
+        </div>
+        <div class="sub-right"
+            style="flex-direction:column; align-items:flex-start; border-left:1px solid var(--border-color); padding-left:4rem;">
+            <span class="card-tag" style="color:var(--accent-purple);">STAY IN THE KNOW</span>
+            <h2 style="font-family:var(--font-heading); font-size:1.8rem; margin:0.5rem 0;">Never miss a night worth
+                remembering.</h2>
+            <p style="color:var(--text-secondary); font-size:0.8rem; max-width:350px; margin-bottom:1.5rem;">Weekly
+                picks, hidden gems, and exclusive invitations—straight to your inbox.</p>
+            <form class="subscribe-form" style="margin:0; width:100%;">
+                <input type="email" placeholder="Your email" required>
+                <button type="submit" class="btn-submit" style="background:var(--accent-purple);">&rarr;</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer" style="padding-top:2rem; background:var(--bg-color);">
+        <div class="footer-container">
+            <div class="logo">
+                <span class="ft-logo">F<sub>T</sub></span>
+                <span class="logo-text">FLORENCE<br><span class="highlight-purple">TONIGHT</span></span>
+            </div>
+            <ul class="footer-links" style="margin:0 auto;">
+                <li><a href="index.html#about">ABOUT</a></li>
+                <li><a href="index.html#contact">CONTACT</a></li>
+                <li><a href="index.html#partnerships">PARTNERSHIPS</a></li>
+                <li><a href="index.html#venue">SUBMIT A VENUE</a></li>
+                <li><a href="index.html#privacy">PRIVACY</a></li>
+            </ul>
+            <div class="social-links">
+                <a href="#"><i data-lucide="instagram"></i></a>
+                <a href="#"><i data-lucide="video"></i></a>
+                <a href="#"><i data-lucide="facebook"></i></a>
+                <a href="#"><i data-lucide="mail"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- EVENT MODAL -->
+    <div id="event-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="event-modal-close">&times;</span>
+            <div class="modal-body">
+                <div class="modal-image-container">
+                    <img id="modal-image" src="" alt="Event Flyer">
+                </div>
+                <div class="modal-info">
+                    <h2 id="modal-title" class="modal-title"></h2>
+                    <p id="modal-subtitle" class="modal-subtitle"></p>
+                    <p class="card-subtitle">Caption Of The Night</p>
+                    <div class="modal-actions">
+                        <button id="btn-book-ticket" class="btn btn-outline">BOOK TICKET</button>
+                        <button id="btn-book-table" class="btn btn-primary">BOOK TABLE</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOOKING FORM MODAL -->
+    <div id="booking-modal" class="modal">
+        <div class="modal-content booking-modal-content">
+            <span class="close-modal" id="booking-modal-close">&times;</span>
+            <div class="booking-header">
+                <span id="booking-type-label" class="section-kicker">BOOK TICKET</span>
+                <h2 id="booking-event-name" class="booking-title"></h2>
+            </div>
+            <form id="booking-form" class="booking-form" onsubmit="return false;">
+                <div class="booking-row">
+                    <div class="booking-field">
+                        <label for="booking-firstname">First Name</label>
+                        <input type="text" id="booking-firstname" placeholder="e.g. Marco" required>
+                    </div>
+                    <div class="booking-field">
+                        <label for="booking-lastname">Last Name</label>
+                        <input type="text" id="booking-lastname" placeholder="e.g. Rossi" required>
+                    </div>
+                </div>
+                <div class="booking-field">
+                    <label for="booking-email">Email Address</label>
+                    <input type="email" id="booking-email" placeholder="your@email.com" required>
+                </div>
+                <div class="booking-field">
+                    <label>Gender</label>
+                    <div class="gender-options">
+                        <label class="gender-option"><input type="radio" name="booking-gender" value="male"
+                                checked><span class="gender-pill">&#9794; Male</span></label>
+                        <label class="gender-option"><input type="radio" name="booking-gender" value="female"><span
+                                class="gender-pill">&#9792; Female</span></label>
+                    </div>
+                </div>
+                <div class="booking-field">
+                    <label id="qty-label">Number of Tickets</label>
+                    <div class="qty-control">
+                        <button type="button" class="qty-btn" id="qty-minus">&#8722;</button>
+                        <span id="qty-display" class="qty-value">1</span>
+                        <button type="button" class="qty-btn" id="qty-plus">&#43;</button>
+                    </div>
+                </div>
+                <div class="booking-price-box">
+                    <span class="price-label">TOTAL PRICE</span>
+                    <span id="booking-total-price" class="price-value">&euro;20</span>
+                </div>
+                <button type="submit" class="btn btn-primary booking-submit" id="booking-submit-btn">CONFIRM BOOKING
+                    &rarr;</button>
+                <p class="booking-note">You will receive a confirmation email within 24 hours.</p>
+            </form>
+        </div>
+    </div>
+    <div id="booking-success" class="booking-success-overlay">
+        <div class="booking-success-box">
+            <div class="success-icon">&#10003;</div>
+            <h3>Booking Confirmed!</h3>
+            <p id="success-message">Your request has been sent. Check your email for details.</p>
+            <button class="btn btn-primary" id="success-close-btn">DONE</button>
+        </div>
+    </div>
+
+    <!-- Payment Return Handler -->
+    <div id="paymentToast"
+        style="display:none; position:fixed; bottom:30px; left:50%; transform:translateX(-50%); z-index:9999; min-width:320px; max-width:90vw; padding:20px 28px; border-radius:8px; font-family:var(--font-body); text-align:center; box-shadow:0 8px 40px rgba(0,0,0,0.7); animation:toastSlide 0.5s ease;">
+        <div id="toastIcon" style="font-size:28px; margin-bottom:8px;"></div>
+        <div id="toastTitle" style="font-family:var(--font-heading); font-size:18px; margin-bottom:4px;"></div>
+        <div id="toastBody" style="font-size:13px; opacity:0.85;"></div>
+    </div>
+    <style>
+        @keyframes toastSlide {
+            from {
+                transform: translateX(-50%) translateY(100px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+    <script>
+        (function () {
+            var params = new URLSearchParams(window.location.search);
+            if (params.get('payment') === 'success' || params.get('payment') === 'cancelled') {
+                var isSuccess = params.get('payment') === 'success';
+                window.history.replaceState({}, '', window.location.pathname);
+                setTimeout(function () {
+                    var toast = document.getElementById('paymentToast');
+                    toast.style.display = 'block';
+                    toast.style.background = isSuccess ? '#0f2a0f' : '#2a0f0f';
+                    toast.style.border = isSuccess ? '1px solid #4CAF50' : '1px solid #f44336';
+                    toast.style.color = isSuccess ? '#81e981' : '#ff8a80';
+                    document.getElementById('toastIcon').textContent = isSuccess ? '🎫' : '❌';
+                    document.getElementById('toastTitle').textContent = isSuccess ? 'Payment Successful!' : 'Payment Cancelled';
+                    document.getElementById('toastBody').textContent = isSuccess
+                        ? 'Your ticket with QR code has been sent to your email. Check your inbox!'
+                        : 'Your payment was cancelled. No charges were made.';
+                    setTimeout(function () { toast.style.display = 'none'; }, 6000);
+                }, 800);
+            }
+        })();
+    </script>
+
+    <script src="./main.js"></script>
+</body>
+
+</html>
