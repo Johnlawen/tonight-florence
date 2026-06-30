@@ -322,18 +322,33 @@ document.addEventListener('DOMContentLoaded', function () {
             if (input && input.value) {
                 var email = input.value.trim();
                 var date = new Date().toLocaleString();
-                var subs = JSON.parse(localStorage.getItem('ft-subscribers') || '[]');
-                if (!subs.some(function(s) { return s.email === email; })) {
-                    subs.push({ email: email, date: date });
-                    localStorage.setItem('ft-subscribers', JSON.stringify(subs));
-                    
-                    // Send welcome email via backend
-                    fetch('/api/subscribe', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ email: email })
-                    }).catch(function(err) { console.error(err); });
-                }
+
+                // Save subscriber to cloud database
+                fetch('/api/content?key=ft-subscribers')
+                    .then(function(r) { return r.json(); })
+                    .then(function(d) {
+                        var subs = [];
+                        if (d.value) {
+                            subs = typeof d.value === 'string' ? JSON.parse(d.value) : d.value;
+                        }
+                        if (!subs.some(function(s) { return s.email === email; })) {
+                            subs.push({ email: email, date: date });
+                            fetch('/api/content', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ key: 'ft-subscribers', value: subs })
+                            }).catch(function(err) { console.error(err); });
+                        }
+                    })
+                    .catch(function(err) { console.error('Subscriber save error:', err); });
+
+                // Send welcome email via backend
+                fetch('/api/subscribe', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: email })
+                }).catch(function(err) { console.error(err); });
+
                 var btn = form.querySelector('button[type="submit"]');
                 var origText = btn.innerHTML;
                 btn.innerHTML = '✓';

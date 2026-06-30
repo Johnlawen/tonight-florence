@@ -971,13 +971,43 @@
       if (el) el.classList.add('active');
     }
 
-    function getEvents() { return JSON.parse(localStorage.getItem('ft-events') || 'null') || DEFAULT_EVENTS; }
-    function saveEvents(evs) { localStorage.setItem('ft-events', JSON.stringify(evs)); localStorage.setItem('ft-updated', new Date().toLocaleString()); updateStats(); showToast('Events saved!'); }
+    // ── CLOUD API HELPER ──
+    function cloudSave(key, value) {
+      return fetch('/api/content', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ key: key, value: value })
+      }).catch(function(e) { console.error('Cloud save error:', e); });
+    }
+    function cloudLoad(key) {
+      return fetch('/api/content?key=' + encodeURIComponent(key))
+        .then(function(r) { return r.json(); })
+        .then(function(d) { return d.value; })
+        .catch(function(e) { console.error('Cloud load error:', e); return null; });
+    }
+    function cloudLoadAll() {
+      return fetch('/api/content')
+        .then(function(r) { return r.json(); })
+        .catch(function(e) { console.error('Cloud load all error:', e); return {}; });
+    }
+
+    var _cachedData = {}; // in-memory cache loaded at init
+
+    function getEvents() { return _cachedData['ft-events'] || DEFAULT_EVENTS; }
+    function saveEvents(evs) {
+      _cachedData['ft-events'] = evs;
+      var now = new Date().toLocaleString();
+      _cachedData['ft-updated'] = now;
+      cloudSave('ft-events', evs);
+      cloudSave('ft-updated', now);
+      updateStats();
+      showToast('Events saved!');
+    }
 
     function updateStats() {
       document.getElementById('stat-events').textContent = getEvents().length;
-      const u = localStorage.getItem('ft-updated');
-      document.getElementById('stat-updated').textContent = u ? u.split(',')[0] : '—';
+      const u = _cachedData['ft-updated'];
+      document.getElementById('stat-updated').textContent = u ? String(u).split(',')[0] : '—';
     }
 
     function showToast(msg) {
@@ -1148,7 +1178,7 @@
 
     // HERO
     function loadHero() {
-      const h = JSON.parse(localStorage.getItem('ft-hero') || '{}');
+      const h = _cachedData['ft-hero'] || {};
       document.getElementById('hero-line1').value = h.line1 || 'YOUR GUIDE TO';
       document.getElementById('hero-line2').value = h.line2 || "FLORENCE'S";
       document.getElementById('hero-line3').value = h.line3 || 'BEST NIGHTS.';
@@ -1178,13 +1208,43 @@
         subtitle: document.getElementById('hero-subtitle').value,
         cta: document.getElementById('hero-cta').value,
       };
-      localStorage.setItem('ft-hero', JSON.stringify(h));
-      localStorage.setItem('ft-updated', new Date().toLocaleString());
+      _cachedData['ft-hero'] = h;
+      var now = new Date().toLocaleString();
+      _cachedData['ft-updated'] = now;
+      cloudSave('ft-hero', h);
+      cloudSave('ft-updated', now);
       updateStats();
       showToast('Hero section saved!');
     }
 
     function initAdmin() {
+      showToast('Loading content from cloud...');
+      cloudLoadAll().then(function(data) {
+        // Parse any stringified JSON values
+        Object.keys(data).forEach(function(k) {
+          if (typeof data[k] === 'string') {
+            try { data[k] = JSON.parse(data[k]); } catch(e) { /* keep as string */ }
+          }
+        });
+        _cachedData = data;
+        renderAfterLoad();
+        showToast('Content loaded from cloud!');
+      }).catch(function() {
+        // Fallback: load from localStorage
+        console.warn('Cloud unavailable, using localStorage fallback');
+        var keys = ['ft-events','ft-hero','ft-guides','ft-newest-guides','ft-events-coming',
+          'ft-hg-thisweek','ft-hg-more','ft-hg-stories','ft-ap-highlights','ft-ap-time',
+          'ft-ap-latest','ft-ad-featured-main','ft-ad-featured-list','ft-ad-scene',
+          'ft-ad-editors-pick','ft-subscribers','ft-updated'];
+        keys.forEach(function(k) {
+          var v = localStorage.getItem(k);
+          if (v) { try { _cachedData[k] = JSON.parse(v); } catch(e) { _cachedData[k] = v; } }
+        });
+        renderAfterLoad();
+      });
+    }
+
+    function renderAfterLoad() {
       renderEvents();
       renderGuides();
       renderGenericList('ft-events-coming', DEFAULT_EVENTS_COMING, 'events-coming-list', false, true);
@@ -1206,8 +1266,16 @@
       renderSubscribers();
     }
 
-    function getGuides() { return JSON.parse(localStorage.getItem('ft-guides') || 'null') || DEFAULT_GUIDES; }
-    function saveGuides(gs) { localStorage.setItem('ft-guides', JSON.stringify(gs)); localStorage.setItem('ft-updated', new Date().toLocaleString()); updateStats(); showToast('Guides saved!'); }
+    function getGuides() { return _cachedData['ft-guides'] || DEFAULT_GUIDES; }
+    function saveGuides(gs) {
+      _cachedData['ft-guides'] = gs;
+      var now = new Date().toLocaleString();
+      _cachedData['ft-updated'] = now;
+      cloudSave('ft-guides', gs);
+      cloudSave('ft-updated', now);
+      updateStats();
+      showToast('Guides saved!');
+    }
 
     function renderGuides() {
       const gs = getGuides();
@@ -1291,7 +1359,7 @@
     }
 
     function renderGenericList(key, defaults, containerId, hasLocation, hasDate) {
-      const data = JSON.parse(localStorage.getItem(key) || 'null') || defaults;
+      const data = _cachedData[key] || defaults;
       const list = document.getElementById(containerId);
       list.innerHTML = '';
       data.forEach(item => {
@@ -1363,7 +1431,7 @@
       if (key === 'ft-ad-scene') defaults = DEFAULT_AD_SCENE;
       if (key === 'ft-ad-editors-pick') defaults = DEFAULT_AD_EDITORS_PICK;
 
-      const data = JSON.parse(localStorage.getItem(key) || 'null') || defaults;
+      const data = _cachedData[key] || defaults;
       const idx = data.findIndex(d => d.id === id);
       if (idx < 0) return;
 
@@ -1376,8 +1444,11 @@
       if (hasLocation) data[idx].location = document.getElementById('loc-' + key + '-' + id).value;
       if (hasDate) data[idx].date = document.getElementById('date-' + key + '-' + id).value;
 
-      localStorage.setItem(key, JSON.stringify(data));
-      localStorage.setItem('ft-updated', new Date().toLocaleString());
+      _cachedData[key] = data;
+      var now = new Date().toLocaleString();
+      _cachedData['ft-updated'] = now;
+      cloudSave(key, data);
+      cloudSave('ft-updated', now);
       updateStats();
       showToast('Saved successfully!');
 
@@ -1407,7 +1478,7 @@
     }
 
     async function sendEventNotification(eventData, type) {
-      const subs = JSON.parse(localStorage.getItem('ft-subscribers') || '[]');
+      const subs = _cachedData['ft-subscribers'] || [];
       if (subs.length === 0) return showToast('No subscribers to notify.');
       const emails = subs.map(s => s.email);
       showToast('Sending notifications to ' + emails.length + ' subscribers...');
@@ -1428,7 +1499,7 @@
     }
 
     function renderSubscribers() {
-      const subs = JSON.parse(localStorage.getItem('ft-subscribers') || '[]');
+      const subs = _cachedData['ft-subscribers'] || [];
       document.getElementById('stat-subs').textContent = subs.length;
       const list = document.getElementById('subscribers-list');
       if (subs.length === 0) {
@@ -1445,7 +1516,8 @@
 
     function clearSubscribers() {
       if(confirm('Are you sure you want to clear all subscribers?')) {
-        localStorage.removeItem('ft-subscribers');
+        _cachedData['ft-subscribers'] = [];
+        cloudSave('ft-subscribers', []);
         renderSubscribers();
       }
     }
