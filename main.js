@@ -430,20 +430,6 @@ function initMain() {
                 overlay.classList.remove('active');
                 document.body.style.overflow = '';
                 localStorage.setItem('cookieConsentAccepted', 'true');
-            });
-        }
-
-        // Add event listener to PRIVACY links to open the modal
-        document.querySelectorAll('a[href="#privacy"]').forEach(function(link) {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                var overlay = document.getElementById('cookie-consent');
-                if (overlay) {
-                    overlay.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                }
-            });
-        });
     }
 
 } // End of initMain

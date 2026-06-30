@@ -13,6 +13,7 @@ export default defineConfig({
         guides: './guides.html',
         hiddenGems: './hidden-gems.html',
         plan: './plan.html',
+        privacy: './privacy.html',
         scan: './scan.html'
       }
     }

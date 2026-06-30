@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Florence Tonight | Privacy & Terms</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="./style.css">
+    <script type="module" src="./lang.js"></script>
+    <style>
+        .privacy-container {
+            max-width: 800px;
+            margin: 120px auto 80px;
+            padding: 0 24px;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        .privacy-container h1 {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+        }
+        .privacy-container h2 {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin: 2.5rem 0 1rem;
+        }
+        .privacy-container ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .privacy-container li {
+            margin-bottom: 0.5rem;
+        }
+        .privacy-container p {
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+
+<body style="background: var(--bg-color);">
+    <!-- NAVBAR -->
+    <nav class="navbar scrolled" id="navbar" style="position: absolute; background: transparent; border-bottom: 1px solid rgba(255,255,255,0.1);">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html" class="logo" style="text-decoration:none;">
+                    <span class="ft-logo">F<sub>T</sub></span>
+                    <span class="logo-text">FLORENCE<br><span class="highlight-purple">TONIGHT</span></span>
+                </a>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="index.html" data-i18n="nav.home">HOME</a></li>
+                <li><a href="guides.html" data-i18n="nav.guides">GUIDES</a></li>
+                <li><a href="hidden-gems.html" data-i18n="nav.hidden">HIDDEN</a></li>
+                <li><a href="aperitivo.html" data-i18n="nav.aperitivo">APERITIVO</a></li>
+                <li><a href="events.html" data-i18n="nav.events">EVENTS</a></li>
+                <li><a href="after-dark.html" data-i18n="nav.afterdark">AFTER DARK</a></li>
+                <li><a href="index.html#about" data-i18n="nav.about">ABOUT</a></li>
+            </ul>
+
+            <div class="nav-action" style="display:flex;align-items:center;gap:0.5rem;">
+                <a href="plan.html" class="btn btn-outline" data-i18n="nav.plan">PLAN YOUR NIGHT <span>&rarr;</span></a>
+                <button id="lang-toggle-btn" title="Switch to Italian"><span class="lang-flag">&#x1F1EE;&#x1F1F9;</span><span class="lang-label">IT</span></button>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- PRIVACY CONTENT -->
+    <div class="privacy-container">
+        <h1>Privacy & Terms</h1>
+        
+        <p>By using this website, creating an account, purchasing a ticket, booking a table, or continuing to browse, you acknowledge and agree to the following:</p>
+        
+        <h2>Cookies & Privacy</h2>
+        <p>We use cookies and similar technologies to:</p>
+        <ul>
+            <li>Keep the website secure and functioning properly.</li>
+            <li>Remember your preferences and login information.</li>
+            <li>Improve your browsing experience.</li>
+            <li>Analyze website traffic and performance.</li>
+            <li>Personalize content and promotions.</li>
+        </ul>
+        <p>You can manage your cookie preferences through your browser settings. Disabling certain cookies may affect website functionality.</p>
+
+        <h2>Ticket Sales & Table Bookings</h2>
+        <ul>
+            <li>All ticket purchases and table bookings are final.</li>
+            <li>No refunds, cancellations, or exchanges will be provided except where required by applicable law or if an event is officially canceled by the organizer.</li>
+            <li>It is your responsibility to verify the event details before completing your purchase.</li>
+        </ul>
+
+        <h2>Photography & Video Recording</h2>
+        <p>By purchasing a ticket, booking a table, or attending any event listed on this platform, you acknowledge and agree that:</p>
+        <ul>
+            <li>The event may be photographed, filmed, or otherwise recorded.</li>
+            <li>Your image, voice, and likeness may appear in photographs, videos, livestreams, or other media captured during the event.</li>
+            <li>These materials may be used by the event organizer, venue, artists, partners, and this platform for marketing, advertising, promotional, editorial, and social media purposes without further notice or compensation.</li>
+        </ul>
+        <p>If you do not wish to appear in recordings, you should not attend the event.</p>
+
+        <h2>Acceptance</h2>
+        <p>By using this website, purchasing tickets, or booking tables, you confirm that you have read, understood, and agreed to these Terms and Privacy conditions.</p>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer" style="padding-top:1rem; border-top:1px solid var(--border-color);">
+        <div class="footer-container" style="max-width:1100px;">
+            <div class="logo">
+                <span class="ft-logo">F<sub>T</sub></span>
+                <span class="logo-text">FLORENCE<br><span class="highlight-purple">TONIGHT</span></span>
+            </div>
+
+            <ul class="footer-links" style="margin:0 auto;">
+                <li><a href="index.html#about" data-i18n="footer.about">ABOUT</a></li>
+                <li><a href="index.html#contact" data-i18n="footer.contact">CONTACT</a></li>
+                <li><a href="index.html#partnerships" data-i18n="footer.partnerships">PARTNERSHIPS</a></li>
+                <li><a href="privacy.html" data-i18n="footer.privacy">PRIVACY</a></li>
+            </ul>
+
+            <div class="social-links">
+                <a href="#"><i data-lucide="instagram"></i></a>
+                <a href="#"><i data-lucide="video"></i></a>
+                <a href="#"><i data-lucide="facebook"></i></a>
+                <a href="#"><i data-lucide="mail"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="./main.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
