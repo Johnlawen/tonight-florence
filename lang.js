@@ -322,8 +322,8 @@ function applyLanguage(lang) {
     const btn = document.getElementById('lang-toggle-btn');
     if (btn) {
         btn.innerHTML = lang === 'en'
-            ? '<span class="lang-flag">🇮🇹</span><span class="lang-label">IT</span>'
-            : '<span class="lang-flag">🇬🇧</span><span class="lang-label">EN</span>';
+            ? '<span class="lang-label">IT</span>'
+            : '<span class="lang-label">EN</span>';
         btn.setAttribute('title', lang === 'en' ? 'Switch to Italian' : 'Switch to English');
     }
 }
