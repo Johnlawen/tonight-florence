@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Florence Tonight â€” Ticket Scanner</title>
+  <title>Florence Tonight &mdash; Ticket Scanner</title>
   <meta name="robots" content="noindex, nofollow">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -126,7 +126,7 @@
       <p>Ticket Scanner</p>
     </div>
     <p class="pin-label">Enter Staff PIN</p>
-    <input type="password" class="pin-input" id="pinInput" maxlength="4" placeholder="Â·Â·Â·Â·" inputmode="numeric" autocomplete="off">
+    <input type="password" class="pin-input" id="pinInput" maxlength="4" placeholder="****" inputmode="numeric" autocomplete="off">
     <button class="pin-btn" id="pinBtn" onclick="checkPin()">Unlock Scanner</button>
     <p class="pin-error" id="pinError">Incorrect PIN. Try again.</p>
   </div>
@@ -135,7 +135,7 @@
   <div class="scanner-screen" id="scannerScreen">
     <div class="scanner-header">
       <div class="scanner-logo">Florence <span>Tonight</span></div>
-      <div class="scanner-badge ready" id="statusBadge">â— Ready</div>
+      <div class="scanner-badge ready" id="statusBadge">&bull; Ready</div>
     </div>
     <div class="scanner-body">
       <div class="camera-box" id="cameraBox">
@@ -162,7 +162,7 @@
 
   <script src="https://unpkg.com/jsqr@1.4.0/dist/jsQR.js"></script>
   <script>
-    // â”€â”€ CONFIG â€” Change this PIN for your staff â”€â”€
+    // --- CONFIG - Change this PIN for your staff ---
     const STAFF_PIN = '1234';
     let scanning = false;
     let lastScanned = '';
@@ -259,7 +259,7 @@
     function showResult(valid, status, message, ticket) {
       const overlay = document.getElementById('resultOverlay');
       overlay.className = 'result-overlay show ' + (valid ? 'valid' : 'invalid');
-      document.getElementById('resultIcon').textContent = valid ? 'âœ…' : 'âŒ';
+      document.getElementById('resultIcon').textContent = valid ? '\u2705' : '\u274C';
       document.getElementById('resultStatus').textContent = status;
       document.getElementById('resultMessage').textContent = message;
 
@@ -287,8 +287,8 @@
 
     function setBadge(state) {
       const badge = document.getElementById('statusBadge');
-      if (state === 'ready') { badge.textContent = 'â— Ready'; badge.className = 'scanner-badge ready'; }
-      else { badge.textContent = 'â— Checking...'; badge.className = 'scanner-badge checking'; }
+      if (state === 'ready') { badge.innerHTML = '&bull; Ready'; badge.className = 'scanner-badge ready'; }
+      else { badge.innerHTML = '&bull; Checking...'; badge.className = 'scanner-badge checking'; }
     }
   </script>
 </body>
