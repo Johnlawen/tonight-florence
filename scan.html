@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Florence Tonight — Ticket Scanner</title>
+  <title>Florence Tonight â€” Ticket Scanner</title>
   <meta name="robots" content="noindex, nofollow">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,7 +20,7 @@
     * { margin:0; padding:0; box-sizing:border-box; }
     html, body { background:var(--bg); color:var(--text-primary); font-family:var(--font-body); min-height:100vh; overflow-x:hidden; }
 
-    /* ── LOGIN ── */
+    /* â”€â”€ LOGIN â”€â”€ */
     .login-screen {
       min-height:100vh; display:flex; flex-direction:column;
       justify-content:center; align-items:center; padding:40px 24px;
@@ -47,7 +47,7 @@
     .pin-btn:hover { background:#5a3296; }
     .pin-error { color:var(--red); font-size:13px; margin-top:12px; display:none; }
 
-    /* ── SCANNER ── */
+    /* â”€â”€ SCANNER â”€â”€ */
     .scanner-screen { display:none; min-height:100vh; flex-direction:column; }
     .scanner-header {
       display:flex; justify-content:space-between; align-items:center;
@@ -86,7 +86,7 @@
     }
     .scan-count strong { color:var(--accent-gold); }
 
-    /* ── RESULT ── */
+    /* â”€â”€ RESULT â”€â”€ */
     .result-overlay {
       position:fixed; inset:0; z-index:9999; display:none;
       flex-direction:column; justify-content:center; align-items:center; padding:30px;
@@ -126,7 +126,7 @@
       <p>Ticket Scanner</p>
     </div>
     <p class="pin-label">Enter Staff PIN</p>
-    <input type="password" class="pin-input" id="pinInput" maxlength="4" placeholder="····" inputmode="numeric" autocomplete="off">
+    <input type="password" class="pin-input" id="pinInput" maxlength="4" placeholder="Â·Â·Â·Â·" inputmode="numeric" autocomplete="off">
     <button class="pin-btn" id="pinBtn" onclick="checkPin()">Unlock Scanner</button>
     <p class="pin-error" id="pinError">Incorrect PIN. Try again.</p>
   </div>
@@ -135,7 +135,7 @@
   <div class="scanner-screen" id="scannerScreen">
     <div class="scanner-header">
       <div class="scanner-logo">Florence <span>Tonight</span></div>
-      <div class="scanner-badge ready" id="statusBadge">● Ready</div>
+      <div class="scanner-badge ready" id="statusBadge">â— Ready</div>
     </div>
     <div class="scanner-body">
       <div class="camera-box" id="cameraBox">
@@ -162,7 +162,7 @@
 
   <script src="https://unpkg.com/jsqr@1.4.0/dist/jsQR.js"></script>
   <script>
-    // ── CONFIG — Change this PIN for your staff ──
+    // â”€â”€ CONFIG â€” Change this PIN for your staff â”€â”€
     const STAFF_PIN = '1234';
     let scanning = false;
     let lastScanned = '';
@@ -259,7 +259,7 @@
     function showResult(valid, status, message, ticket) {
       const overlay = document.getElementById('resultOverlay');
       overlay.className = 'result-overlay show ' + (valid ? 'valid' : 'invalid');
-      document.getElementById('resultIcon').textContent = valid ? '✅' : '❌';
+      document.getElementById('resultIcon').textContent = valid ? 'âœ…' : 'âŒ';
       document.getElementById('resultStatus').textContent = status;
       document.getElementById('resultMessage').textContent = message;
 
@@ -287,8 +287,8 @@
 
     function setBadge(state) {
       const badge = document.getElementById('statusBadge');
-      if (state === 'ready') { badge.textContent = '● Ready'; badge.className = 'scanner-badge ready'; }
-      else { badge.textContent = '● Checking...'; badge.className = 'scanner-badge checking'; }
+      if (state === 'ready') { badge.textContent = 'â— Ready'; badge.className = 'scanner-badge ready'; }
+      else { badge.textContent = 'â— Checking...'; badge.className = 'scanner-badge checking'; }
     }
   </script>
 </body>

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -582,8 +582,8 @@
     <div class="login-box">
       <div class="login-logo">F<span>T</span></div>
       <h2>JOURNALIST ACCESS</h2>
-      <input type="password" id="login-code" placeholder="● ● ● ● ● ●" maxlength="10">
-      <button class="btn-login" onclick="doLogin()">ACCESS PANEL →</button>
+      <input type="password" id="login-code" placeholder="â— â— â— â— â— â—" maxlength="10">
+      <button class="btn-login" onclick="doLogin()">ACCESS PANEL â†’</button>
       <div class="login-error" id="login-error">Incorrect access code. Try again.</div>
     </div>
   </div>
@@ -597,7 +597,7 @@
       <div class="admin-nav-right">
         <span class="badge-admin">JOURNALIST</span>
         <a href="index.html" target="_blank" style="color:var(--muted);font-size:.75rem;text-decoration:none;">VIEW SITE
-          →</a>
+          â†’</a>
         <button class="btn-logout" onclick="logout()">LOG OUT</button>
       </div>
     </nav>
@@ -690,7 +690,7 @@
             </div>
             <div class="stat-card">
               <div class="label">LAST UPDATED</div>
-              <div class="value" style="font-size:1.4rem" id="stat-updated">—</div>
+              <div class="value" style="font-size:1.4rem" id="stat-updated">â€”</div>
               <div class="sub">Your last save</div>
             </div>
           </div>
@@ -752,7 +752,7 @@
             </div>
           </div>
           <div class="form-actions">
-            <button class="btn-save" onclick="saveHero()">SAVE HERO →</button>
+            <button class="btn-save" onclick="saveHero()">SAVE HERO â†’</button>
           </div>
         </div>
 
@@ -855,7 +855,7 @@
     const DEFAULT_EVENTS = [
       { id: 1, image: './images/la_loggia.png', tag: 'ROOFTOP', title: 'LA LOGGIA ROOFTOP', subtitle: 'COCKTAILS & VIEWS', age: 'ALL AGES', location: 'VIA DELLA LOGGIA, 6', days: 'Friday - Saturday', hours: '7PM - 2AM' },
       { id: 2, image: './images/yab.jpg', tag: 'CLUB', title: 'YAB CLUB', subtitle: 'HIP HOP & INTERNATIONAL', age: '+18 ONLY', location: "VIA DE' BARDI, 16", days: 'Friday', hours: '11PM - 4AM' },
-      { id: 3, image: './images/sesto_arnol.png', tag: 'APERITIVO', title: 'SE•STO ON ARNOLFO', subtitle: 'APERITIVO & MUSIC', age: 'ALL AGES', location: 'PIAZZA S. SPIRITO, 10', days: 'Daily', hours: '7PM - 11PM' },
+      { id: 3, image: './images/sesto_arnol.png', tag: 'APERITIVO', title: 'SEâ€¢STO ON ARNOLFO', subtitle: 'APERITIVO & MUSIC', age: 'ALL AGES', location: 'PIAZZA S. SPIRITO, 10', days: 'Daily', hours: '7PM - 11PM' },
       { id: 4, image: './images/space2.jpg', tag: 'CLUB', title: 'SPACE CLUB', subtitle: 'TECHNO & HOUSE', age: '+18 ONLY', location: 'VIA PALAZZUOLO, 37', days: 'Saturday', hours: '11PM - 5AM' },
       { id: 5, image: './images/babylone_club.png', tag: 'CLUB', title: 'BABYLONE CLUB', subtitle: 'R&B & LATIN VIBES', age: '+18 ONLY', location: 'VIA BORGO OGNISSANTI, 12', days: 'Friday - Saturday', hours: '10PM - 4AM' },
       { id: 6, image: './images/xoo.png', tag: 'CLUB', title: 'XO CLUB', subtitle: 'LUXURY NIGHTLIFE', age: '+18 ONLY', location: 'LUNGARNO CORSINI, 4', days: 'Thursday - Sunday', hours: '9PM - 3AM' }
@@ -971,7 +971,7 @@
       if (el) el.classList.add('active');
     }
 
-    // ── CLOUD API HELPER ──
+    // â”€â”€ CLOUD API HELPER â”€â”€
     function cloudSave(key, value) {
       return fetch('/api/content', {
         method: 'POST',
@@ -1007,7 +1007,7 @@
     function updateStats() {
       document.getElementById('stat-events').textContent = getEvents().length;
       const u = _cachedData['ft-updated'];
-      document.getElementById('stat-updated').textContent = u ? String(u).split(',')[0] : '—';
+      document.getElementById('stat-updated').textContent = u ? String(u).split(',')[0] : 'â€”';
     }
 
     function showToast(msg) {
@@ -1030,7 +1030,7 @@
         <img class="event-thumb" src="${ev.image}" onerror="this.src='./images/hero_bg.png'">
         <div class="event-row-info">
           <h3>${ev.title}</h3>
-          <p>${ev.tag} · ${ev.days} · ${ev.hours}</p>
+          <p>${ev.tag} Â· ${ev.days} Â· ${ev.hours}</p>
         </div>
         <div class="event-row-actions">
           <button class="btn-edit" onclick="event.stopPropagation();toggleForm(${ev.id})">EDIT</button>
@@ -1082,11 +1082,11 @@
             <input type="text" id="hours-${ev.id}" value="${ev.hours}">
           </div>
           <div class="form-field">
-            <label>Ticket Price (€)</label>
+            <label>Ticket Price (â‚¬)</label>
             <input type="number" id="t-price-${ev.id}" value="${ev.ticketPrice !== undefined ? ev.ticketPrice : 20}">
           </div>
           <div class="form-field">
-            <label>Table Price (€)</label>
+            <label>Table Price (â‚¬)</label>
             <input type="number" id="tbl-price-${ev.id}" value="${ev.tablePrice !== undefined ? ev.tablePrice : 15}">
           </div>
           <div class="form-field">
@@ -1098,10 +1098,10 @@
           </div>
         </div>
         <label style="display:flex;align-items:center;gap:0.5rem;color:var(--gold);font-size:0.75rem;margin-top:1rem;cursor:pointer;">
-          <input type="checkbox" id="notify-${ev.id}"> 📢 Notify all subscribers about this event
+          <input type="checkbox" id="notify-${ev.id}"> ðŸ“¢ Notify all subscribers about this event
         </label>
         <div class="form-actions">
-          <button class="btn-save" onclick="saveEvent(${ev.id})">SAVE EVENT →</button>
+          <button class="btn-save" onclick="saveEvent(${ev.id})">SAVE EVENT â†’</button>
           <button class="btn-cancel" onclick="toggleForm(${ev.id})">CANCEL</button>
         </div>
       </div>
@@ -1319,7 +1319,7 @@
           </div>
         </div>
         <div class="form-actions">
-          <button class="btn-save" onclick="saveGuide(${g.id})">SAVE GUIDE →</button>
+          <button class="btn-save" onclick="saveGuide(${g.id})">SAVE GUIDE â†’</button>
           <button class="btn-cancel" onclick="toggleForm('g${g.id}')">CANCEL</button>
         </div>
       </div>
@@ -1403,11 +1403,11 @@
         </div>
         ${key === 'ft-events-coming' ? `
         <label style="display:flex;align-items:center;gap:0.5rem;color:var(--gold);font-size:0.75rem;margin-top:1rem;cursor:pointer;">
-          <input type="checkbox" id="notify-${key}-${item.id}"> 📢 Notify all subscribers about this coming event
+          <input type="checkbox" id="notify-${key}-${item.id}"> ðŸ“¢ Notify all subscribers about this coming event
         </label>
         ` : ''}
         <div class="form-actions">
-          <button class="btn-save" onclick="saveGeneric('${key}', ${item.id}, ${hasLocation}, ${hasDate})">SAVE →</button>
+          <button class="btn-save" onclick="saveGeneric('${key}', ${item.id}, ${hasLocation}, ${hasDate})">SAVE â†’</button>
           <button class="btn-cancel" onclick="toggleForm('${key}-${item.id}')">CANCEL</button>
         </div>
       </div>
