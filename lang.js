@@ -335,13 +335,22 @@ function initLang() {
 
     const btn = document.getElementById('lang-toggle-btn');
     if (btn) {
-        btn.addEventListener('click', () => {
-            const current = localStorage.getItem('ft-lang') || 'en';
-            const next = current === 'en' ? 'it' : 'en';
-            localStorage.setItem('ft-lang', next);
-            applyLanguage(next);
-        });
+        // Prevent duplicate listeners if initLang is called twice
+        btn.removeEventListener('click', toggleLang);
+        btn.addEventListener('click', toggleLang);
     }
 }
 
-document.addEventListener('DOMContentLoaded', initLang);
+function toggleLang(e) {
+    if (e) e.preventDefault();
+    const current = localStorage.getItem('ft-lang') || 'en';
+    const next = current === 'en' ? 'it' : 'en';
+    localStorage.setItem('ft-lang', next);
+    applyLanguage(next);
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLang);
+} else {
+    initLang();
+}
