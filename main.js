@@ -1,4 +1,4 @@
-﻿function initMain() {
+function initMain() {
     // -- LUCIDE ICONS --
     if (typeof lucide !== 'undefined') {
         lucide.createIcons();
@@ -356,12 +356,11 @@
 
                 var btn = form.querySelector('button[type="submit"]');
                 var origText = btn.innerHTML;
-                btn.innerHTML = '-';
+                btn.innerHTML = '\u2713';
                 input.value = '';
                 setTimeout(function() { btn.innerHTML = origText; }, 2000);
             }
         });
-    });
     });
 
     // -- COOKIE CONSENT --
@@ -430,7 +429,6 @@
                 setTimeout(function() { overlay.remove(); }, 300);
             });
         }
-    }
     }
 
 } // End of initMain
