@@ -2066,3 +2066,34 @@ h1, h2, h3, h4 {
 .btn-accept-cookie:hover {
     background: #5a3296;
 }
+
+/* Responsive adjustments for sub-pages */
+@media (max-width: 1024px) {
+    .guides-grid-4, .hg-stories-grid, .tip-right, .guides-grid-5 { grid-template-columns: repeat(2, 1fr); }
+    .occasion-grid, .neighborhood-grid, .guides-grid-6 { grid-template-columns: repeat(3, 1fr); }
+    .hg-gems-grid { grid-template-columns: repeat(2, 1fr); }
+    .two-col, .flex-reverse { padding: 0 2rem; gap: 2rem; }
+    .hg-left, .tip-left { flex: 0 0 250px; padding: 2rem; }
+}
+
+@media (max-width: 768px) {
+    .guides-grid-4, .hg-gems-grid, .guides-grid-5, .hg-stories-grid, .tip-right { grid-template-columns: repeat(2, 1fr); }
+    .guides-grid-6, .occasion-grid, .neighborhood-grid { grid-template-columns: repeat(2, 1fr); }
+    .two-col, .flex-reverse, .hg-container, .hg-local-tip { flex-direction: column; padding: 0 1.5rem; }
+    .hg-left, .tip-left, .hg-right-narrow { flex: auto; padding: 2rem 0; width: 100%; }
+    .seasonal-edit { padding: 2rem 1.5rem; }
+    .guides-footer-subscribe { flex-direction: column; gap: 2rem; padding: 2rem 1.5rem; text-align: center; }
+    .guides-section { padding: 2rem 1.5rem; }
+    .hg-section-dark { padding: 3rem 0; }
+    .hg-list-item { flex-direction: column; }
+    .hg-list-item img { width: 100%; height: 200px; }
+    .vibe-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 480px) {
+    .guides-grid-4, .hg-gems-grid, .guides-grid-5, .hg-stories-grid, .tip-right { grid-template-columns: 1fr; }
+    .guides-grid-6, .occasion-grid, .neighborhood-grid { grid-template-columns: 1fr; }
+    .two-col, .flex-reverse { padding: 0 1rem; }
+    .seasonal-edit { min-height: 250px; }
+    .vibe-grid { grid-template-columns: 1fr; }
+}
