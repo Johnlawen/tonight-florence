@@ -46,6 +46,11 @@
         if (typeof lucide !== 'undefined') {
             lucide.createIcons();
         }
+
+        // Re-apply language translation after dynamic content is loaded
+        if (typeof applyLanguage === 'function') {
+            applyLanguage(localStorage.getItem('ft-lang') || 'en');
+        }
     }
 
     function parse(val) {

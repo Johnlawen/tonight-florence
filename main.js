@@ -1,5 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
-
+function initMain() {
     // ── LUCIDE ICONS ──
     if (typeof lucide !== 'undefined') {
         lucide.createIcons();
@@ -10,25 +9,29 @@ document.addEventListener('DOMContentLoaded', function () {
     var mobileMenuBtn = document.getElementById('mobile-menu-btn');
     var navLinks = document.querySelector('.nav-links');
 
-    window.addEventListener('scroll', function () {
-        if (window.scrollY > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-    });
+    if (navbar) {
+        window.addEventListener('scroll', function () {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    }
 
-    if (mobileMenuBtn) {
+    if (mobileMenuBtn && navLinks) {
         mobileMenuBtn.addEventListener('click', function () {
             navLinks.classList.toggle('active');
         });
     }
 
-    navLinks.querySelectorAll('a').forEach(function (link) {
-        link.addEventListener('click', function () {
-            navLinks.classList.remove('active');
+    if (navLinks) {
+        navLinks.querySelectorAll('a').forEach(function (link) {
+            link.addEventListener('click', function () {
+                navLinks.classList.remove('active');
+            });
         });
-    });
+    }
 
     // ── SMOOTH SCROLL ──
     document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
@@ -45,22 +48,24 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // ── FADE-IN ANIMATION ──
-    var observer = new IntersectionObserver(function (entries, obs) {
-        entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-                obs.unobserve(entry.target);
-            }
-        });
-    }, { root: null, rootMargin: '0px', threshold: 0.1 });
+    if (typeof IntersectionObserver !== 'undefined') {
+        var observer = new IntersectionObserver(function (entries, obs) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { root: null, rootMargin: '0px', threshold: 0.1 });
 
-    document.querySelectorAll('.event-card, .feature-item, .newsletter-middle, .newsletter-right').forEach(function (el) {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
-    });
+        document.querySelectorAll('.event-card, .feature-item, .newsletter-middle, .newsletter-right').forEach(function (el) {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    }
 
     // ── CAROUSEL ARROW ──
     var carousel = document.querySelector('.events-carousel');
@@ -426,5 +431,12 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
     }
+    }
 
-});
+} // End of initMain
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMain);
+} else {
+    initMain();
+}
