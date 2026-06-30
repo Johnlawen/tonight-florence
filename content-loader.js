@@ -1,5 +1,5 @@
-/**
- * Florence Tonight — Content Loader
+﻿/**
+ * Florence Tonight - Content Loader
  * Fetches content from the cloud database (Upstash Redis via /api/content)
  * and dynamically renders it on the website pages.
  * Falls back to localStorage for offline/dev mode.
@@ -61,7 +61,7 @@
         return val; // already parsed object/array
     }
 
-    // ── LOAD EVENTS ──
+    // -- LOAD EVENTS --
     function loadEvents(raw) {
         var events = parse(raw);
         if (!events) return;
@@ -99,7 +99,7 @@
         });
     }
 
-    // ── LOAD GUIDES ──
+    // -- LOAD GUIDES --
     function loadGuides(raw) {
         var guides = parse(raw);
         if (!guides) return;
@@ -123,7 +123,7 @@
         });
     }
 
-    // ── LOAD HERO ──
+    // -- LOAD HERO --
     function loadHero(raw) {
         var hero = parse(raw);
         if (!hero || !hero.line1) return;
@@ -139,7 +139,7 @@
         if (cta) cta.textContent = hero.cta;
     }
 
-    // ── LOAD HIDDEN GEMS: THIS WEEK ──
+    // -- LOAD HIDDEN GEMS: THIS WEEK --
     function loadHgThisWeek(raw) {
         var hgThisWeek = parse(raw);
         if (!hgThisWeek) return;
@@ -165,7 +165,7 @@
         });
     }
 
-    // ── LOAD HIDDEN GEMS: MORE ──
+    // -- LOAD HIDDEN GEMS: MORE --
     function loadHgMore(raw) {
         var hgMore = parse(raw);
         if (!hgMore) return;
@@ -187,7 +187,7 @@
         });
     }
 
-    // ── LOAD HIDDEN GEMS: STORIES ──
+    // -- LOAD HIDDEN GEMS: STORIES --
     function loadHgStories(raw) {
         var hgStories = parse(raw);
         if (!hgStories) return;
@@ -209,7 +209,7 @@
         });
     }
 
-    // ── LOAD NEWEST GUIDES ──
+    // -- LOAD NEWEST GUIDES --
     function loadNewestGuides(raw) {
         var newestGuides = parse(raw);
         if (!newestGuides) return;
@@ -233,7 +233,7 @@
         });
     }
 
-    // ── LOAD APERITIVO HIGHLIGHTS ──
+    // -- LOAD APERITIVO HIGHLIGHTS --
     function loadApHighlights(raw) {
         var apHighlights = parse(raw);
         if (!apHighlights) return;
@@ -256,7 +256,7 @@
         });
     }
 
-    // ── LOAD APERITIVO TIME ──
+    // -- LOAD APERITIVO TIME --
     function loadApTime(raw) {
         var apTime = parse(raw);
         if (!apTime) return;
@@ -277,7 +277,7 @@
         });
     }
 
-    // ── LOAD APERITIVO LATEST ──
+    // -- LOAD APERITIVO LATEST --
     function loadApLatest(raw) {
         var apLatest = parse(raw);
         if (!apLatest) return;
@@ -301,7 +301,7 @@
         });
     }
 
-    // ── LOAD COMING SOON (EVENTS) ──
+    // -- LOAD COMING SOON (EVENTS) --
     function loadEventsComing(raw) {
         var eventsComing = parse(raw);
         if (!eventsComing) return;
@@ -323,7 +323,7 @@
         });
     }
 
-    // ── LOAD AFTER DARK: FEATURED STORY ──
+    // -- LOAD AFTER DARK: FEATURED STORY --
     function loadAdFeatured(rawMain, rawList) {
         var adMainArr = parse(rawMain);
         var adList = parse(rawList);
@@ -358,7 +358,7 @@
             listHtml;
     }
 
-    // ── LOAD AFTER DARK: THE SCENE ──
+    // -- LOAD AFTER DARK: THE SCENE --
     function loadAdScene(raw) {
         var adScene = parse(raw);
         if (!adScene) return;
@@ -378,7 +378,7 @@
         });
     }
 
-    // ── LOAD AFTER DARK: EDITOR'S PICK ──
+    // -- LOAD AFTER DARK: EDITOR'S PICK --
     function loadAdEditorsPick(raw) {
         var adEPArr = parse(raw);
         if (!adEPArr) return;
@@ -400,3 +400,4 @@
             '</div>';
     }
 })();
+

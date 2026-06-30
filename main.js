@@ -1,10 +1,10 @@
-function initMain() {
-    // ── LUCIDE ICONS ──
+﻿function initMain() {
+    // -- LUCIDE ICONS --
     if (typeof lucide !== 'undefined') {
         lucide.createIcons();
     }
 
-    // ── NAVBAR SCROLL ──
+    // -- NAVBAR SCROLL --
     var navbar = document.getElementById('navbar');
     var mobileMenuBtn = document.getElementById('mobile-menu-btn');
     var navLinks = document.querySelector('.nav-links');
@@ -33,7 +33,7 @@ function initMain() {
         });
     }
 
-    // ── SMOOTH SCROLL ──
+    // -- SMOOTH SCROLL --
     document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
         anchor.addEventListener('click', function (e) {
             var href = this.getAttribute('href');
@@ -47,7 +47,7 @@ function initMain() {
         });
     });
 
-    // ── FADE-IN ANIMATION ──
+    // -- FADE-IN ANIMATION --
     if (typeof IntersectionObserver !== 'undefined') {
         var observer = new IntersectionObserver(function (entries, obs) {
             entries.forEach(function (entry) {
@@ -67,7 +67,7 @@ function initMain() {
         });
     }
 
-    // ── CAROUSEL ARROW ──
+    // -- CAROUSEL ARROW --
     var carousel = document.querySelector('.events-carousel');
     var nextBtn = document.getElementById('carousel-next');
 
@@ -84,7 +84,7 @@ function initMain() {
         });
     }
 
-    // ── EVENT MODAL ──
+    // -- EVENT MODAL --
     var eventModal      = document.getElementById('event-modal');
     var eventModalClose = document.getElementById('event-modal-close');
     var modalImage      = document.getElementById('modal-image');
@@ -134,7 +134,7 @@ function initMain() {
         if (e.target === eventModal) closeEventModal();
     });
 
-    // ── BOOKING FORM MODAL ──
+    // -- BOOKING FORM MODAL --
     var bookingModal      = document.getElementById('booking-modal');
     var bookingModalClose = document.getElementById('booking-modal-close');
     var bookingTypeLabel  = document.getElementById('booking-type-label');
@@ -229,7 +229,7 @@ function initMain() {
         });
     }
 
-    // ── BOOKING FORM SUBMIT ──
+    // -- BOOKING FORM SUBMIT --
     var successOverlay  = document.getElementById('booking-success');
     var successMsg      = document.getElementById('success-message');
     var successCloseBtn = document.getElementById('success-close-btn');
@@ -278,7 +278,7 @@ function initMain() {
                     // Redirect to Stripe Checkout
                     window.location.href = data.url;
                 } else {
-                    // Stripe not configured — show demo confirmation
+                    // Stripe not configured - show demo confirmation
                     closeBookingModal();
                     successMsg.textContent =
                         customerName + ', your ' + type + ' for ' +
@@ -287,7 +287,7 @@ function initMain() {
                     if (successOverlay) successOverlay.classList.add('active');
                 }
             } catch (error) {
-                // Network error — fall back to demo mode
+                // Network error - fall back to demo mode
                 closeBookingModal();
                 successMsg.textContent =
                     customerName + ', your ' + type + ' for ' +
@@ -308,7 +308,7 @@ function initMain() {
         });
     }
 
-    // ── CLOSE ALL WITH ESCAPE ──
+    // -- CLOSE ALL WITH ESCAPE --
     document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') {
             closeEventModal();
@@ -318,7 +318,7 @@ function initMain() {
         }
     });
 
-    // ── NEWSLETTER SUBSCRIPTION ──
+    // -- NEWSLETTER SUBSCRIPTION --
     var subscribeForms = document.querySelectorAll('.subscribe-form');
     subscribeForms.forEach(function(form) {
         form.addEventListener('submit', function(e) {
@@ -356,7 +356,7 @@ function initMain() {
 
                 var btn = form.querySelector('button[type="submit"]');
                 var origText = btn.innerHTML;
-                btn.innerHTML = '✓';
+                btn.innerHTML = '-';
                 input.value = '';
                 setTimeout(function() { btn.innerHTML = origText; }, 2000);
             }
@@ -364,7 +364,7 @@ function initMain() {
     });
     });
 
-    // ── COOKIE CONSENT ──
+    // -- COOKIE CONSENT --
     {
         var cookieHtml = `
             <div id="cookie-consent" class="cookie-consent-overlay">
@@ -440,3 +440,4 @@ if (document.readyState === 'loading') {
 } else {
     initMain();
 }
+
