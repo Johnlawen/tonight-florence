@@ -318,12 +318,11 @@ function applyLanguage(lang) {
     // Update html lang attribute
     document.documentElement.setAttribute('lang', lang);
 
-    // Update the toggle button label
     const btn = document.getElementById('lang-toggle-btn');
     if (btn) {
         btn.innerHTML = lang === 'en'
-            ? '<span class="lang-label">IT</span>'
-            : '<span class="lang-label">EN</span>';
+            ? '<span class="lang-flag">\uD83C\uDDEE\uD83C\uDDF9</span><span class="lang-label">IT</span>'
+            : '<span class="lang-flag">\uD83C\uDDEC\uD83C\uDDE7</span><span class="lang-label">EN</span>';
         btn.setAttribute('title', lang === 'en' ? 'Switch to Italian' : 'Switch to English');
     }
 }
