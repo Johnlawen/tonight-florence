@@ -996,7 +996,7 @@
         .catch(function(e) { console.error('Cloud load error:', e); return null; });
     }
     function cloudLoadAll() {
-      return fetch('/api/content')
+      return fetch('/api/content?t=' + Date.now())
         .then(function(r) { return r.json(); })
         .catch(function(e) { console.error('Cloud load all error:', e); return {}; });
     }
@@ -1154,8 +1154,8 @@
         location: document.getElementById('loc-' + id).value,
         days: document.getElementById('days-' + id).value,
         hours: document.getElementById('hours-' + id).value,
-        ticketPrice: parseInt(document.getElementById('t-price-' + id).value) || 20,
-        tablePrice: parseInt(document.getElementById('tbl-price-' + id).value) || 15,
+        ticketPrice: document.getElementById('t-price-' + id).value === '' ? 20 : parseInt(document.getElementById('t-price-' + id).value),
+        tablePrice: document.getElementById('tbl-price-' + id).value === '' ? 15 : parseInt(document.getElementById('tbl-price-' + id).value),
         tableAvailable: document.getElementById('tbl-avail-' + id).value === 'true',
       };
       saveEvents(evs);

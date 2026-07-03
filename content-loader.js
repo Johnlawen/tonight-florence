@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Florence Tonight - Content Loader
  * Fetches content from the cloud database (Upstash Redis via /api/content)
  * and dynamically renders it on the website pages.
@@ -6,7 +6,7 @@
  */
 (function () {
     // Fetch all content from the cloud API
-    fetch('/api/content')
+    fetch('/api/content?t=' + Date.now())
         .then(function (res) { return res.json(); })
         .then(function (cloud) { renderAll(cloud); })
         .catch(function () {

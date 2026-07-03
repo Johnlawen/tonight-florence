@@ -101,8 +101,10 @@ function initMain() {
         modalSubtitle.innerHTML = card.querySelector('.card-subtitle').innerHTML;
         currentEventName = card.querySelector('.card-title').innerText.replace(/\n/g, ' ');
 
-        currentTicketPrice = parseInt(card.dataset.ticketPrice) || 20;
-        currentTablePrice = parseInt(card.dataset.tablePrice) || 15;
+        var parsedTicket = parseInt(card.dataset.ticketPrice);
+        currentTicketPrice = isNaN(parsedTicket) ? 20 : parsedTicket;
+        var parsedTable = parseInt(card.dataset.tablePrice);
+        currentTablePrice = isNaN(parsedTable) ? 15 : parsedTable;
 
         if (card.dataset.tableAvailable === 'false') {
             btnBookTable.style.display = 'none';
