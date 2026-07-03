@@ -209,7 +209,7 @@ h1, h2, h3, h4 {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('./images/hero_bg.png');
+    background-image: url('/images/hero_bg.png');
     background-size: cover;
     background-position: center;
     z-index: -2;
@@ -946,7 +946,7 @@ h1, h2, h3, h4 {
     padding: 0 4rem;
 }
 .guides-bg {
-    background-image: url('./images/hero_bg.png');
+    background-image: url('/images/hero_bg.png');
 }
 .guides-hero-content {
 }
@@ -1114,7 +1114,7 @@ h1, h2, h3, h4 {
     border-bottom: 1px solid var(--border-color);
 }
 .hg-bg {
-    background-image: url('./images/HIDDEN GEMS of Florence.png'); /* A different image */
+    background-image: url('/images/HIDDEN GEMS of Florence.png'); /* A different image */
 }
 .hg-section-dark {
     background: var(--bg-color);
@@ -1262,7 +1262,7 @@ h1, h2, h3, h4 {
 
 /* Aperitivo Styles */
 .ap-bg {
-    background-image: url('./images/aperitivo_hero.png');
+    background-image: url('/images/aperitivo_hero.png');
     background-position: center top;
 }
 .vibe-grid {
@@ -1300,7 +1300,7 @@ h1, h2, h3, h4 {
 
 /* Events Page Styles */
 .events-hero-bg {
-    background-image: url('./images/events.png');
+    background-image: url('/images/events.png');
 }
 .feat-card {
     position: relative;
@@ -1773,7 +1773,7 @@ h1, h2, h3, h4 {
 .plan-hero-bg {
     position: absolute;
     inset: 0;
-    background-image: url('./images/hero_bg.png'); /* Using an existing florence view image */
+    background-image: url('/images/hero_bg.png'); /* Using an existing florence view image */
     background-size: cover;
     background-position: center;
     z-index: -2;
