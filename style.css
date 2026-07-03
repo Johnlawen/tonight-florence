@@ -858,16 +858,6 @@ h1, h2, h3, h4 {
     transform: scale(1.1);
 }
 
-/* Mobile-only Utility */
-.mobile-only {
-    display: none !important;
-}
-@media (max-width: 768px) {
-    .mobile-only {
-        display: block !important;
-    }
-}
-
 .booking-submit {
     width: 100%;
     justify-content: center;
