@@ -1,7 +1,5 @@
 import { Redis } from '@upstash/redis';
 
-const redis = Redis.fromEnv();
-
 // All valid content keys
 const VALID_KEYS = [
   'ft-events', 'ft-hero', 'ft-guides', 'ft-newest-guides',
@@ -11,6 +9,27 @@ const VALID_KEYS = [
   'ft-subscribers', 'ft-updated'
 ];
 
+// Lazy Redis instance — initialized only when first needed, not at module load.
+// This prevents a crash when env vars are missing.
+let _redis = null;
+function getRedis() {
+  if (_redis) return _redis;
+
+  const url = process.env.UPSTASH_REDIS_REST_URL;
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+
+  if (!url || !token) {
+    throw new Error(
+      'Missing Upstash env vars. In Vercel go to: project → Settings → Environment Variables. ' +
+      'Add UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN. ' +
+      'Get values from https://console.upstash.com then Redeploy.'
+    );
+  }
+
+  _redis = new Redis({ url, token });
+  return _redis;
+}
+
 export default async function handler(req, res) {
   // CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -19,7 +38,18 @@ export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store, max-age=0');
   if (req.method === 'OPTIONS') return res.status(200).end();
 
+  // Debug endpoint — visit /api/content?debug=1 to check env var status
+  if (req.method === 'GET' && req.query.debug === '1') {
+    return res.status(200).json({
+      UPSTASH_REDIS_REST_URL: process.env.UPSTASH_REDIS_REST_URL ? 'SET ✓' : 'MISSING ✗',
+      UPSTASH_REDIS_REST_TOKEN: process.env.UPSTASH_REDIS_REST_TOKEN ? 'SET ✓' : 'MISSING ✗',
+      NODE_ENV: process.env.NODE_ENV || 'unknown'
+    });
+  }
+
   try {
+    const redis = getRedis();
+
     // GET — fetch one or all content keys
     if (req.method === 'GET') {
       const { key } = req.query;
@@ -72,8 +102,12 @@ export default async function handler(req, res) {
     }
 
     return res.status(405).json({ error: 'Method not allowed' });
+
   } catch (err) {
-    console.error('Content API error:', err);
-    return res.status(500).json({ error: 'Internal server error' });
+    console.error('Content API error:', err.message);
+    return res.status(500).json({
+      error: err.message,
+      hint: 'Go to Vercel → project → Settings → Environment Variables. Add UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN from https://console.upstash.com'
+    });
   }
 }
