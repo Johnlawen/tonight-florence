@@ -2097,3 +2097,9 @@ h1, h2, h3, h4 {
     .seasonal-edit { min-height: 250px; }
     .vibe-grid { grid-template-columns: 1fr; }
 }
+
+select,
+select option {
+    background-color: #030303;
+    color: #ffffff;
+}
