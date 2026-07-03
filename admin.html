@@ -569,19 +569,68 @@
     }
 
     @media (max-width: 1024px) {
-      .admin-body { flex-direction: column; }
-      .sidebar { width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--border); display: flex; overflow-x: auto; padding-bottom: 0.5rem; }
-      .sidebar-section { display: none; }
-      .sidebar-item { white-space: nowrap; padding: 0.5rem 1rem; }
+      .admin-body {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+      }
+
+      .sidebar-section {
+        display: none;
+      }
+
+      .sidebar-item {
+        white-space: nowrap;
+        padding: 0.5rem 1rem;
+      }
     }
+
     @media (max-width: 768px) {
-      .grid-2, .form-grid { grid-template-columns: 1fr; }
-      .event-row-header { flex-direction: column; align-items: flex-start; }
-      .event-thumb { width: 100%; height: 160px; margin-bottom: 1rem; }
-      .event-row-actions { width: 100%; justify-content: space-between; margin-top: 1rem; }
-      .main-content { padding: 1rem; }
-      .login-box { padding: 2rem 1.5rem; width: 90%; }
-      .admin-nav { padding: 1rem; flex-direction: column; gap: 1rem; }
+
+      .grid-2,
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .event-row-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .event-thumb {
+        width: 100%;
+        height: 160px;
+        margin-bottom: 1rem;
+      }
+
+      .event-row-actions {
+        width: 100%;
+        justify-content: space-between;
+        margin-top: 1rem;
+      }
+
+      .main-content {
+        padding: 1rem;
+      }
+
+      .login-box {
+        padding: 2rem 1.5rem;
+        width: 90%;
+      }
+
+      .admin-nav {
+        padding: 1rem;
+        flex-direction: column;
+        gap: 1rem;
+      }
     }
   </style>
 </head>
@@ -607,7 +656,8 @@
       </div>
       <div class="admin-nav-right">
         <span class="badge-admin">JOURNALIST</span>
-        <a href="index.html" target="_blank" style="color:var(--muted);font-size:.75rem;text-decoration:none;">VIEW SITE &rarr;</a>
+        <a href="index.html" target="_blank" style="color:var(--muted);font-size:.75rem;text-decoration:none;">VIEW SITE
+          &rarr;</a>
         <button class="btn-logout" onclick="logout()">LOG OUT</button>
       </div>
     </nav>
@@ -647,7 +697,7 @@
           </svg>
           Featured Guides
         </div>
-        <div class="sidebar-item" onclick="showPage('hidden-gems',this)">
+        <div class="sidebar-item" onclick="showPage('hidden-gems',this)" style="display: none;">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
             <polygon
               points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
@@ -668,7 +718,8 @@
         </div>
         <div class="sidebar-item" onclick="showPage('subscribers',this)">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline>
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
           </svg>
           Subscribers
         </div>
@@ -843,11 +894,12 @@
           </div>
           <div style="background:var(--bg2); border:1px solid var(--border); border-radius:2px; padding:1.5rem;">
             <div style="display:flex; justify-content:space-between; margin-bottom:1rem; align-items:center;">
-                <h3 style="font-family:'Playfair Display',serif;">Email List</h3>
-                <button class="btn-del" onclick="clearSubscribers()">CLEAR ALL</button>
+              <h3 style="font-family:'Playfair Display',serif;">Email List</h3>
+              <button class="btn-del" onclick="clearSubscribers()">CLEAR ALL</button>
             </div>
-            <div id="subscribers-list" style="display:flex; flex-direction:column; gap:0.5rem; max-height:400px; overflow-y:auto;">
-                <!-- Emails go here -->
+            <div id="subscribers-list"
+              style="display:flex; flex-direction:column; gap:0.5rem; max-height:400px; overflow-y:auto;">
+              <!-- Emails go here -->
             </div>
           </div>
         </div>
@@ -990,16 +1042,16 @@
         body: JSON.stringify({ key: key, value: value })
       }).then(r => {
         if (!r.ok) console.warn('Cloud save non-200 response:', r.status);
-      }).catch(function(e) { console.warn('Cloud save unavailable, saved locally:', e); });
+      }).catch(function (e) { console.warn('Cloud save unavailable, saved locally:', e); });
     }
-    
+
     function cloudLoadAll() {
       return fetch('/api/content?t=' + Date.now())
-        .then(function(r) { 
+        .then(function (r) {
           if (!r.ok) throw new Error('API not ok');
-          return r.json(); 
+          return r.json();
         })
-        .catch(function(e) { 
+        .catch(function (e) {
           console.warn('Cloud load failed, falling back to local storage:', e);
           const local = {};
           const keys = [
@@ -1010,8 +1062,8 @@
             'ft-updated'
           ];
           keys.forEach(k => {
-             const val = localStorage.getItem(k);
-             if (val) local[k] = val;
+            const val = localStorage.getItem(k);
+            if (val) local[k] = val;
           });
           return local;
         });
@@ -1144,7 +1196,7 @@
     function previewImg(input, id) {
       const file = input.files[0];
       if (!file) return;
-      
+
       const reader = new FileReader();
       reader.onload = e => {
         const img = new Image();
@@ -1176,9 +1228,9 @@
           const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
 
           const prev = document.getElementById('prev-' + id);
-          if(prev) {
-             prev.src = compressedBase64;
-             prev.style.display = 'block';
+          if (prev) {
+            prev.src = compressedBase64;
+            prev.style.display = 'block';
           }
           // Store compressed base64 temporarily
           input.dataset.b64 = compressedBase64;
@@ -1210,11 +1262,11 @@
       saveEvents(evs);
       renderEvents();
       document.getElementById('eform-' + id).classList.add('open');
-      
+
       const notifyCheckbox = document.getElementById('notify-' + id);
       if (notifyCheckbox && notifyCheckbox.checked) {
-          sendEventNotification(evs[idx], 'new');
-          notifyCheckbox.checked = false;
+        sendEventNotification(evs[idx], 'new');
+        notifyCheckbox.checked = false;
       }
     }
 
@@ -1278,26 +1330,26 @@
 
     function initAdmin() {
       showToast('Loading content from cloud...');
-      cloudLoadAll().then(function(data) {
+      cloudLoadAll().then(function (data) {
         // Parse any stringified JSON values
-        Object.keys(data).forEach(function(k) {
+        Object.keys(data).forEach(function (k) {
           if (typeof data[k] === 'string') {
-            try { data[k] = JSON.parse(data[k]); } catch(e) { /* keep as string */ }
+            try { data[k] = JSON.parse(data[k]); } catch (e) { /* keep as string */ }
           }
         });
         _cachedData = data;
         renderAfterLoad();
         showToast('Content loaded from cloud!');
-      }).catch(function() {
+      }).catch(function () {
         // Fallback: load from localStorage
         console.warn('Cloud unavailable, using localStorage fallback');
-        var keys = ['ft-events','ft-hero','ft-guides','ft-newest-guides','ft-events-coming',
-          'ft-hg-thisweek','ft-hg-more','ft-hg-stories','ft-ap-highlights','ft-ap-time',
-          'ft-ap-latest','ft-ad-featured-main','ft-ad-featured-list','ft-ad-scene',
-          'ft-ad-editors-pick','ft-subscribers','ft-updated'];
-        keys.forEach(function(k) {
+        var keys = ['ft-events', 'ft-hero', 'ft-guides', 'ft-newest-guides', 'ft-events-coming',
+          'ft-hg-thisweek', 'ft-hg-more', 'ft-hg-stories', 'ft-ap-highlights', 'ft-ap-time',
+          'ft-ap-latest', 'ft-ad-featured-main', 'ft-ad-featured-list', 'ft-ad-scene',
+          'ft-ad-editors-pick', 'ft-subscribers', 'ft-updated'];
+        keys.forEach(function (k) {
           var v = localStorage.getItem(k);
-          if (v) { try { _cachedData[k] = JSON.parse(v); } catch(e) { _cachedData[k] = v; } }
+          if (v) { try { _cachedData[k] = JSON.parse(v); } catch (e) { _cachedData[k] = v; } }
         });
         renderAfterLoad();
       });
@@ -1528,11 +1580,11 @@
       document.getElementById('eform-' + key + '-' + id).classList.add('open');
 
       if (key === 'ft-events-coming') {
-          const notifyCheckbox = document.getElementById('notify-' + key + '-' + id);
-          if (notifyCheckbox && notifyCheckbox.checked) {
-              sendEventNotification(data[idx], 'coming_soon');
-              notifyCheckbox.checked = false;
-          }
+        const notifyCheckbox = document.getElementById('notify-' + key + '-' + id);
+        if (notifyCheckbox && notifyCheckbox.checked) {
+          sendEventNotification(data[idx], 'coming_soon');
+          notifyCheckbox.checked = false;
+        }
       }
     }
 
@@ -1548,9 +1600,9 @@
           body: JSON.stringify({ emails, event: eventData, type })
         });
         if (res.ok) {
-           showToast('Notifications sent successfully!');
+          showToast('Notifications sent successfully!');
         } else {
-           showToast('Failed to send notifications.');
+          showToast('Failed to send notifications.');
         }
       } catch (e) {
         showToast('Error sending notifications.');
@@ -1574,7 +1626,7 @@
     }
 
     function clearSubscribers() {
-      if(confirm('Are you sure you want to clear all subscribers?')) {
+      if (confirm('Are you sure you want to clear all subscribers?')) {
         _cachedData['ft-subscribers'] = [];
         cloudSave('ft-subscribers', []);
         renderSubscribers();
@@ -1584,4 +1636,3 @@
 </body>
 
 </html>
-
