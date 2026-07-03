@@ -981,24 +981,40 @@
       if (el) el.classList.add('active');
     }
 
-    // --- CLOUD API HELPER ---
+    // --- CLOUD API HELPER (WITH LOCAL FALLBACK) ---
     function cloudSave(key, value) {
+      localStorage.setItem(key, typeof value === 'string' ? value : JSON.stringify(value));
       return fetch('/api/content', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ key: key, value: value })
-      }).catch(function(e) { console.error('Cloud save error:', e); });
+      }).then(r => {
+        if (!r.ok) console.warn('Cloud save non-200 response:', r.status);
+      }).catch(function(e) { console.warn('Cloud save unavailable, saved locally:', e); });
     }
-    function cloudLoad(key) {
-      return fetch('/api/content?key=' + encodeURIComponent(key))
-        .then(function(r) { return r.json(); })
-        .then(function(d) { return d.value; })
-        .catch(function(e) { console.error('Cloud load error:', e); return null; });
-    }
+    
     function cloudLoadAll() {
       return fetch('/api/content?t=' + Date.now())
-        .then(function(r) { return r.json(); })
-        .catch(function(e) { console.error('Cloud load all error:', e); return {}; });
+        .then(function(r) { 
+          if (!r.ok) throw new Error('API not ok');
+          return r.json(); 
+        })
+        .catch(function(e) { 
+          console.warn('Cloud load failed, falling back to local storage:', e);
+          const local = {};
+          const keys = [
+            'ft-events', 'ft-hero', 'ft-guides', 'ft-newest-guides',
+            'ft-events-coming', 'ft-hg-thisweek', 'ft-hg-more', 'ft-hg-stories',
+            'ft-ap-highlights', 'ft-ap-time', 'ft-ap-latest',
+            'ft-ad-featured-main', 'ft-ad-featured-list', 'ft-ad-scene', 'ft-ad-editors-pick',
+            'ft-updated'
+          ];
+          keys.forEach(k => {
+             const val = localStorage.getItem(k);
+             if (val) local[k] = val;
+          });
+          return local;
+        });
     }
 
     var _cachedData = {}; // in-memory cache loaded at init
