@@ -1409,9 +1409,6 @@ h1, h2, h3, h4 {
     .feature-item:nth-child(n+4) {
         border-bottom: none;
     }
-    .feature-item:nth-child(7) {
-        display: none;
-    }
     .hero {
         padding: 0 2rem;
     }
