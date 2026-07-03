@@ -723,6 +723,12 @@
           </svg>
           Subscribers
         </div>
+        <div class="sidebar-item" onclick="showPage('messages',this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+          </svg>
+          Messages
+        </div>
         <div class="sidebar-section">PREVIEW</div>
         <div class="sidebar-item" onclick="window.open('index.html','_blank')">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -900,6 +906,28 @@
             <div id="subscribers-list"
               style="display:flex; flex-direction:column; gap:0.5rem; max-height:400px; overflow-y:auto;">
               <!-- Emails go here -->
+            </div>
+          </div>
+        </div>
+
+        <!-- MESSAGES PAGE -->
+        <div class="page" id="page-messages">
+          <div class="page-header">
+            <h1>Messages</h1>
+            <p>View messages sent from the "Send Us A Message" contact forms.</p>
+          </div>
+          <div class="stat-card" style="margin-bottom:1.5rem">
+            <div class="label">TOTAL MESSAGES</div>
+            <div class="value" id="stat-msgs">0</div>
+          </div>
+          <div style="background:var(--bg2); border:1px solid var(--border); border-radius:2px; padding:1.5rem;">
+            <div style="display:flex; justify-content:space-between; margin-bottom:1rem; align-items:center;">
+              <h3 style="font-family:'Playfair Display',serif;">Inbox</h3>
+              <button class="btn-del" onclick="clearMessages()">CLEAR ALL</button>
+            </div>
+            <div id="messages-list"
+              style="display:flex; flex-direction:column; gap:0.5rem; max-height:400px; overflow-y:auto;">
+              <!-- Messages go here -->
             </div>
           </div>
         </div>
@@ -1082,7 +1110,7 @@
           'ft-events-coming', 'ft-hg-thisweek', 'ft-hg-more', 'ft-hg-stories',
           'ft-ap-highlights', 'ft-ap-time', 'ft-ap-latest',
           'ft-ad-featured-main', 'ft-ad-featured-list', 'ft-ad-scene', 'ft-ad-editors-pick',
-          'ft-updated'
+          'ft-subscribers', 'ft-messages', 'ft-updated'
         ];
         keys.forEach(k => {
           const val = localStorage.getItem(k);
@@ -1108,7 +1136,7 @@
             'ft-events-coming', 'ft-hg-thisweek', 'ft-hg-more', 'ft-hg-stories',
             'ft-ap-highlights', 'ft-ap-time', 'ft-ap-latest',
             'ft-ad-featured-main', 'ft-ad-featured-list', 'ft-ad-scene', 'ft-ad-editors-pick',
-            'ft-updated'
+            'ft-subscribers', 'ft-messages', 'ft-updated'
           ];
           keys.forEach(k => {
             const val = localStorage.getItem(k);
@@ -1399,7 +1427,7 @@
         var keys = ['ft-events', 'ft-hero', 'ft-guides', 'ft-newest-guides', 'ft-events-coming',
           'ft-hg-thisweek', 'ft-hg-more', 'ft-hg-stories', 'ft-ap-highlights', 'ft-ap-time',
           'ft-ap-latest', 'ft-ad-featured-main', 'ft-ad-featured-list', 'ft-ad-scene',
-          'ft-ad-editors-pick', 'ft-subscribers', 'ft-updated'];
+          'ft-ad-editors-pick', 'ft-subscribers', 'ft-messages', 'ft-updated'];
         keys.forEach(function (k) {
           var v = localStorage.getItem(k);
           if (v) { try { _cachedData[k] = JSON.parse(v); } catch (e) { _cachedData[k] = v; } }
@@ -1428,6 +1456,7 @@
       loadHero();
       updateStats();
       renderSubscribers();
+      renderMessages();
     }
 
     function getGuides() { return _cachedData['ft-guides'] || DEFAULT_GUIDES; }
@@ -1683,6 +1712,34 @@
         _cachedData['ft-subscribers'] = [];
         cloudSave('ft-subscribers', []);
         renderSubscribers();
+      }
+    }
+
+    function renderMessages() {
+      const msgs = _cachedData['ft-messages'] || [];
+      document.getElementById('stat-msgs').textContent = msgs.length;
+      const list = document.getElementById('messages-list');
+      if (msgs.length === 0) {
+        list.innerHTML = '<p style="color:var(--muted); font-size:0.85rem;">No messages yet.</p>';
+        return;
+      }
+      list.innerHTML = msgs.map(m => `
+        <div style="display:flex; flex-direction:column; padding:1rem; background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:2px; margin-bottom:0.5rem;">
+          <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;">
+            <div style="font-size:0.85rem; font-weight:bold; color:var(--gold);">${m.subject || 'No Subject'}</div>
+            <div style="font-size:0.7rem; color:var(--muted);">${m.date || ''}</div>
+          </div>
+          <div style="font-size:0.85rem; font-family:'Inter',sans-serif; color:rgba(255,255,255,0.9); margin-bottom:0.5rem;">From: ${m.email || 'Unknown Email'}</div>
+          <div style="font-size:0.85rem; font-family:'Inter',sans-serif; line-height:1.4;">${m.message || ''}</div>
+        </div>
+      `).join('');
+    }
+
+    function clearMessages() {
+      if (confirm('Are you sure you want to clear all messages?')) {
+        _cachedData['ft-messages'] = [];
+        cloudSave('ft-messages', []);
+        renderMessages();
       }
     }
   </script>

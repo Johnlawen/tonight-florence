@@ -6,7 +6,7 @@ const VALID_KEYS = [
   'ft-events-coming', 'ft-hg-thisweek', 'ft-hg-more', 'ft-hg-stories',
   'ft-ap-highlights', 'ft-ap-time', 'ft-ap-latest',
   'ft-ad-featured-main', 'ft-ad-featured-list', 'ft-ad-scene', 'ft-ad-editors-pick',
-  'ft-subscribers', 'ft-updated'
+  'ft-subscribers', 'ft-messages', 'ft-updated'
 ];
 
 // Lazy Redis instance — initialized only when first needed, not at module load.
