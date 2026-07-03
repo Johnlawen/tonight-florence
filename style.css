@@ -855,7 +855,17 @@ h1, h2, h3, h4 {
 }
 
 .price-value.bump {
-    transform: scale(1.15);
+    transform: scale(1.1);
+}
+
+/* Mobile-only Utility */
+.mobile-only {
+    display: none !important;
+}
+@media (max-width: 768px) {
+    .mobile-only {
+        display: block !important;
+    }
 }
 
 .booking-submit {
