@@ -909,6 +909,7 @@
   </div>
 
   <div class="toast" id="toast">Saved successfully!</div>
+  <div id="cloud-status-bar" style="display:none; position:fixed; top:0; left:0; right:0; z-index:99999; padding:0.6rem 1.5rem; font-size:0.75rem; font-weight:600; letter-spacing:1px; text-align:center;"></div>
 
   <script>
     const ACCESS_CODE = 'FT2026';
@@ -1033,26 +1034,74 @@
       if (el) el.classList.add('active');
     }
 
+    // --- CLOUD STATUS BAR ---
+    function setCloudStatus(ok, msg) {
+      const bar = document.getElementById('cloud-status-bar');
+      if (!bar) return;
+      bar.style.display = 'block';
+      bar.style.background = ok ? 'rgba(76,175,80,0.9)' : 'rgba(220,53,69,0.9)';
+      bar.style.color = '#fff';
+      bar.textContent = ok ? ('✓ CLOUD SYNC: ' + msg) : ('✗ CLOUD SYNC FAILED: ' + msg);
+      if (ok) setTimeout(() => { bar.style.display = 'none'; }, 4000);
+    }
+
     // --- CLOUD API HELPER (WITH LOCAL FALLBACK) ---
     function cloudSave(key, value) {
+      // Always save to localStorage as immediate backup
       localStorage.setItem(key, typeof value === 'string' ? value : JSON.stringify(value));
+
+      // Check if we are on a real server (not file://)
+      if (location.protocol === 'file:') {
+        setCloudStatus(false, 'Open the admin panel from your live Vercel URL, not a local file.');
+        return Promise.resolve();
+      }
+
       return fetch('/api/content', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ key: key, value: value })
       }).then(r => {
-        if (!r.ok) console.warn('Cloud save non-200 response:', r.status);
-      }).catch(function (e) { console.warn('Cloud save unavailable, saved locally:', e); });
+        if (r.ok) {
+          setCloudStatus(true, 'Saved to cloud successfully!');
+        } else {
+          r.text().then(t => console.error('Cloud save error body:', t));
+          setCloudStatus(false, 'API error ' + r.status + ' — check Vercel env vars (UPSTASH_REDIS_REST_URL, UPSTASH_REDIS_REST_TOKEN)');
+        }
+      }).catch(function (e) {
+        setCloudStatus(false, 'Cannot reach API — is the site deployed on Vercel? (' + e.message + ')');
+      });
     }
 
     function cloudLoadAll() {
+      // If running from file://, skip cloud and use localStorage
+      if (location.protocol === 'file:') {
+        setCloudStatus(false, 'Running locally — open from your Vercel URL for live editing. Using local data only.');
+        const local = {};
+        const keys = [
+          'ft-events', 'ft-hero', 'ft-guides', 'ft-newest-guides',
+          'ft-events-coming', 'ft-hg-thisweek', 'ft-hg-more', 'ft-hg-stories',
+          'ft-ap-highlights', 'ft-ap-time', 'ft-ap-latest',
+          'ft-ad-featured-main', 'ft-ad-featured-list', 'ft-ad-scene', 'ft-ad-editors-pick',
+          'ft-updated'
+        ];
+        keys.forEach(k => {
+          const val = localStorage.getItem(k);
+          if (val) local[k] = val;
+        });
+        return Promise.resolve(local);
+      }
+
       return fetch('/api/content?t=' + Date.now())
         .then(function (r) {
-          if (!r.ok) throw new Error('API not ok');
+          if (!r.ok) throw new Error('API returned status ' + r.status);
           return r.json();
         })
+        .then(function(data) {
+          setCloudStatus(true, 'Connected to cloud database!');
+          return data;
+        })
         .catch(function (e) {
-          console.warn('Cloud load failed, falling back to local storage:', e);
+          setCloudStatus(false, 'Cannot load from cloud (' + e.message + ') — Check UPSTASH env vars in Vercel. Using local fallback.');
           const local = {};
           const keys = [
             'ft-events', 'ft-hero', 'ft-guides', 'ft-newest-guides',
@@ -1329,7 +1378,11 @@
     }
 
     function initAdmin() {
-      showToast('Loading content from cloud...');
+      if (location.protocol === 'file:') {
+        showToast('⚠ Local mode — changes will NOT update the live website!');
+      } else {
+        showToast('Loading content from cloud...');
+      }
       cloudLoadAll().then(function (data) {
         // Parse any stringified JSON values
         Object.keys(data).forEach(function (k) {
@@ -1339,7 +1392,7 @@
         });
         _cachedData = data;
         renderAfterLoad();
-        showToast('Content loaded from cloud!');
+        if (location.protocol !== 'file:') showToast('Content loaded from cloud!');
       }).catch(function () {
         // Fallback: load from localStorage
         console.warn('Cloud unavailable, using localStorage fallback');
