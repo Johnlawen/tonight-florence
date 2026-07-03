@@ -78,7 +78,7 @@
             card.dataset.tableAvailable = ev.tableAvailable !== undefined ? ev.tableAvailable : true;
             card.innerHTML =
                 '<div class="card-image">' +
-                    '<img src="' + ev.image + '" alt="' + ev.title + '" onerror="this.src=\'./images/hero_bg.png\'">' +
+                    '<img src="' + ev.image + '" alt="' + ev.title + '" onerror="this.src=\'/images/hero_bg.png\'">' +
                 '</div>' +
                 '<div class="card-content">' +
                     '<span class="card-tag">' + ev.tag + '</span>' +
@@ -111,7 +111,7 @@
             card.className = 'event-card';
             card.innerHTML =
                 '<div class="card-image">' +
-                    '<img src="' + g.image + '" alt="' + g.title + '" onerror="this.src=\'./images/hero_bg.png\'">' +
+                    '<img src="' + g.image + '" alt="' + g.title + '" onerror="this.src=\'/images/hero_bg.png\'">' +
                 '</div>' +
                 '<div class="card-content">' +
                     '<span class="card-tag">' + g.tag + '</span>' +
@@ -152,7 +152,7 @@
             card.className = 'hg-card';
             card.innerHTML =
                 '<div class="card-image hg-img-tall">' +
-                    '<img src="' + g.image + '" alt="' + g.title + '" onerror="this.src=\'./images/hero_bg.png\'">' +
+                    '<img src="' + g.image + '" alt="' + g.title + '" onerror="this.src=\'/images/hero_bg.png\'">' +
                 '</div>' +
                 '<div class="card-content hg-card-content">' +
                     '<div class="hg-num" style="color:var(--accent-gold); font-size:0.9rem; margin-bottom:1rem;">' + num + '</div>' +
@@ -176,7 +176,7 @@
             var item = document.createElement('div');
             item.className = 'hg-list-item';
             item.innerHTML =
-                '<img src="' + g.image + '" alt="' + g.title + '" onerror="this.src=\'./images/hero_bg.png\'">' +
+                '<img src="' + g.image + '" alt="' + g.title + '" onerror="this.src=\'/images/hero_bg.png\'">' +
                 '<div class="hg-list-text">' +
                     '<span class="card-tag">' + g.tag + '</span>' +
                     '<h4 style="font-size:1.1rem; margin-bottom:0.5rem; font-family:var(--font-heading);">' + g.title + '</h4>' +
@@ -198,7 +198,7 @@
             var card = document.createElement('div');
             card.className = 'hg-story-card';
             card.innerHTML =
-                '<img src="' + g.image + '" alt="' + g.title + '" onerror="this.src=\'./images/hero_bg.png\'">' +
+                '<img src="' + g.image + '" alt="' + g.title + '" onerror="this.src=\'/images/hero_bg.png\'">' +
                 '<div class="card-content" style="padding:1rem;">' +
                     '<span class="card-tag">' + g.tag + '</span>' +
                     '<h4 style="font-size:1rem; margin-bottom:0.5rem; font-family:var(--font-heading);">' + g.title + '</h4>' +
@@ -220,7 +220,7 @@
             var card = document.createElement('div');
             card.className = 'newest-card';
             card.innerHTML =
-                '<img src="' + g.image + '" alt="' + g.title + '" onerror="this.src=\'./images/hero_bg.png\'">' +
+                '<img src="' + g.image + '" alt="' + g.title + '" onerror="this.src=\'/images/hero_bg.png\'">' +
                 '<div class="card-content" style="padding:1rem;">' +
                     '<span class="card-tag">' + g.tag + '</span>' +
                     '<h4 style="font-size:0.9rem; margin-bottom:0.5rem; line-height:1.2;">' + g.title + '</h4>' +
@@ -245,7 +245,7 @@
             card.className = 'event-card';
             card.innerHTML =
                 '<div class="card-image">' +
-                    '<img src="' + g.image + '" alt="' + g.title + '" onerror="this.src=\'./images/hero_bg.png\'">' +
+                    '<img src="' + g.image + '" alt="' + g.title + '" onerror="this.src=\'/images/hero_bg.png\'">' +
                 '</div>' +
                 '<div class="card-content" style="padding:1.5rem;">' +
                     '<span class="card-tag" style="color:var(--accent-purple);">' + g.tag + '</span>' +
@@ -288,7 +288,7 @@
             var card = document.createElement('div');
             card.className = 'newest-card';
             card.innerHTML =
-                '<img src="' + g.image + '" alt="' + g.title + '" onerror="this.src=\'./images/hero_bg.png\'">' +
+                '<img src="' + g.image + '" alt="' + g.title + '" onerror="this.src=\'/images/hero_bg.png\'">' +
                 '<div class="card-content" style="padding:1rem;">' +
                     '<span class="card-tag" style="color:var(--accent-purple);">' + g.tag + '</span>' +
                     '<h4 style="font-size:0.9rem; margin-bottom:0.5rem; line-height:1.2;">' + g.title + '</h4>' +
@@ -336,7 +336,7 @@
         adList.forEach(function (item) {
             listHtml +=
                 '<div class="fs-item">' +
-                    '<img src="' + item.image + '" alt="' + item.title + '" onerror="this.src=\'./images/hero_bg.png\'">' +
+                    '<img src="' + item.image + '" alt="' + item.title + '" onerror="this.src=\'/images/hero_bg.png\'">' +
                     '<div class="fs-item-info">' +
                         '<span class="tag">' + item.tag + '</span>' +
                         '<h4>' + item.title + '</h4>' +
@@ -369,7 +369,7 @@
             var card = document.createElement('div');
             card.className = 'scene-card';
             card.innerHTML =
-                '<img src="' + item.image + '" alt="' + item.title + '" onerror="this.src=\'./images/hero_bg.png\'">' +
+                '<img src="' + item.image + '" alt="' + item.title + '" onerror="this.src=\'/images/hero_bg.png\'">' +
                 '<div class="scene-info">' +
                     '<span class="tag">' + item.tag + '</span>' +
                     '<h4>' + item.title + '</h4>' +
@@ -389,7 +389,7 @@
             '<h2 class="sec-title">EDITOR\'S PICK</h2>' +
             '<div class="ep-card">' +
                 '<div class="ep-image">' +
-                    '<img src="' + adEP.image + '" alt="' + adEP.title + '" onerror="this.src=\'./images/hero_bg.png\'">' +
+                    '<img src="' + adEP.image + '" alt="' + adEP.title + '" onerror="this.src=\'/images/hero_bg.png\'">' +
                 '</div>' +
                 '<div class="ep-info">' +
                     '<span class="tag">' + adEP.tag + '</span>' +
