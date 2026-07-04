@@ -132,9 +132,11 @@ function initMain() {
     if (eventModalClose) {
         eventModalClose.addEventListener('click', closeEventModal);
     }
-    eventModal.addEventListener('click', function (e) {
-        if (e.target === eventModal) closeEventModal();
-    });
+    if (eventModal) {
+        eventModal.addEventListener('click', function (e) {
+            if (e.target === eventModal) closeEventModal();
+        });
+    }
 
     // -- BOOKING FORM MODAL --
     var bookingModal      = document.getElementById('booking-modal');
