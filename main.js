@@ -365,6 +365,78 @@ function initMain() {
         });
     });
 
+    // -- PLAN FORM SUBMISSION --
+    var planForm = document.querySelector('.plan-form');
+    if (planForm) {
+        planForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            var nameInput = planForm.querySelector('input[type="text"]');
+            var emailInput = planForm.querySelector('input[type="email"]');
+            var subjectSelect = planForm.querySelector('select');
+            var messageTextarea = planForm.querySelector('textarea');
+            
+            if (nameInput && emailInput && subjectSelect && messageTextarea) {
+                var name = nameInput.value.trim();
+                var email = emailInput.value.trim();
+                var subject = subjectSelect.value;
+                var message = messageTextarea.value.trim();
+                var date = new Date().toLocaleString();
+
+                var btn = planForm.querySelector('button[type="submit"]');
+                var originalText = btn.innerHTML;
+                btn.disabled = true;
+                btn.innerHTML = 'SENDING...';
+
+                // Save message to cloud database
+                fetch('/api/content?key=ft-messages')
+                    .then(function(r) { return r.json(); })
+                    .then(function(d) {
+                        var msgs = [];
+                        if (d.value) {
+                            msgs = typeof d.value === 'string' ? JSON.parse(d.value) : d.value;
+                        }
+                        
+                        msgs.push({
+                            name: name,
+                            email: email,
+                            subject: subject,
+                            message: message,
+                            date: date,
+                            read: false
+                        });
+                        
+                        return fetch('/api/content', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ key: 'ft-messages', value: msgs })
+                        });
+                    })
+                    .then(function() {
+                        btn.innerHTML = 'MESSAGE SENT &#10003;';
+                        btn.style.backgroundColor = 'var(--accent-gold)';
+                        btn.style.color = '#fff';
+                        planForm.reset();
+                        
+                        setTimeout(function() {
+                            btn.disabled = false;
+                            btn.innerHTML = originalText;
+                            btn.style.backgroundColor = '';
+                            btn.style.color = '';
+                        }, 5000);
+                    })
+                    .catch(function(err) {
+                        console.error('Message save error:', err);
+                        btn.innerHTML = 'ERROR. TRY AGAIN.';
+                        setTimeout(function() {
+                            btn.disabled = false;
+                            btn.innerHTML = originalText;
+                        }, 3000);
+                    });
+            }
+        });
+    }
+
     // -- COOKIE CONSENT --
     {
         var cookieHtml = `

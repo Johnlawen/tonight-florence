@@ -937,7 +937,9 @@
   </div>
 
   <div class="toast" id="toast">Saved successfully!</div>
-  <div id="cloud-status-bar" style="display:none; position:fixed; top:0; left:0; right:0; z-index:99999; padding:0.6rem 1.5rem; font-size:0.75rem; font-weight:600; letter-spacing:1px; text-align:center;"></div>
+  <div id="cloud-status-bar"
+    style="display:none; position:fixed; top:0; left:0; right:0; z-index:99999; padding:0.6rem 1.5rem; font-size:0.75rem; font-weight:600; letter-spacing:1px; text-align:center;">
+  </div>
 
   <script>
     const ACCESS_CODE = 'FT2026';
@@ -1124,7 +1126,7 @@
           if (!r.ok) throw new Error('API returned status ' + r.status);
           return r.json();
         })
-        .then(function(data) {
+        .then(function (data) {
           setCloudStatus(true, 'Connected to cloud database!');
           return data;
         })
