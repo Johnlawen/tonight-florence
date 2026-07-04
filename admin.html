@@ -1725,16 +1725,19 @@
         list.innerHTML = '<p style="color:var(--muted); font-size:0.85rem;">No messages yet.</p>';
         return;
       }
-      list.innerHTML = msgs.map(m => `
+      list.innerHTML = msgs.map(m => {
+        let displaySubject = m.subject || 'No Subject';
+        if (displaySubject.includes('_')) displaySubject = displaySubject.replace(/_/g, ' ');
+        return `
         <div style="display:flex; flex-direction:column; padding:1rem; background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:2px; margin-bottom:0.5rem;">
           <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;">
-            <div style="font-size:0.85rem; font-weight:bold; color:var(--gold);">${m.subject || 'No Subject'}</div>
+            <div style="font-size:0.85rem; font-weight:bold; color:var(--gold); text-transform:uppercase;">SUBJECT: ${displaySubject}</div>
             <div style="font-size:0.7rem; color:var(--muted);">${m.date || ''}</div>
           </div>
-          <div style="font-size:0.85rem; font-family:'Inter',sans-serif; color:rgba(255,255,255,0.9); margin-bottom:0.5rem;">From: ${m.email || 'Unknown Email'}</div>
-          <div style="font-size:0.85rem; font-family:'Inter',sans-serif; line-height:1.4;">${m.message || ''}</div>
+          <div style="font-size:0.85rem; font-family:'Inter',sans-serif; color:rgba(255,255,255,0.9); margin-bottom:0.5rem;">From: <span style="color:var(--text);">${m.name || 'Unknown User'}</span> (${m.email || 'Unknown Email'})</div>
+          <div style="font-size:0.85rem; font-family:'Inter',sans-serif; line-height:1.4; margin-top:0.5rem; padding-top:0.5rem; border-top:1px solid rgba(255,255,255,0.1);">${m.message || ''}</div>
         </div>
-      `).join('');
+      `}).join('');
     }
 
     function clearMessages() {
