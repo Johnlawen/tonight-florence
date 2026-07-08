@@ -106,7 +106,7 @@
                     <div class="calendar-cell">17<div class="dots"><span class="dot blue"></span><span class="dot orange"></span><span class="dot green"></span></div></div>
                     <div class="calendar-cell">18<div class="dots"><span class="dot purple"></span><span class="dot orange"></span><span class="dot red"></span></div></div>
                     <div class="calendar-cell">19<div class="dots"><span class="dot green"></span><span class="dot orange"></span></div></div>
-                    <div class="calendar-cell active">20<div class="dots"><span class="dot blue"></span><span class="dot orange"></span></div></div>
+                    <div class="calendar-cell">20<div class="dots"><span class="dot blue"></span><span class="dot orange"></span></div></div>
                     <div class="calendar-cell">21<div class="dots"><span class="dot green"></span><span class="dot orange"></span></div></div>
                     <div class="calendar-cell">22<div class="dots"><span class="dot blue"></span><span class="dot orange"></span><span class="dot green"></span></div></div>
 
@@ -261,5 +261,53 @@
 
     <script src="./content-loader.js"></script>
     <script type="module" src="./main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cells = document.querySelectorAll('.calendar-cell:not(.prev-month)');
+            const rightPanel = document.querySelector('.calendar-right');
+            const rightTitle = document.querySelector('.calendar-right-title');
+            const rightKicker = document.querySelector('.calendar-right-title-box .section-kicker');
+            const closeBtn = document.querySelector('.calendar-close-btn');
+
+            cells.forEach(cell => {
+                cell.addEventListener('click', () => {
+                    // Remove active class from all
+                    document.querySelectorAll('.calendar-cell').forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked
+                    cell.classList.add('active');
+
+                    // Get date number
+                    const dateText = cell.childNodes[0].textContent.trim();
+                    
+                    // Update text
+                    rightTitle.innerHTML = `Events on June ${dateText}<span class="highlight-purple">.</span>`;
+                    
+                    // Calculate correct day of week for June 2025
+                    const dateNum = parseInt(dateText);
+                    const selectedDate = new Date(2025, 5, dateNum); // Month 5 is June
+                    const days = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
+                    const dayName = days[selectedDate.getDay()];
+                    
+                    rightKicker.textContent = `${dayName}, JUNE ${dateText}, 2025`;
+
+                    // Show panel
+                    rightPanel.classList.add('active');
+                    
+                    // On mobile, scroll to it smoothly
+                    if (window.innerWidth <= 1024) {
+                        rightPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+
+            if (closeBtn) {
+                closeBtn.addEventListener('click', () => {
+                    rightPanel.classList.remove('active');
+                    document.querySelectorAll('.calendar-cell').forEach(c => c.classList.remove('active'));
+                });
+            }
+        });
+    </script>
 </body>
 </html>

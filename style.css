@@ -1668,9 +1668,12 @@ h1, h2, h3, h4 {
     width: 450px;
     flex-shrink: 0;
     padding: 3rem;
-    display: flex;
+    display: none; /* Hidden by default until date is clicked */
     flex-direction: column;
     border-left: 1px solid #1a1a1a;
+}
+.calendar-right.active {
+    display: flex;
 }
 .calendar-right-header {
     display: flex;
