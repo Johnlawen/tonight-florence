@@ -208,7 +208,7 @@
                 </div>
                 
                 <div class="calendar-right-footer">
-                    <a href="events.html" class="btn btn-outline calendar-btn-full" style="width: 100%; justify-content: center; border-color: var(--accent-gold); color: var(--accent-gold);">VIEW FULL CALENDAR &rarr;</a>
+                    <a href="day.html?date=20" id="view-full-calendar-btn" class="btn btn-outline calendar-btn-full" style="width: 100%; justify-content: center; border-color: var(--accent-gold); color: var(--accent-gold);">VIEW FULL CALENDAR &rarr;</a>
                 </div>
             </div>
         </div>
@@ -290,6 +290,12 @@
                     const dayName = days[selectedDate.getDay()];
                     
                     rightKicker.textContent = `${dayName}, JUNE ${dateText}, 2025`;
+                    
+                    // Update the VIEW FULL CALENDAR link
+                    const fullCalendarBtn = document.getElementById('view-full-calendar-btn');
+                    if (fullCalendarBtn) {
+                        fullCalendarBtn.href = `day.html?date=${dateText}`;
+                    }
 
                     // Show panel
                     rightPanel.classList.add('active');

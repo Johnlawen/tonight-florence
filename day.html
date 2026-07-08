@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Florence Tonight | Events for Friday, June 20, 2025</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="./style.css">
+    <script type="module" src="./lang.js"></script>
+    <style>
+        .day-header-section {
+            padding: 4rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .day-header-kicker {
+            color: var(--accent-purple);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 1rem;
+        }
+        .day-header-title {
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
+            margin: 0 0 1rem 0;
+        }
+        .day-events-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+        /* Override carousel card styles to fit grid */
+        .events-grid .event-card {
+            width: 100%;
+            margin-right: 0;
+        }
+    </style>
+</head>
+<body style="background: var(--bg-color);">
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar" style="border-bottom: 1px solid var(--border-color);">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html" class="logo" style="text-decoration:none;">
+                    <span class="ft-logo">F<sub>T</sub></span>
+                    <span class="logo-text">FLORENCE<br><span class="highlight-purple">TONIGHT</span></span>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html"><span data-i18n="nav.home">HOME</span></a></li>
+                <li><a href="after-dark.html"><span data-i18n="nav.afterdark">AFTER DARK</span></a></li>
+                <li><a href="aperitivo.html">APERITIVO</a></li>
+                <li><a href="events.html"><span data-i18n="nav.events">EVENTS</span></a></li>
+                <li><a href="guides.html"><span data-i18n="nav.guides">GUIDES</span></a></li>
+                <li><a href="index.html#about">ABOUT</a></li>
+            </ul>
+            <div class="nav-action" style="display:flex;align-items:center;gap:0.5rem;">
+                <a href="plan.html" class="btn btn-outline"><span data-i18n="nav.plan">PLAN YOUR NIGHT</span> <span>&rarr;</span></a>
+            </div>
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </nav>
+
+    <section class="day-header-section">
+        <span class="day-header-kicker" id="dynamic-date-kicker">FRIDAY, JUNE 20, 2025</span>
+        <h1 class="day-header-title">Events on June <span id="dynamic-date-num">20</span><span class="highlight-purple">.</span></h1>
+        <p style="color: var(--text-secondary);">Browse all curated events and secure your spot.</p>
+    </section>
+
+    <section class="day-events-container">
+        <div class="events-grid">
+            <!-- Event 1 -->
+            <div class="event-card">
+                <div class="card-image">
+                    <img src="/images/aperitvo.png" alt="Aperitivo Hour at Vista">
+                </div>
+                <div class="card-content">
+                    <span class="card-tag">APERITIVO & DRINKS</span>
+                    <h3 class="card-title">Aperitivo Hour<br>at Vista</h3>
+                    <p class="card-subtitle">COCKTAILS & VIEWS</p>
+                    <p class="card-subtitle">ALL AGES</p>
+                    <p class="card-meta">
+                        <span class="icon-pin"></span> Vista Lounge, Lungarno<br>
+                        Today<br>
+                        6:00 PM - LATE
+                    </p>
+                </div>
+            </div>
+
+            <!-- Event 2 -->
+            <div class="event-card">
+                <div class="card-image">
+                    <img src="/images/yab.jpg" alt="YAB Presents: Thursday Club">
+                </div>
+                <div class="card-content">
+                    <span class="card-tag">CLUBS & PARTIES</span>
+                    <h3 class="card-title">YAB Presents:<br>Thursday Club</h3>
+                    <p class="card-subtitle">HIP HOP & R&B</p>
+                    <p class="card-subtitle">+18 ONLY</p>
+                    <p class="card-meta">
+                        <span class="icon-pin"></span> YAB, Via de' Bardi 16<br>
+                        Today<br>
+                        9:00 PM - 1:00 AM
+                    </p>
+                </div>
+            </div>
+
+            <!-- Event 3 -->
+            <div class="event-card">
+                <div class="card-image">
+                    <img src="/images/space2.jpg" alt="Move On Friday at Tenax">
+                </div>
+                <div class="card-content">
+                    <span class="card-tag">CLUBS & PARTIES</span>
+                    <h3 class="card-title">Move On Friday<br>at Tenax</h3>
+                    <p class="card-subtitle">TECHNO & HOUSE</p>
+                    <p class="card-subtitle">+18 ONLY</p>
+                    <p class="card-meta">
+                        <span class="icon-pin"></span> Tenax, Via Pratese 46<br>
+                        Today<br>
+                        10:00 PM - 3:00 AM
+                    </p>
+                </div>
+            </div>
+
+            <!-- Event 4 -->
+            <div class="event-card">
+                <div class="card-image">
+                    <img src="/images/la_loggia.png" alt="Friday Nights at La Suite">
+                </div>
+                <div class="card-content">
+                    <span class="card-tag">CLUBS & PARTIES</span>
+                    <h3 class="card-title">Friday Nights<br>at La Suite</h3>
+                    <p class="card-subtitle">EXCLUSIVE & CHIC</p>
+                    <p class="card-subtitle">+18 ONLY</p>
+                    <p class="card-meta">
+                        <span class="icon-pin"></span> La Suite, Borgo SS. Apostoli 9<br>
+                        Today<br>
+                        10:30 PM - LATE
+                    </p>
+                </div>
+            </div>
+
+            <!-- Event 5 -->
+            <div class="event-card">
+                <div class="card-image">
+                    <img src="/images/xoo.png" alt="Underground Vibe at Cave Club">
+                </div>
+                <div class="card-content">
+                    <span class="card-tag">CLUBS & PARTIES</span>
+                    <h3 class="card-title">Underground Vibe<br>at Cave Club</h3>
+                    <p class="card-subtitle">DEEP HOUSE & ELECTRONIC</p>
+                    <p class="card-subtitle">+18 ONLY</p>
+                    <p class="card-meta">
+                        <span class="icon-pin"></span> Cave Club, Via dei Benci 12<br>
+                        Today<br>
+                        11:30 PM - LATE
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer" style="padding-top:1rem; border-top:1px solid var(--border-color);">
+        <div class="footer-container">
+            <div class="logo">
+                <span class="ft-logo">F<sub>T</sub></span>
+                <span class="logo-text">FLORENCE<br><span class="highlight-purple">TONIGHT</span></span>
+            </div>
+            <ul class="footer-links" style="margin:0 auto;">
+                <li><a href="index.html#about">ABOUT</a></li>
+                <li><a href="index.html#contact">CONTACT</a></li>
+                <li><a href="index.html#partnerships">PARTNERSHIPS</a></li>
+                <li><a href="index.html#venue">SUBMIT A VENUE</a></li>
+                <li><a href="index.html#privacy">PRIVACY</a></li>
+            </ul>
+            <div class="social-links">
+                <a href="#"><i data-lucide="instagram"></i></a>
+                <a href="#"><i data-lucide="video"></i></a>
+                <a href="#"><i data-lucide="facebook"></i></a>
+                <a href="#"><i data-lucide="mail"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- EVENT MODAL -->
+    <div id="event-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="event-modal-close">&times;</span>
+            <div class="modal-body">
+                <div class="modal-image-container">
+                    <img id="modal-image" src="" alt="Event Flyer">
+                </div>
+                <div class="modal-info">
+                    <h2 id="modal-title" class="modal-title"></h2>
+                    <p id="modal-subtitle" class="modal-subtitle"></p>
+                    <p class="card-subtitle">Caption Of The Night</p>
+                    <div class="modal-actions">
+                        <button id="btn-book-ticket" class="btn btn-outline">BOOK TICKET</button>
+                        <button id="btn-book-table" class="btn btn-primary">BOOK TABLE</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOOKING FORM MODAL -->
+    <div id="booking-modal" class="modal">
+        <div class="modal-content booking-modal-content">
+            <span class="close-modal" id="booking-modal-close">&times;</span>
+            <div class="booking-header">
+                <span id="booking-type-label" class="section-kicker">BOOK TICKET</span>
+                <h2 id="booking-event-name" class="booking-title"></h2>
+            </div>
+            <form id="booking-form" class="booking-form" onsubmit="return false;">
+                <div class="booking-row">
+                    <div class="booking-field">
+                        <label for="booking-firstname">First Name</label>
+                        <input type="text" id="booking-firstname" placeholder="e.g. Marco" required>
+                    </div>
+                    <div class="booking-field">
+                        <label for="booking-lastname">Last Name</label>
+                        <input type="text" id="booking-lastname" placeholder="e.g. Rossi" required>
+                    </div>
+                </div>
+                <div class="booking-field">
+                    <label for="booking-email">Email Address</label>
+                    <input type="email" id="booking-email" placeholder="your@email.com" required>
+                </div>
+                <div class="booking-field">
+                    <label>Gender</label>
+                    <div class="gender-options">
+                        <label class="gender-option"><input type="radio" name="booking-gender" value="male" checked><span class="gender-pill">&#9794; Male</span></label>
+                        <label class="gender-option"><input type="radio" name="booking-gender" value="female"><span class="gender-pill">&#9792; Female</span></label>
+                    </div>
+                </div>
+                <div class="booking-field">
+                    <label id="qty-label">Number of Tickets</label>
+                    <div class="qty-control">
+                        <button type="button" class="qty-btn" id="qty-minus">&#8722;</button>
+                        <span id="qty-display" class="qty-value">1</span>
+                        <button type="button" class="qty-btn" id="qty-plus">&#43;</button>
+                    </div>
+                </div>
+                <div class="booking-price-box">
+                    <span class="price-label">TOTAL PRICE</span>
+                    <span id="booking-total-price" class="price-value">&euro;20</span>
+                </div>
+                <button type="submit" class="btn btn-primary booking-submit" id="booking-submit-btn">CONFIRM BOOKING &rarr;</button>
+                <p class="booking-note">You will receive a confirmation email within 24 hours.</p>
+            </form>
+        </div>
+    </div>
+    <div id="booking-success" class="booking-success-overlay">
+        <div class="booking-success-box">
+            <div class="success-icon">&#10003;</div>
+            <h3>Booking Confirmed!</h3>
+            <p id="success-message">Your request has been sent. Check your email for details.</p>
+            <button class="btn btn-primary" id="success-close-btn">DONE</button>
+        </div>
+    </div>
+
+    <script src="./content-loader.js"></script>
+    <script type="module" src="./main.js"></script>
+    <script>
+        // Check URL parameters for date to dynamically update title
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const dateStr = params.get('date');
+            
+            if (dateStr) {
+                const dateNum = parseInt(dateStr);
+                if (!isNaN(dateNum)) {
+                    document.getElementById('dynamic-date-num').textContent = dateNum;
+                    
+                    const selectedDate = new Date(2025, 5, dateNum); // Month 5 is June
+                    const days = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
+                    const dayName = days[selectedDate.getDay()];
+                    
+                    document.getElementById('dynamic-date-kicker').textContent = `${dayName}, JUNE ${dateNum}, 2025`;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
