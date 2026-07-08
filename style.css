@@ -2013,6 +2013,11 @@ h1, h2, h3, h4 {
     display: flex;
     flex-direction: column;
     box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    transform: translateY(50px);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.cookie-consent-overlay.active .cookie-consent-modal {
+    transform: translateY(0);
 }
 .cookie-consent-header {
     padding: 1.5rem 2rem;

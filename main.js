@@ -488,8 +488,8 @@ function initMain() {
         `;
         document.body.insertAdjacentHTML('beforeend', cookieHtml);
         
-        // Only auto-open if not already accepted
-        if (!localStorage.getItem('cookieConsentAccepted')) {
+        // Only auto-open if not already accepted in this session
+        if (!sessionStorage.getItem('cookieConsentAccepted')) {
             setTimeout(function() {
                 var overlay = document.getElementById('cookie-consent');
                 if (overlay) {
@@ -505,7 +505,7 @@ function initMain() {
                 var overlay = document.getElementById('cookie-consent');
                 overlay.classList.remove('active');
                 document.body.style.overflow = '';
-                localStorage.setItem('cookieConsentAccepted', 'true');
+                sessionStorage.setItem('cookieConsentAccepted', 'true');
             });
         }
     }
