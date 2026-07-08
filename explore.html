@@ -47,146 +47,169 @@
         </div>
     </nav>
 
-    <!-- EXPLORE HEADER -->
-    <section class="explore-header-section">
-        <div class="explore-container">
-            <div class="breadcrumb">
-                <a href="index.html"><span data-i18n="nav.home">HOME</span></a> &gt; <span>Explore Tonight</span>
-            </div>
-
-            <div class="explore-header-top">
-                <div class="explore-header-left">
-                    <span class="section-kicker" style="color:var(--accent-purple);">EXPLORE TONIGHT</span>
-                    <h1 class="hero-title explore-title">Tonight<br>in Florence<span class="highlight-purple">.</span></h1>
-                    <p class="explore-subtitle">Curated events happening around the city<br>tonight. Choose your vibe.</p>
+    <!-- EVENTS CALENDAR SECTION -->
+    <section class="calendar-section">
+        <div class="calendar-layout">
+            <!-- Left Side: Calendar Grid -->
+            <div class="calendar-left">
+                <div class="calendar-header-top">
+                    <span class="section-kicker" style="color:var(--accent-purple); margin-bottom: 0.5rem; letter-spacing: 2px;">EVENTS CALENDAR</span>
+                    <h1 class="calendar-title">June 2025<span class="highlight-purple">.</span></h1>
                 </div>
-                <div class="explore-header-right">
-                    <div class="date-selector">
-                        <div class="date-day"><i data-lucide="calendar"></i> SATURDAY</div>
-                        <div class="date-date">June 15 <i data-lucide="chevron-down"></i></div>
+                <div class="calendar-controls">
+                    <div class="calendar-nav-group">
+                        <button class="calendar-nav-btn"><i data-lucide="chevron-left"></i></button>
+                        <button class="calendar-month-btn">JUNE 2025 <i data-lucide="chevron-down" style="width: 14px; height: 14px; margin-left: 0.5rem;"></i></button>
+                        <button class="calendar-nav-btn"><i data-lucide="chevron-right"></i></button>
                     </div>
+                    <button class="calendar-today-btn">TODAY</button>
+                </div>
+
+                <div class="calendar-grid">
+                    <div class="calendar-day-header">MON</div>
+                    <div class="calendar-day-header">TUE</div>
+                    <div class="calendar-day-header">WED</div>
+                    <div class="calendar-day-header">THU</div>
+                    <div class="calendar-day-header">FRI</div>
+                    <div class="calendar-day-header">SAT</div>
+                    <div class="calendar-day-header">SUN</div>
+                    
+                    <!-- Row 1 -->
+                    <div class="calendar-cell prev-month">26<div class="dots"><span class="dot purple"></span><span class="dot orange"></span></div></div>
+                    <div class="calendar-cell prev-month">27</div>
+                    <div class="calendar-cell prev-month">28<div class="dots"><span class="dot green"></span><span class="dot orange"></span></div></div>
+                    <div class="calendar-cell prev-month">29</div>
+                    <div class="calendar-cell prev-month">30</div>
+                    <div class="calendar-cell prev-month">31</div>
+                    <div class="calendar-cell">1<div class="dots"><span class="dot blue"></span><span class="dot orange"></span><span class="dot green"></span></div></div>
+                    
+                    <!-- Row 2 -->
+                    <div class="calendar-cell">2<div class="dots"><span class="dot purple"></span><span class="dot green"></span></div></div>
+                    <div class="calendar-cell">3</div>
+                    <div class="calendar-cell">4<div class="dots"><span class="dot blue"></span><span class="dot orange"></span><span class="dot red"></span><span class="dot green"></span></div></div>
+                    <div class="calendar-cell">5</div>
+                    <div class="calendar-cell">6</div>
+                    <div class="calendar-cell">7<div class="dots"><span class="dot blue"></span><span class="dot orange"></span><span class="dot red"></span></div></div>
+                    <div class="calendar-cell">8<div class="dots"><span class="dot purple"></span><span class="dot orange"></span><span class="dot green"></span></div></div>
+                    
+                    <!-- Row 3 -->
+                    <div class="calendar-cell">9<div class="dots"><span class="dot green"></span><span class="dot orange"></span></div></div>
+                    <div class="calendar-cell">10<div class="dots"><span class="dot blue"></span><span class="dot green"></span></div></div>
+                    <div class="calendar-cell">11<div class="dots"><span class="dot green"></span><span class="dot orange"></span><span class="dot red"></span></div></div>
+                    <div class="calendar-cell">12<div class="dots"><span class="dot purple"></span></div></div>
+                    <div class="calendar-cell">13<div class="dots"><span class="dot purple"></span><span class="dot green"></span></div></div>
+                    <div class="calendar-cell">14<div class="dots"><span class="dot blue"></span><span class="dot orange"></span></div></div>
+                    <div class="calendar-cell">15<div class="dots"><span class="dot purple"></span><span class="dot orange"></span></div></div>
+                    
+                    <!-- Row 4 -->
+                    <div class="calendar-cell">16<div class="dots"><span class="dot green"></span><span class="dot orange"></span></div></div>
+                    <div class="calendar-cell">17<div class="dots"><span class="dot blue"></span><span class="dot orange"></span><span class="dot green"></span></div></div>
+                    <div class="calendar-cell">18<div class="dots"><span class="dot purple"></span><span class="dot orange"></span><span class="dot red"></span></div></div>
+                    <div class="calendar-cell">19<div class="dots"><span class="dot green"></span><span class="dot orange"></span></div></div>
+                    <div class="calendar-cell active">20<div class="dots"><span class="dot blue"></span><span class="dot orange"></span></div></div>
+                    <div class="calendar-cell">21<div class="dots"><span class="dot green"></span><span class="dot orange"></span></div></div>
+                    <div class="calendar-cell">22<div class="dots"><span class="dot blue"></span><span class="dot orange"></span><span class="dot green"></span></div></div>
+
+                    <!-- Row 5 -->
+                    <div class="calendar-cell">23<div class="dots"><span class="dot green"></span><span class="dot orange"></span></div></div>
+                    <div class="calendar-cell">24<div class="dots"><span class="dot blue"></span><span class="dot orange"></span><span class="dot green"></span></div></div>
+                    <div class="calendar-cell">25<div class="dots"><span class="dot purple"></span><span class="dot orange"></span><span class="dot red"></span></div></div>
+                    <div class="calendar-cell">26<div class="dots"><span class="dot green"></span><span class="dot orange"></span></div></div>
+                    <div class="calendar-cell">27<div class="dots"><span class="dot purple"></span><span class="dot green"></span></div></div>
+                    <div class="calendar-cell">28<div class="dots"><span class="dot blue"></span><span class="dot green"></span></div></div>
+                    <div class="calendar-cell">29<div class="dots"><span class="dot green"></span><span class="dot orange"></span></div></div>
+
+                    <!-- Row 6 -->
+                    <div class="calendar-cell">30<div class="dots"><span class="dot purple"></span><span class="dot orange"></span><span class="dot green"></span></div></div>
+                    <div class="calendar-cell prev-month">1<div class="dots"><span class="dot blue"></span><span class="dot orange"></span></div></div>
+                    <div class="calendar-cell prev-month">2<div class="dots"><span class="dot green"></span><span class="dot orange"></span></div></div>
+                    <div class="calendar-cell prev-month">3<div class="dots"><span class="dot blue"></span><span class="dot green"></span></div></div>
+                    <div class="calendar-cell prev-month">4<div class="dots"><span class="dot purple"></span><span class="dot green"></span></div></div>
+                    <div class="calendar-cell prev-month">5<div class="dots"><span class="dot purple"></span></div></div>
+                    <div class="calendar-cell prev-month">6<div class="dots"><span class="dot purple"></span><span class="dot orange"></span></div></div>
                 </div>
             </div>
-
-            <!-- TABS & FILTER -->
-            <div class="explore-controls">
-                <div class="explore-tabs">
-                    <div class="explore-tab active">
-                        <i data-lucide="home"></i> All Events
+            
+            <!-- Right Side: Events List -->
+            <div class="calendar-right">
+                <div class="calendar-right-header">
+                    <div class="calendar-right-title-box">
+                        <span class="section-kicker" style="color:var(--accent-purple); margin-bottom: 0.5rem; letter-spacing: 2px;">FRIDAY, JUNE 20, 2025</span>
+                        <h2 class="calendar-right-title">Events on June 20<span class="highlight-purple">.</span></h2>
                     </div>
+                    <button class="calendar-close-btn" aria-label="Close"><i data-lucide="x"></i></button>
                 </div>
-                <div class="explore-filter">
-                    Sort by: <span style="color:var(--accent-gold);">Time <i data-lucide="chevron-down"></i></span>
+                
+                <div class="event-list">
+                    <a href="#" class="list-item">
+                        <div class="list-col-time">
+                            <div class="list-time-top">6:00 PM</div>
+                            <div class="list-time-bottom">- LATE</div>
+                        </div>
+                        <div class="list-col-main">
+                            <h3 class="list-title">Aperitivo Hour at Vista</h3>
+                            <div class="list-category" style="color: var(--accent-purple);">APERITIVO & DRINKS</div>
+                            <div class="list-location"><i data-lucide="map-pin"></i> Vista Lounge, Lungarno</div>
+                        </div>
+                        <div class="list-col-arrow">&rarr;</div>
+                    </a>
+                    
+                    <a href="#" class="list-item">
+                        <div class="list-col-time">
+                            <div class="list-time-top">9:00 PM</div>
+                            <div class="list-time-bottom">- 1:00 AM</div>
+                        </div>
+                        <div class="list-col-main">
+                            <h3 class="list-title">YAB Presents: Thursday Club</h3>
+                            <div class="list-category" style="color: var(--accent-purple);">CLUBS & PARTIES</div>
+                            <div class="list-location"><i data-lucide="map-pin"></i> YAB, Via de' Bardi 16</div>
+                        </div>
+                        <div class="list-col-arrow">&rarr;</div>
+                    </a>
+                    
+                    <a href="#" class="list-item">
+                        <div class="list-col-time">
+                            <div class="list-time-top">10:00 PM</div>
+                            <div class="list-time-bottom">- 3:00 AM</div>
+                        </div>
+                        <div class="list-col-main">
+                            <h3 class="list-title">Move On Friday at Tenax</h3>
+                            <div class="list-category" style="color: var(--accent-purple);">CLUBS & PARTIES</div>
+                            <div class="list-location"><i data-lucide="map-pin"></i> Tenax, Via Pratese 46</div>
+                        </div>
+                        <div class="list-col-arrow">&rarr;</div>
+                    </a>
+                    
+                    <a href="#" class="list-item">
+                        <div class="list-col-time">
+                            <div class="list-time-top">10:30 PM</div>
+                            <div class="list-time-bottom">- LATE</div>
+                        </div>
+                        <div class="list-col-main">
+                            <h3 class="list-title">Friday Nights at La Suite</h3>
+                            <div class="list-category" style="color: var(--accent-purple);">CLUBS & PARTIES</div>
+                            <div class="list-location"><i data-lucide="map-pin"></i> La Suite, Borgo SS. Apostoli 9</div>
+                        </div>
+                        <div class="list-col-arrow">&rarr;</div>
+                    </a>
+                    
+                    <a href="#" class="list-item" style="border-bottom: none;">
+                        <div class="list-col-time">
+                            <div class="list-time-top">11:30 PM</div>
+                            <div class="list-time-bottom">- LATE</div>
+                        </div>
+                        <div class="list-col-main">
+                            <h3 class="list-title">Underground Vibe at Cave Club</h3>
+                            <div class="list-category" style="color: var(--accent-purple);">CLUBS & PARTIES</div>
+                            <div class="list-location"><i data-lucide="map-pin"></i> Cave Club, Via dei Benci 12</div>
+                        </div>
+                        <div class="list-col-arrow">&rarr;</div>
+                    </a>
                 </div>
-            </div>
-
-            <!-- EVENT LIST -->
-            <div class="event-list">
-                <!-- ITEM 1 -->
-                <a href="#" class="list-item">
-                    <div class="list-col-time">
-                        <div class="list-time-top">7:00 PM</div>
-                        <div class="list-time-bottom">- 2:00 AM</div>
-                    </div>
-                    <div class="list-col-main">
-                        <h3 class="list-title">LA LOGGIA ROOFTOP</h3>
-                        <p class="list-desc">COCKTAILS & VIEWS</p>
-                    </div>
-                    <div class="list-col-meta">
-                        <div class="list-category">ROOFTOP</div>
-                        <div class="list-location"><i data-lucide="map-pin"></i> VIA DELLA LOGGIA, 6</div>
-                    </div>
-                    <div class="list-col-arrow">&rarr;</div>
-                </a>
-
-                <!-- ITEM 2 -->
-                <a href="#" class="list-item">
-                    <div class="list-col-time">
-                        <div class="list-time-top">11:00 PM</div>
-                        <div class="list-time-bottom">- 4:00 AM</div>
-                    </div>
-                    <div class="list-col-main">
-                        <h3 class="list-title">YAB CLUB</h3>
-                        <p class="list-desc">HIP HOP & INTERNATIONAL</p>
-                    </div>
-                    <div class="list-col-meta">
-                        <div class="list-category">CLUB</div>
-                        <div class="list-location"><i data-lucide="map-pin"></i> VIA DE' BARDI, 16</div>
-                    </div>
-                    <div class="list-col-arrow">&rarr;</div>
-                </a>
-
-                <!-- ITEM 3 -->
-                <a href="#" class="list-item">
-                    <div class="list-col-time">
-                        <div class="list-time-top">7:00 PM</div>
-                        <div class="list-time-bottom">- 11:00 PM</div>
-                    </div>
-                    <div class="list-col-main">
-                        <h3 class="list-title">SE&bull;STO ON ARNOLFO</h3>
-                        <p class="list-desc">APERITIVO & MUSIC</p>
-                    </div>
-                    <div class="list-col-meta">
-                        <div class="list-category">APERITIVO</div>
-                        <div class="list-location"><i data-lucide="map-pin"></i> PIAZZA S. SPIRITO, 10</div>
-                    </div>
-                    <div class="list-col-arrow">&rarr;</div>
-                </a>
-
-                <!-- ITEM 4 -->
-                <a href="#" class="list-item">
-                    <div class="list-col-time">
-                        <div class="list-time-top">11:00 PM</div>
-                        <div class="list-time-bottom">- 5:00 AM</div>
-                    </div>
-                    <div class="list-col-main">
-                        <h3 class="list-title">SPACE CLUB</h3>
-                        <p class="list-desc">TECHNO & HOUSE</p>
-                    </div>
-                    <div class="list-col-meta">
-                        <div class="list-category">CLUB</div>
-                        <div class="list-location"><i data-lucide="map-pin"></i> VIA PALAZZUOLO, 37</div>
-                    </div>
-                    <div class="list-col-arrow">&rarr;</div>
-                </a>
-
-                <!-- ITEM 5 -->
-                <a href="#" class="list-item">
-                    <div class="list-col-time">
-                        <div class="list-time-top">10:00 PM</div>
-                        <div class="list-time-bottom">- 4:00 AM</div>
-                    </div>
-                    <div class="list-col-main">
-                        <h3 class="list-title">BABYLONE CLUB</h3>
-                        <p class="list-desc">R&B & LATIN VIBES</p>
-                    </div>
-                    <div class="list-col-meta">
-                        <div class="list-category">CLUB</div>
-                        <div class="list-location"><i data-lucide="map-pin"></i> VIA BORGO OGNISSANTI, 12</div>
-                    </div>
-                    <div class="list-col-arrow">&rarr;</div>
-                </a>
-
-                <!-- ITEM 6 -->
-                <a href="#" class="list-item">
-                    <div class="list-col-time">
-                        <div class="list-time-top">9:00 PM</div>
-                        <div class="list-time-bottom">- 3:00 AM</div>
-                    </div>
-                    <div class="list-col-main">
-                        <h3 class="list-title">XO CLUB</h3>
-                        <p class="list-desc">LUXURY NIGHTLIFE</p>
-                    </div>
-                    <div class="list-col-meta">
-                        <div class="list-category">CLUB</div>
-                        <div class="list-location"><i data-lucide="map-pin"></i> LUNGARNO CORSINI, 4</div>
-                    </div>
-                    <div class="list-col-arrow">&rarr;</div>
-                </a>
-            </div>
-
-            <div class="explore-action" style="text-align: center; margin-top: 3rem;">
-                <a href="events.html" class="btn btn-outline" style="border-color:var(--accent-gold); color:var(--accent-gold);">VIEW FULL CALENDAR &rarr;</a>
+                
+                <div class="calendar-right-footer">
+                    <a href="events.html" class="btn btn-outline calendar-btn-full" style="width: 100%; justify-content: center; border-color: var(--accent-gold); color: var(--accent-gold);">VIEW FULL CALENDAR &rarr;</a>
+                </div>
             </div>
         </div>
     </section>

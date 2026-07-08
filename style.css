@@ -1505,125 +1505,230 @@ h1, h2, h3, h4 {
     }
 }
 
-/* ── Explore Page ── */
-.explore-header-section {
-    padding: 3rem 0 6rem;
-}
-.explore-container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 0 2rem;
-}
-.breadcrumb {
-    font-size: 0.75rem;
-    color: var(--text-secondary);
-    margin-bottom: 3rem;
-    letter-spacing: 0.5px;
-}
-.breadcrumb a {
-    color: var(--text-secondary);
-    transition: color 0.3s;
-}
-.breadcrumb a:hover {
-    color: var(--text-primary);
-}
-.explore-header-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 4rem;
-}
-.explore-title {
-    font-size: 4rem;
-    line-height: 1.1;
-    margin-bottom: 1rem;
-}
-.explore-subtitle {
-    font-size: 1rem;
-    color: var(--text-secondary);
-    line-height: 1.6;
-}
-.explore-header-right {
-    text-align: right;
-}
-.date-selector {
+/* ── Explore Calendar Layout ── */
+.calendar-section {
+    padding: 2rem 0 0;
+    min-height: calc(100vh - 80px);
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
 }
-.date-day {
-    color: var(--accent-gold);
+.calendar-layout {
+    display: flex;
+    border-top: 1px solid #1a1a1a;
+    flex: 1;
+}
+.calendar-left {
+    flex: 1;
+    padding: 3rem 4rem;
+    border-right: 1px solid #1a1a1a;
+}
+.calendar-header-top {
+    margin-bottom: 2rem;
+}
+.calendar-title {
+    font-size: 4rem;
+    line-height: 1.1;
+    font-family: var(--font-heading);
+    margin-top: 0.5rem;
+}
+.calendar-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+.calendar-nav-group {
+    display: flex;
+    align-items: center;
+    border: 1px solid #1a1a1a;
+    border-radius: 4px;
+}
+.calendar-nav-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+.calendar-nav-btn:hover {
+    color: var(--text-primary);
+}
+.calendar-nav-btn:first-child {
+    border-right: 1px solid #1a1a1a;
+}
+.calendar-nav-btn:last-child {
+    border-left: 1px solid #1a1a1a;
+}
+.calendar-month-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    padding: 0.5rem 1.5rem;
     font-size: 0.8rem;
     letter-spacing: 1.5px;
     font-weight: 600;
-    margin-bottom: 0.5rem;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-}
-.date-day svg {
-    width: 16px;
-    height: 16px;
-}
-.date-date {
-    font-family: var(--font-heading);
-    font-size: 2.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
     cursor: pointer;
 }
-.date-date svg {
-    width: 24px;
-    height: 24px;
-    color: var(--text-secondary);
-}
-.explore-controls {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 1rem;
-    margin-bottom: 2rem;
-}
-.explore-tabs {
-    display: flex;
-    gap: 2rem;
-}
-.explore-tab {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.85rem;
-    color: var(--text-secondary);
+.calendar-today-btn {
+    background: transparent;
+    border: 1px solid #1a1a1a;
+    color: var(--text-primary);
+    padding: 0.5rem 1.5rem;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    font-weight: 600;
+    border-radius: 4px;
     cursor: pointer;
+    transition: border-color 0.3s;
+}
+.calendar-today-btn:hover {
+    border-color: var(--text-secondary);
+}
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    border: 1px solid #1a1a1a;
+}
+.calendar-day-header {
+    text-align: center;
+    padding: 1rem 0;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    letter-spacing: 1px;
+    border-bottom: 1px solid #1a1a1a;
+    font-weight: 600;
+}
+.calendar-cell {
+    aspect-ratio: 1.2;
+    border-right: 1px solid #1a1a1a;
+    border-bottom: 1px solid #1a1a1a;
+    padding: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: background 0.3s;
     position: relative;
 }
-.explore-tab.active {
-    color: var(--accent-gold);
+.calendar-cell:nth-child(7n) {
+    border-right: none;
 }
-.explore-tab.active::after {
+.calendar-cell:hover {
+    background: rgba(255,255,255,0.03);
+}
+.calendar-cell.prev-month {
+    color: #444;
+}
+.calendar-cell.active {
+    background: transparent; /* Wait, it's a purple background for the date itself in the image */
+}
+/* Wait, in the image the active date has a solid purple circle behind the number 20 */
+.calendar-cell.active {
+    /* To make just the number have a circle, we need a span. For simplicity, we can do a radial background or just background on the cell. */
+    background: rgba(138, 99, 210, 0.1);
+}
+.calendar-cell.active::before {
     content: '';
     position: absolute;
-    bottom: -1rem;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: var(--accent-gold);
+    top: 0.4rem;
+    left: 0.4rem;
+    width: 30px;
+    height: 30px;
+    background: var(--accent-purple);
+    border-radius: 50%;
+    z-index: -1;
 }
-.explore-tab svg {
-    width: 16px;
-    height: 16px;
+.calendar-cell.active {
+    z-index: 1;
 }
-.explore-filter {
-    font-size: 0.8rem;
+
+.dots {
+    display: flex;
+    gap: 4px;
+    margin-top: auto;
+    padding-top: 1rem;
+}
+.dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+}
+.dot.purple { background: var(--accent-purple); }
+.dot.orange { background: var(--accent-gold); }
+.dot.green { background: #4caf50; }
+.dot.blue { background: #2196f3; }
+.dot.red { background: #f44336; }
+
+.calendar-right {
+    width: 450px;
+    flex-shrink: 0;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid #1a1a1a;
+}
+.calendar-right-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #1a1a1a;
+}
+.calendar-right-title-box {
+    display: flex;
+    flex-direction: column;
+}
+.calendar-right-title {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    margin-top: 0.5rem;
+}
+.calendar-close-btn {
+    background: transparent;
+    border: 1px solid #1a1a1a;
     color: var(--text-secondary);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
+    border-radius: 4px;
+    transition: border-color 0.3s, color 0.3s;
 }
-.explore-filter svg {
-    width: 14px;
-    height: 14px;
-    vertical-align: middle;
+.calendar-close-btn:hover {
+    border-color: var(--text-primary);
+    color: var(--text-primary);
+}
+.calendar-right .event-list {
+    flex: 1;
+    overflow-y: auto;
+}
+.calendar-right-footer {
+    margin-top: 2rem;
+    padding-top: 1rem;
+}
+
+@media (max-width: 1024px) {
+    .calendar-layout {
+        flex-direction: column;
+    }
+    .calendar-left {
+        border-right: none;
+        border-bottom: 1px solid #1a1a1a;
+        padding: 2rem;
+    }
+    .calendar-right {
+        width: 100%;
+        border-left: none;
+        padding: 2rem;
+    }
 }
 .event-list {
     display: flex;
