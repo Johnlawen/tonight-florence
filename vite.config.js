@@ -14,7 +14,8 @@ export default defineConfig({
         hiddenGems: './hidden-gems.html',
         plan: './plan.html',
         privacy: './privacy.html',
-        scan: './scan.html'
+        scan: './scan.html',
+        day: './day.html'
       }
     }
   }
