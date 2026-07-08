@@ -442,47 +442,35 @@ function initMain() {
     // -- COOKIE CONSENT --
     {
         var cookieHtml = `
-            <div id="cookie-consent" class="cookie-consent-overlay">
-                <div class="cookie-consent-modal">
-                    <div class="cookie-consent-header">
-                        <h2>Cookie Notice & User Consent</h2>
+            <div id="cookie-consent" class="cookie-banner-wrapper">
+                <div class="cookie-banner-content">
+                    <div class="cookie-banner-left">
+                        <div class="cookie-icon">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"></path>
+                                <path d="M8.5 8.5v.01"></path>
+                                <path d="M16 12.5v.01"></path>
+                                <path d="M12 16v.01"></path>
+                                <path d="M11 12.5v.01"></path>
+                                <path d="M8 14v.01"></path>
+                            </svg>
+                        </div>
+                        <div class="cookie-text">
+                            <h3>We value your privacy</h3>
+                            <p>We use cookies to enhance your experience, analyze traffic, and personalize content.<br>You can accept all cookies or manage your preferences.</p>
+                            <p class="cookie-links">Learn more in our <a href="/privacy.html">Cookie Policy</a>, <a href="/privacy.html">Privacy Policy</a>, and <a href="/privacy.html">Terms & Conditions</a>.</p>
+                        </div>
                     </div>
-                    <div class="cookie-consent-body">
-                        <p>By clicking "Accept", creating an account, purchasing a ticket, booking a table, or continuing to use this website, you acknowledge and agree to the following:</p>
-                        
-                        <h3>Cookies</h3>
-                        <p>We use cookies and similar technologies to:</p>
-                        <ul>
-                            <li>Keep the website secure and functioning properly.</li>
-                            <li>Remember your preferences and login information.</li>
-                            <li>Improve your browsing experience.</li>
-                            <li>Analyze website traffic and performance.</li>
-                            <li>Personalize content and promotions.</li>
-                        </ul>
-                        <p>You can manage your cookie preferences through your browser settings. Disabling certain cookies may affect website functionality.</p>
-
-                        <h3>Ticket Sales & Table Bookings</h3>
-                        <ul>
-                            <li>All ticket purchases and table bookings are final.</li>
-                            <li>No refunds, cancellations, or exchanges will be provided except where required by applicable law or if an event is officially canceled by the organizer.</li>
-                            <li>It is your responsibility to verify the event details before completing your purchase.</li>
-                        </ul>
-
-                        <h3>Photography & Video Recording</h3>
-                        <p>By purchasing a ticket, booking a table, or attending any event listed on this platform, you acknowledge and agree that:</p>
-                        <ul>
-                            <li>The event may be photographed, filmed, or otherwise recorded.</li>
-                            <li>Your image, voice, and likeness may appear in photographs, videos, livestreams, or other media captured during the event.</li>
-                            <li>These materials may be used by the event organizer, venue, artists, partners, and this platform for marketing, advertising, promotional, editorial, and social media purposes without further notice or compensation.</li>
-                        </ul>
-                        <p>If you do not wish to appear in recordings, you should not attend the event.</p>
-
-                        <h3>Acceptance</h3>
-                        <p>By selecting "Accept" or by using this website, purchasing tickets, or booking tables, you confirm that you have read, understood, and agreed to this Cookie Notice and User Consent.</p>
+                    <div class="cookie-banner-right">
+                        <div class="cookie-buttons">
+                            <button id="btn-accept-cookie" class="btn-cookie-primary">Accept All</button>
+                            <button id="btn-customize-cookie" class="btn-cookie-outline">Customize</button>
+                        </div>
+                        <a href="#" id="btn-reject-cookie" class="cookie-reject">Reject All</a>
                     </div>
-                    <div class="cookie-consent-footer">
-                        <button id="btn-accept-cookie" class="btn-accept-cookie">ACCEPT</button>
-                    </div>
+                    <button id="btn-close-cookie" class="cookie-close" aria-label="Close">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
                 </div>
             </div>
         `;
@@ -494,20 +482,27 @@ function initMain() {
                 var overlay = document.getElementById('cookie-consent');
                 if (overlay) {
                     overlay.classList.add('active');
-                    document.body.style.overflow = 'hidden';
                 }
             }, 500);
         }
 
-        var btnAccept = document.getElementById('btn-accept-cookie');
-        if (btnAccept) {
-            btnAccept.addEventListener('click', function() {
-                var overlay = document.getElementById('cookie-consent');
+        function closeCookieBanner() {
+            var overlay = document.getElementById('cookie-consent');
+            if (overlay) {
                 overlay.classList.remove('active');
-                document.body.style.overflow = '';
-                sessionStorage.setItem('cookieConsentAccepted', 'true');
-            });
+            }
+            sessionStorage.setItem('cookieConsentAccepted', 'true');
         }
+
+        var btnAccept = document.getElementById('btn-accept-cookie');
+        var btnReject = document.getElementById('btn-reject-cookie');
+        var btnCustomize = document.getElementById('btn-customize-cookie');
+        var btnClose = document.getElementById('btn-close-cookie');
+
+        if (btnAccept) btnAccept.addEventListener('click', closeCookieBanner);
+        if (btnReject) btnReject.addEventListener('click', function(e) { e.preventDefault(); closeCookieBanner(); });
+        if (btnCustomize) btnCustomize.addEventListener('click', closeCookieBanner);
+        if (btnClose) btnClose.addEventListener('click', closeCookieBanner);
     }
 
 } // End of initMain
