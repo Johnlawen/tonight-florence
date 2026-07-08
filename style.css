@@ -2231,6 +2231,48 @@ h1, h2, h3, h4 {
     color: #ffffff;
 }
 
+/* Cookie Banner Mobile Styles */
+@media (max-width: 1024px) {
+    .cookie-banner-wrapper {
+        padding: 1rem;
+    }
+    .cookie-banner-content {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1.5rem;
+        padding-right: 2rem; /* Keep space for close button */
+    }
+    .cookie-banner-left {
+        flex-direction: column; /* Stack icon and text on very small screens, or keep row. Let's do row to match desktop but smaller gap */
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    .cookie-icon svg {
+        width: 24px;
+        height: 24px;
+    }
+    .cookie-text h3 {
+        font-size: 1.1rem;
+    }
+    .cookie-text p {
+        font-size: 0.8rem;
+    }
+    .cookie-banner-right {
+        align-items: stretch;
+        gap: 1rem;
+    }
+    .cookie-buttons {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.75rem;
+    }
+    .btn-cookie-primary, .btn-cookie-outline {
+        width: 100%;
+        padding: 0.75rem 1rem;
+    }
+}
+
 /* Responsive adjustments for sub-pages */
 @media (max-width: 1024px) {
     .guides-grid-4, .hg-stories-grid, .tip-right, .guides-grid-5 { grid-template-columns: repeat(2, 1fr); }
