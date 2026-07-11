@@ -5,7 +5,7 @@ import crypto from 'crypto';
 import { Redis } from '@upstash/redis';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY || 're_dummy_key');
 const redis = Redis.fromEnv();
 const QR_SECRET = process.env.QR_SIGNING_SECRET || 'ft-default-secret-change-me';
 
