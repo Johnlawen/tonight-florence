@@ -111,12 +111,18 @@ export default async function handler(req, res) {
 
       if (supabase) {
         if (batch && typeof batch === 'object') {
-           const rows = Object.entries(batch).filter(([k]) => VALID_KEYS.includes(k)).map(([k, v]) => ({ key: k, value: typeof v === 'string' ? JSON.parse(v) : v }));
+           const rows = Object.entries(batch).filter(([k]) => VALID_KEYS.includes(k)).map(([k, v]) => {
+             let parsed = v;
+             if (typeof v === 'string') { try { parsed = JSON.parse(v); } catch(e) { parsed = v; } }
+             return { key: k, value: parsed };
+           });
            await supabase.from('content').upsert(rows);
            return res.status(200).json({ ok: true, saved: rows.length });
         }
         if (!key || !VALID_KEYS.includes(key)) return res.status(400).json({ error: 'Invalid or missing key' });
-        await supabase.from('content').upsert({ key, value: typeof value === 'string' ? JSON.parse(value) : value });
+        let parsedValue = value;
+        if (typeof value === 'string') { try { parsedValue = JSON.parse(value); } catch(e) { parsedValue = value; } }
+        await supabase.from('content').upsert({ key, value: parsedValue });
         return res.status(200).json({ ok: true, key });
       }
 
