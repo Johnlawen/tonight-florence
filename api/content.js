@@ -1,4 +1,5 @@
 import { Redis } from '@upstash/redis';
+import { createClient } from '@supabase/supabase-js';
 
 // All valid content keys
 const VALID_KEYS = [
@@ -30,6 +31,17 @@ function getRedis() {
   return _redis;
 }
 
+let _supabase = null;
+function getSupabase() {
+  if (_supabase) return _supabase;
+  const url = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY;
+  if (url && key) {
+    _supabase = createClient(url, key);
+  }
+  return _supabase;
+}
+
 export default async function handler(req, res) {
   // CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -48,13 +60,28 @@ export default async function handler(req, res) {
   }
 
   try {
-    const redis = getRedis();
-
+    const supabase = getSupabase();
+    
     // GET — fetch one or all content keys
     if (req.method === 'GET') {
       const { key } = req.query;
 
-      // Single key
+      if (supabase) {
+        if (key) {
+           if (!VALID_KEYS.includes(key)) return res.status(400).json({ error: 'Invalid key' });
+           const { data } = await supabase.from('content').select('value').eq('key', key).single();
+           return res.status(200).json({ key, value: data ? data.value : null });
+        }
+        const { data } = await supabase.from('content').select('*');
+        const results = {};
+        if (data) {
+          data.forEach(row => { results[row.key] = row.value; });
+        }
+        return res.status(200).json(results);
+      }
+
+      // Redis Fallback
+      const redis = getRedis();
       if (key) {
         if (!VALID_KEYS.includes(key)) {
           return res.status(400).json({ error: 'Invalid key' });
@@ -82,6 +109,19 @@ export default async function handler(req, res) {
     if (req.method === 'POST') {
       const { key, value, batch } = req.body;
 
+      if (supabase) {
+        if (batch && typeof batch === 'object') {
+           const rows = Object.entries(batch).filter(([k]) => VALID_KEYS.includes(k)).map(([k, v]) => ({ key: k, value: typeof v === 'string' ? JSON.parse(v) : v }));
+           await supabase.from('content').upsert(rows);
+           return res.status(200).json({ ok: true, saved: rows.length });
+        }
+        if (!key || !VALID_KEYS.includes(key)) return res.status(400).json({ error: 'Invalid or missing key' });
+        await supabase.from('content').upsert({ key, value: typeof value === 'string' ? JSON.parse(value) : value });
+        return res.status(200).json({ ok: true, key });
+      }
+
+      // Redis Fallback
+      const redis = getRedis();
       // Batch save (multiple keys at once)
       if (batch && typeof batch === 'object') {
         const pipeline = redis.pipeline();

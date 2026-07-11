@@ -1,30 +1,69 @@
 /**
  * Florence Tonight - Content Loader
- * Fetches content from the cloud database (Upstash Redis via /api/content)
+ * Fetches content from Supabase (Real-Time) or fallback to Upstash Redis (/api/content)
  * and dynamically renders it on the website pages.
  * Falls back to localStorage for offline/dev mode.
  */
-(function () {
-    // Fetch all content from the cloud API
-    fetch('/api/content?t=' + Date.now())
-        .then(function (res) { return res.json(); })
-        .then(function (cloud) { renderAll(cloud); })
-        .catch(function () {
-            // Fallback to localStorage if API is unavailable (local dev)
-            console.warn('[content-loader] API unavailable, falling back to localStorage');
-            var local = {};
-            var keys = [
-                'ft-events', 'ft-hero', 'ft-guides', 'ft-newest-guides',
-                'ft-events-coming', 'ft-hg-thisweek', 'ft-hg-more', 'ft-hg-stories',
-                'ft-ap-highlights', 'ft-ap-time', 'ft-ap-latest',
-                'ft-ad-featured-main', 'ft-ad-featured-list', 'ft-ad-scene', 'ft-ad-editors-pick'
-            ];
-            keys.forEach(function (k) {
-                var val = localStorage.getItem(k);
-                if (val) local[k] = JSON.parse(val);
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+(async function () {
+    let cloudData = {};
+
+    try {
+        // 1. Fetch config to check if Supabase is connected
+        const configRes = await fetch('/api/config');
+        const config = await configRes.json();
+
+        if (config.supabaseUrl && config.supabaseAnonKey) {
+            console.log('[content-loader] Supabase is connected. Initializing Realtime...');
+            const supabase = createClient(config.supabaseUrl, config.supabaseAnonKey);
+
+            // Fetch initial data
+            const { data, error } = await supabase.from('content').select('*');
+            if (error) throw error;
+
+            data.forEach(row => {
+                cloudData[row.key] = row.value;
             });
-            renderAll(local);
-        });
+            renderAll(cloudData);
+
+            // Setup Real-Time Subscription
+            supabase.channel('public:content')
+                .on('postgres_changes', { event: '*', schema: 'public', table: 'content' }, (payload) => {
+                    console.log('[content-loader] Realtime update received:', payload);
+                    if (payload.new && payload.new.key) {
+                        cloudData[payload.new.key] = payload.new.value;
+                        // Re-render everything to easily reflect changes
+                        renderAll(cloudData);
+                    }
+                })
+                .subscribe();
+
+        } else {
+            throw new Error('Supabase not configured, fallback to API');
+        }
+    } catch (err) {
+        console.warn('[content-loader]', err.message);
+        // Fallback to old cloud API
+        fetch('/api/content?t=' + Date.now())
+            .then(function (res) { return res.json(); })
+            .then(function (cloud) { renderAll(cloud); })
+            .catch(function () {
+                console.warn('[content-loader] API unavailable, falling back to localStorage');
+                var local = {};
+                var keys = [
+                    'ft-events', 'ft-hero', 'ft-guides', 'ft-newest-guides',
+                    'ft-events-coming', 'ft-hg-thisweek', 'ft-hg-more', 'ft-hg-stories',
+                    'ft-ap-highlights', 'ft-ap-time', 'ft-ap-latest',
+                    'ft-ad-featured-main', 'ft-ad-featured-list', 'ft-ad-scene', 'ft-ad-editors-pick'
+                ];
+                keys.forEach(function (k) {
+                    var val = localStorage.getItem(k);
+                    if (val) local[k] = JSON.parse(val);
+                });
+                renderAll(local);
+            });
+    }
 
     function renderAll(data) {
         loadEvents(data['ft-events']);
@@ -69,6 +108,23 @@
         if (!carousel) return;
         var navDiv = carousel.querySelector('.carousel-nav');
         carousel.querySelectorAll('.event-card').forEach(function (c) { c.remove(); });
+        var emptyMsg = carousel.querySelector('.empty-events-msg');
+        if (emptyMsg) emptyMsg.remove();
+
+        if (events.length === 0) {
+            var msg = document.createElement('div');
+            msg.className = 'empty-events-msg';
+            msg.style.width = '100%';
+            msg.style.textAlign = 'center';
+            msg.style.padding = '3rem 1rem';
+            msg.style.color = 'var(--muted)';
+            msg.innerHTML = '<h3 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 0.5rem;">No events available right now</h3><p>Check back later for upcoming nights in Florence.</p>';
+            if (navDiv) navDiv.style.display = 'none';
+            carousel.appendChild(msg);
+            return;
+        } else {
+            if (navDiv) navDiv.style.display = 'flex';
+        }
 
         events.forEach(function (ev) {
             var card = document.createElement('div');
@@ -308,6 +364,12 @@
         var grid = document.getElementById('events-coming-grid');
         if (!grid) return;
         grid.innerHTML = '';
+        
+        if (eventsComing.length === 0) {
+            grid.innerHTML = '<div style="width: 100%; text-align: center; padding: 3rem 1rem; color: var(--muted); grid-column: 1 / -1;"><h3 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 0.5rem;">No upcoming events</h3><p>Check back later for new dates.</p></div>';
+            return;
+        }
+
         eventsComing.forEach(function (g) {
             var card = document.createElement('div');
             card.className = 'coming-card';
