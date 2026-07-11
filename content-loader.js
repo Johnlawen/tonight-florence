@@ -103,7 +103,7 @@ import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js
     // -- LOAD EVENTS --
     function loadEvents(raw) {
         var events = parse(raw);
-        if (!events) return;
+        if (!events) events = [];
         var carousel = document.querySelector('.events-carousel');
         if (!carousel) return;
         var navDiv = carousel.querySelector('.carousel-nav');
@@ -360,7 +360,7 @@ import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js
     // -- LOAD COMING SOON (EVENTS) --
     function loadEventsComing(raw) {
         var eventsComing = parse(raw);
-        if (!eventsComing) return;
+        if (!eventsComing) eventsComing = [];
         var grid = document.getElementById('events-coming-grid');
         if (!grid) return;
         grid.innerHTML = '';
