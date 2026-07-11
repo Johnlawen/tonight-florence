@@ -5,7 +5,7 @@
  * Falls back to localStorage for offline/dev mode.
  */
 
-function initApp() {
+async function initApp() {
     let cloudData = {};
 
     try {
