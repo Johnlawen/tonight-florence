@@ -697,7 +697,7 @@
           </svg>
           Featured Guides
         </div>
-        <div class="sidebar-item" onclick="showPage('hidden-gems',this)" style="display: none;">
+        <div class="sidebar-item" onclick="showPage('hidden-gems',this)">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
             <polygon
               points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
@@ -783,6 +783,7 @@
           <div class="event-editor-list" id="event-list" style="margin-bottom:2rem;"></div>
 
           <h3 style="margin-bottom:1rem; font-family:'Playfair Display',serif;">Coming Soon (Events Page)</h3>
+          <button class="btn-add" onclick="addNewGenericItem('ft-events-coming', 'events-coming-list', false, true)">+ ADD COMING SOON EVENT</button>
           <div class="event-editor-list" id="events-coming-list"></div>
         </div>
 
@@ -830,9 +831,11 @@
             <p>Edit sections on the Guides page.</p>
           </div>
           <h3 style="margin-bottom:1rem; font-family:'Playfair Display',serif;">Featured Guides</h3>
+          <button class="btn-add" onclick="addNewGuide()">+ ADD GUIDE</button>
           <div class="event-editor-list" id="guide-list" style="margin-bottom:2rem;"></div>
 
           <h3 style="margin-bottom:1rem; font-family:'Playfair Display',serif;">Newest Guides</h3>
+          <button class="btn-add" onclick="addNewGenericItem('ft-newest-guides', 'newest-guides-list', false, true)">+ ADD NEWEST GUIDE</button>
           <div class="event-editor-list" id="newest-guides-list"></div>
         </div>
 
@@ -843,12 +846,15 @@
             <p>Edit sections on the Hidden Gems page.</p>
           </div>
           <h3 style="margin-bottom:1rem; font-family:'Playfair Display',serif;">This Week's Hidden Gems</h3>
+          <button class="btn-add" onclick="addNewGenericItem('ft-hg-thisweek', 'hg-thisweek-list', true, false)">+ ADD HIDDEN GEM</button>
           <div class="event-editor-list" id="hg-thisweek-list" style="margin-bottom:2rem;"></div>
 
           <h3 style="margin-bottom:1rem; font-family:'Playfair Display',serif;">More Hidden Gems</h3>
+          <button class="btn-add" onclick="addNewGenericItem('ft-hg-more', 'hg-more-list', false, false)">+ ADD MORE GEM</button>
           <div class="event-editor-list" id="hg-more-list" style="margin-bottom:2rem;"></div>
 
           <h3 style="margin-bottom:1rem; font-family:'Playfair Display',serif;">Hidden Gem Stories</h3>
+          <button class="btn-add" onclick="addNewGenericItem('ft-hg-stories', 'hg-stories-list', false, true)">+ ADD STORY</button>
           <div class="event-editor-list" id="hg-stories-list"></div>
         </div>
 
@@ -859,12 +865,15 @@
             <p>Edit sections on the Aperitivo page.</p>
           </div>
           <h3 style="margin-bottom:1rem; font-family:'Playfair Display',serif;">Aperitivo Highlights</h3>
+          <button class="btn-add" onclick="addNewGenericItem('ft-ap-highlights', 'ap-highlights-list', false, false)">+ ADD HIGHLIGHT</button>
           <div class="event-editor-list" id="ap-highlights-list" style="margin-bottom:2rem;"></div>
 
           <h3 style="margin-bottom:1rem; font-family:'Playfair Display',serif;">By Time Of Day</h3>
+          <button class="btn-add" onclick="addNewGenericItem('ft-ap-time', 'ap-time-list', false, false)">+ ADD TIME SPOT</button>
           <div class="event-editor-list" id="ap-time-list" style="margin-bottom:2rem;"></div>
 
           <h3 style="margin-bottom:1rem; font-family:'Playfair Display',serif;">Latest Aperitivo Guides</h3>
+          <button class="btn-add" onclick="addNewGenericItem('ft-ap-latest', 'ap-latest-list', false, true)">+ ADD GUIDE</button>
           <div class="event-editor-list" id="ap-latest-list"></div>
         </div>
 
@@ -876,15 +885,19 @@
           </div>
 
           <h3 style="margin-bottom:1rem; font-family:'Playfair Display',serif;">Featured Story (Main)</h3>
+          <button class="btn-add" onclick="addNewGenericItem('ft-ad-featured-main', 'ad-featured-main-list', false, false)">+ ADD MAIN STORY</button>
           <div class="event-editor-list" id="ad-featured-main-list" style="margin-bottom:2rem;"></div>
 
           <h3 style="margin-bottom:1rem; font-family:'Playfair Display',serif;">Featured Story (List)</h3>
+          <button class="btn-add" onclick="addNewGenericItem('ft-ad-featured-list', 'ad-featured-list-list', false, true)">+ ADD LIST STORY</button>
           <div class="event-editor-list" id="ad-featured-list-list" style="margin-bottom:2rem;"></div>
 
           <h3 style="margin-bottom:1rem; font-family:'Playfair Display',serif;">The Scene</h3>
+          <button class="btn-add" onclick="addNewGenericItem('ft-ad-scene', 'ad-scene-list', false, false)">+ ADD SCENE ITEM</button>
           <div class="event-editor-list" id="ad-scene-list" style="margin-bottom:2rem;"></div>
 
           <h3 style="margin-bottom:1rem; font-family:'Playfair Display',serif;">Editor's Pick</h3>
+          <button class="btn-add" onclick="addNewGenericItem('ft-ad-editors-pick', 'ad-editors-pick-list', false, false)">+ ADD EDITORS PICK</button>
           <div class="event-editor-list" id="ad-editors-pick-list"></div>
         </div>
 
@@ -1423,6 +1436,7 @@
         </div>
         <div class="event-row-actions">
           <button class="btn-edit" onclick="event.stopPropagation();toggleForm('g${g.id}')">EDIT</button>
+          <button class="btn-del" onclick="event.stopPropagation();deleteGuide(${g.id})">DELETE</button>
         </div>
       </div>
       <div class="event-form" id="eform-g${g.id}">
@@ -1504,6 +1518,7 @@
         </div>
         <div class="event-row-actions">
           <button class="btn-edit" onclick="event.stopPropagation();toggleForm('${key}-${item.id}')">EDIT</button>
+          <button class="btn-del" onclick="event.stopPropagation();deleteGenericItem('${key}', ${item.id}, ${hasLocation}, ${hasDate})">DELETE</button>
         </div>
       </div>
       <div class="event-form" id="eform-${key}-${item.id}">
@@ -1682,6 +1697,64 @@
         renderMessages();
       }
     }
+  
+    function deleteGuide(id) {
+      if (!confirm('Delete this guide?')) return;
+      const gs = getGuides().filter(e => e.id !== id);
+      saveGuides(gs);
+      renderGuides();
+    }
+    
+    function addNewGuide() {
+      const gs = getGuides();
+      const newId = Date.now();
+      gs.unshift({ id: newId, image: '/images/hero_bg.png', tag: 'NEW GUIDE', title: 'New Guide Title', subtitle: 'Subtitle' });
+      saveGuides(gs);
+      renderGuides();
+      setTimeout(() => toggleForm('g' + newId), 100);
+    }
+    
+    function deleteGenericItem(key, id, hasLocation, hasDate) {
+      if (!confirm('Delete this item?')) return;
+      let data = _cachedData[key] || [];
+      data = data.filter(e => e.id !== id);
+      
+      _cachedData[key] = data;
+      var now = new Date().toLocaleString();
+      _cachedData['ft-updated'] = now;
+      cloudSave(key, data);
+      cloudSave('ft-updated', now);
+      updateStats();
+      showToast('Deleted successfully!');
+      
+      // We pass [] as defaults since we no longer use them
+      renderGenericList(key, [], '', hasLocation, hasDate);
+      
+      // A trick to avoid parsing ID by name again: we just call renderAfterLoad to re-render all Generic Lists!
+      renderAfterLoad();
+    }
+    
+    function addNewGenericItem(key, listId, hasLocation, hasDate) {
+      let data = _cachedData[key] || [];
+      const newId = Date.now();
+      const newItem = { id: newId, image: '/images/hero_bg.png', tag: 'NEW', title: 'New Item', subtitle: 'Subtitle' };
+      if (hasLocation) newItem.location = 'Location';
+      if (hasDate) newItem.date = 'Date';
+      
+      data.unshift(newItem);
+      
+      _cachedData[key] = data;
+      var now = new Date().toLocaleString();
+      _cachedData['ft-updated'] = now;
+      cloudSave(key, data);
+      cloudSave('ft-updated', now);
+      updateStats();
+      showToast('Added new item!');
+      
+      renderAfterLoad();
+      setTimeout(() => toggleForm(key + '-' + newId), 100);
+    }
+
   </script>
 </body>
 
