@@ -178,10 +178,12 @@ async function initApp() {
         }
 
         events.forEach(function (ev) {
+            var dayStr = (ev.days || '').split('-')[0].trim().substring(0, 3).toUpperCase() || 'NOW';
             var card = document.createElement('div');
             card.className = 'event-card feat-card';
             card.innerHTML =
                 '<div class="card-image feat-img">' +
+                    '<div class="date-badge"><span class="day">' + dayStr + '</span><span class="date">*</span></div>' +
                     '<img src="' + ev.image + '" alt="' + ev.title + '" onerror="this.src=\'/images/hero_bg.png\'">' +
                 '</div>' +
                 '<div class="card-content" style="padding:1.5rem;">' +
