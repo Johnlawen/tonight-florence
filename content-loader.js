@@ -4,9 +4,8 @@
  * and dynamically renders it on the website pages.
  * Falls back to localStorage for offline/dev mode.
  */
-import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
-(async function () {
+function initApp() {
     let cloudData = {};
 
     try {
@@ -16,7 +15,7 @@ import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 
         if (config.supabaseUrl && config.supabaseAnonKey) {
             console.log('[content-loader] Supabase is connected. Initializing Realtime...');
-            const supabase = createClient(config.supabaseUrl, config.supabaseAnonKey);
+            const supabase = window.supabase.createClient(config.supabaseUrl, config.supabaseAnonKey);
 
             // Fetch initial data
             const { data, error } = await supabase.from('content').select('*');
@@ -570,5 +569,14 @@ import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js
                 '</div>' +
             '</div>';
     }
-})();
+}
+
+if (typeof window.supabase === 'undefined') {
+    var s = document.createElement('script');
+    s.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+    s.onload = initApp;
+    document.head.appendChild(s);
+} else {
+    initApp();
+}
 
