@@ -30,13 +30,17 @@ export default async function handler(req, res) {
   if (!email) return res.status(400).json({ error: 'Email is required' });
 
   try {
-    await resend.emails.send({
-      from: process.env.EMAIL_FROM || 'Florence Tonight <hello@yoursite.com>',
+    const { data, error } = await resend.emails.send({
+      from: process.env.EMAIL_FROM || 'Florence Tonight <onboarding@resend.dev>',
       to: [email],
       subject: `Welcome to Florence Tonight 🥂`,
       html: buildWelcomeEmail(),
     });
-    return res.status(200).json({ success: true });
+    if (error) {
+      console.error('Resend API Error:', error);
+      return res.status(400).json({ success: false, error });
+    }
+    return res.status(200).json({ success: true, data });
   } catch (error) {
     console.error('Error sending welcome email:', error);
     return res.status(500).json({ error: 'Failed to send email' });
