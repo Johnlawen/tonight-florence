@@ -269,6 +269,77 @@
             const rightKicker = document.querySelector('.calendar-right-title-box .section-kicker');
             const closeBtn = document.querySelector('.calendar-close-btn');
 
+            window.activeDateNum = 20; // default initial date
+            window.activeDayName = 'FRIDAY'; // default initial day
+            
+            window.updateExploreCalendar = function() {
+                const list = document.querySelector('.event-list');
+                if (!list) return;
+                list.innerHTML = '';
+                
+                let matches = [];
+                
+                // Add regular events that match the day of week (case insensitive check)
+                (window.ftGlobalEvents || []).forEach(ev => {
+                    if (ev.days && ev.days.toUpperCase().includes(window.activeDayName)) {
+                        matches.push({
+                            title: ev.title,
+                            tag: ev.tag,
+                            location: ev.location,
+                            hours: ev.hours,
+                            image: ev.image
+                        });
+                    }
+                });
+                
+                // Add coming soon events that match the exact date
+                (window.ftGlobalComing || []).forEach(ev => {
+                    if (ev.date && (ev.date.toUpperCase().includes('JUNE ' + window.activeDateNum) || ev.date.includes(window.activeDateNum.toString()))) {
+                        matches.push({
+                            title: ev.title,
+                            tag: ev.tag,
+                            location: ev.location || '',
+                            hours: ev.subtitle || '', // Use subtitle for hours if none provided
+                            image: ev.image
+                        });
+                    }
+                });
+
+                if (matches.length === 0) {
+                    list.innerHTML = '<div style="padding: 2rem; text-align: center; color: var(--muted);">No events scheduled for this day. Check back later!</div>';
+                } else {
+                    matches.forEach((m, i) => {
+                        let timeTop = m.hours;
+                        let timeBot = '';
+                        if (m.hours && m.hours.includes('-')) {
+                            const pts = m.hours.split('-');
+                            timeTop = pts[0].trim();
+                            timeBot = '- ' + pts.slice(1).join('-').trim();
+                        }
+                        
+                        const item = document.createElement('a');
+                        item.href = '#';
+                        item.className = 'list-item';
+                        if (i === matches.length - 1) item.style.borderBottom = 'none';
+                        
+                        item.innerHTML = `
+                            <div class="list-col-time">
+                                <div class="list-time-top">${timeTop || ''}</div>
+                                <div class="list-time-bottom">${timeBot}</div>
+                            </div>
+                            <div class="list-col-main">
+                                <h3 class="list-title">${m.title || ''}</h3>
+                                <div class="list-category" style="color: var(--accent-purple);">${m.tag || ''}</div>
+                                <div class="list-location"><i data-lucide="map-pin"></i> ${m.location || 'Florence'}</div>
+                            </div>
+                            <div class="list-col-arrow">&rarr;</div>
+                        `;
+                        list.appendChild(item);
+                    });
+                    if (typeof lucide !== 'undefined') lucide.createIcons();
+                }
+            };
+
             cells.forEach(cell => {
                 cell.addEventListener('click', () => {
                     // Remove active class from all
@@ -279,23 +350,28 @@
 
                     // Get date number
                     const dateText = cell.childNodes[0].textContent.trim();
+                    const dateNum = parseInt(dateText);
                     
                     // Update text
-                    rightTitle.innerHTML = `Events on June ${dateText}<span class="highlight-purple">.</span>`;
+                    rightTitle.innerHTML = `Events on June ${dateNum}<span class="highlight-purple">.</span>`;
                     
                     // Calculate correct day of week for June 2025
-                    const dateNum = parseInt(dateText);
                     const selectedDate = new Date(2025, 5, dateNum); // Month 5 is June
                     const days = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
                     const dayName = days[selectedDate.getDay()];
                     
-                    rightKicker.textContent = `${dayName}, JUNE ${dateText}, 2025`;
+                    rightKicker.textContent = `${dayName}, JUNE ${dateNum}, 2025`;
                     
                     // Update the VIEW FULL CALENDAR link
                     const fullCalendarBtn = document.getElementById('view-full-calendar-btn');
                     if (fullCalendarBtn) {
-                        fullCalendarBtn.href = `day.html?date=${dateText}`;
+                        fullCalendarBtn.href = `day.html?date=${dateNum}`;
                     }
+
+                    // TRIGGER DYNAMIC UPDATE
+                    window.activeDateNum = dateNum;
+                    window.activeDayName = dayName;
+                    window.updateExploreCalendar();
 
                     // Show panel
                     rightPanel.classList.add('active');

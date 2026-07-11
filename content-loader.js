@@ -80,15 +80,25 @@ import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js
         loadAdFeatured(data['ft-ad-featured-main'], data['ft-ad-featured-list']);
         loadAdScene(data['ft-ad-scene']);
         loadAdEditorsPick(data['ft-ad-editors-pick']);
+        
+        loadEventsFeatured(data['ft-events']);
+        loadDayEvents(data['ft-events'], data['ft-events-coming']);
 
         // Re-render Lucide icons for any new data-lucide elements
         if (typeof lucide !== 'undefined') {
             lucide.createIcons();
         }
 
+        window.ftGlobalEvents = parse(data['ft-events']) || [];
+        window.ftGlobalComing = parse(data['ft-events-coming']) || [];
+        
         // Re-apply language translation after dynamic content is loaded
         if (typeof applyLanguage === 'function') {
             applyLanguage(localStorage.getItem('ft-lang') || 'en');
+        }
+
+        if (typeof window.updateExploreCalendar === 'function') {
+            window.updateExploreCalendar();
         }
     }
 
@@ -152,6 +162,105 @@ import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js
             } else {
                 carousel.appendChild(card);
             }
+        });
+    }
+
+    // -- LOAD EVENTS FEATURED (events.html) --
+    function loadEventsFeatured(raw) {
+        var events = parse(raw);
+        if (!events) events = [];
+        var grid = document.querySelector('.events-featured-grid');
+        if (!grid) return;
+        grid.innerHTML = '';
+        
+        if (events.length === 0) {
+            grid.innerHTML = '<div style="width: 100%; text-align: center; padding: 3rem 1rem; color: var(--muted); grid-column: 1 / -1;"><h3 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 0.5rem;">No featured events</h3><p>Check back later for new dates.</p></div>';
+            return;
+        }
+
+        events.forEach(function (ev) {
+            var card = document.createElement('div');
+            card.className = 'event-card feat-card';
+            card.innerHTML =
+                '<div class="card-image feat-img">' +
+                    '<img src="' + ev.image + '" alt="' + ev.title + '" onerror="this.src=\'/images/hero_bg.png\'">' +
+                '</div>' +
+                '<div class="card-content" style="padding:1.5rem;">' +
+                    '<span class="card-tag" style="color:var(--accent-purple);">' + ev.tag + '</span>' +
+                    '<h3 class="card-title" style="font-size:1.2rem; margin-bottom:1.5rem;">' + ev.title + '</h3>' +
+                    '<div class="feat-meta">' +
+                        '<p style="display:flex; align-items:center; gap:0.5rem;"><i data-lucide="clock" style="width:14px;"></i> ' + ev.hours + '</p>' +
+                        '<div class="loc-bookmark">' +
+                            '<p style="display:flex; align-items:center; gap:0.5rem;"><i data-lucide="map-pin" style="width:14px;"></i> ' + ev.location + '</p>' +
+                            '<i data-lucide="bookmark" style="color:var(--accent-gold); cursor:pointer;"></i>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>';
+            grid.appendChild(card);
+        });
+    }
+
+    // -- LOAD DAY EVENTS (day.html) --
+    function loadDayEvents(rawEvents, rawComing) {
+        var events = parse(rawEvents) || [];
+        var coming = parse(rawComing) || [];
+        var grid = document.querySelector('.day-events-container .events-grid');
+        if (!grid) return;
+        
+        const params = new URLSearchParams(window.location.search);
+        const dateStr = params.get('date');
+        if (!dateStr) return; // if no date param, skip
+        
+        const dateNum = parseInt(dateStr);
+        if (isNaN(dateNum)) return;
+        
+        const selectedDate = new Date(2025, 5, dateNum); // Month 5 is June
+        const days = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
+        const dayName = days[selectedDate.getDay()];
+        
+        let matches = [];
+        events.forEach(ev => {
+            if (ev.days && ev.days.toUpperCase().includes(dayName)) matches.push(ev);
+        });
+        coming.forEach(ev => {
+            if (ev.date && (ev.date.toUpperCase().includes('JUNE ' + dateNum) || ev.date.includes(dateNum.toString()))) {
+                matches.push({
+                    title: ev.title,
+                    tag: ev.tag,
+                    location: ev.location || '',
+                    hours: ev.subtitle || '', // Use subtitle for hours if none provided
+                    image: ev.image,
+                    subtitle: '',
+                    age: ''
+                });
+            }
+        });
+        
+        grid.innerHTML = '';
+        if (matches.length === 0) {
+            grid.innerHTML = '<div style="width: 100%; text-align: center; padding: 3rem 1rem; color: var(--muted); grid-column: 1 / -1;"><h3 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 0.5rem;">No events scheduled</h3><p>Check back later for new dates.</p></div>';
+            return;
+        }
+        
+        matches.forEach(function (ev) {
+            var card = document.createElement('div');
+            card.className = 'event-card';
+            card.innerHTML =
+                '<div class="card-image">' +
+                    '<img src="' + ev.image + '" alt="' + ev.title + '" onerror="this.src=\'/images/hero_bg.png\'">' +
+                '</div>' +
+                '<div class="card-content">' +
+                    '<span class="card-tag">' + ev.tag + '</span>' +
+                    '<h3 class="card-title">' + ev.title + '</h3>' +
+                    '<p class="card-subtitle">' + (ev.subtitle || 'SPECIAL EVENT') + '</p>' +
+                    '<p class="card-subtitle">' + (ev.age || 'ALL AGES') + '</p>' +
+                    '<p class="card-meta">' +
+                        '<span class="icon-pin"></span> ' + ev.location + '<br>' +
+                        'Today<br>' +
+                        ev.hours +
+                    '</p>' +
+                '</div>';
+            grid.appendChild(card);
         });
     }
 
