@@ -945,98 +945,33 @@
     const ACCESS_CODE = 'FT2026';
 
     // DEFAULT EVENTS
-    const DEFAULT_EVENTS = [
-      { id: 1, image: '/images/la_loggia.png', tag: 'ROOFTOP', title: 'LA LOGGIA ROOFTOP', subtitle: 'COCKTAILS & VIEWS', age: 'ALL AGES', location: 'VIA DELLA LOGGIA, 6', days: 'Friday - Saturday', hours: '7PM - 2AM' },
-      { id: 2, image: '/images/yab.jpg', tag: 'CLUB', title: 'YAB CLUB', subtitle: 'HIP HOP & INTERNATIONAL', age: '+18 ONLY', location: "VIA DE' BARDI, 16", days: 'Friday', hours: '11PM - 4AM' },
-      { id: 3, image: '/images/sesto_arnol.png', tag: 'APERITIVO', title: 'SE&bull;STO ON ARNOLFO', subtitle: 'APERITIVO & MUSIC', age: 'ALL AGES', location: 'PIAZZA S. SPIRITO, 10', days: 'Daily', hours: '7PM - 11PM' },
-      { id: 4, image: '/images/space2.jpg', tag: 'CLUB', title: 'SPACE CLUB', subtitle: 'TECHNO & HOUSE', age: '+18 ONLY', location: 'VIA PALAZZUOLO, 37', days: 'Saturday', hours: '11PM - 5AM' },
-      { id: 5, image: '/images/babylone_club.png', tag: 'CLUB', title: 'BABYLONE CLUB', subtitle: 'R&B & LATIN VIBES', age: '+18 ONLY', location: 'VIA BORGO OGNISSANTI, 12', days: 'Friday - Saturday', hours: '10PM - 4AM' },
-      { id: 6, image: '/images/xoo.png', tag: 'CLUB', title: 'XO CLUB', subtitle: 'LUXURY NIGHTLIFE', age: '+18 ONLY', location: 'LUNGARNO CORSINI, 4', days: 'Thursday - Sunday', hours: '9PM - 3AM' }
-    ];
+    const DEFAULT_EVENTS = [];
 
-    const DEFAULT_GUIDES = [
-      { id: 1, image: '/images/la_loggia.png', tag: 'ITINERARY', title: 'The Perfect Weekend in Florence', subtitle: 'Your 48-hour guide to the very best of the city.' },
-      { id: 2, image: '/images/guides.png', tag: 'ROOFTOP GUIDE', title: 'Best Rooftops<br>in Florence', subtitle: 'Sunset views, great cocktails, and unforgettable nights.' },
-      { id: 3, image: '/images/hidden gem.png', tag: 'NEIGHBORHOOD GUIDE', title: 'Santo Spirito Neighborhood Guide', subtitle: 'Where to eat, drink, shop, and wander.' },
-      { id: 4, image: '/images/aperitvo.png', tag: 'FOOD GUIDE', title: 'Best Restaurants in Florence', subtitle: 'Our favorite places to eat right now, from trattorias to fine dining.' }
-    ];
+    const DEFAULT_GUIDES = [];
 
-    const DEFAULT_EVENTS_COMING = [
-      { id: 1, image: '/images/featured events.png', tag: 'JUN', title: 'Firenze Rocks 2024', subtitle: "The city's biggest music festival returns this summer.", date: '28 - 30' },
-      { id: 2, image: '/images/hidden gem.png', tag: 'JUL', title: 'Estate Fiorentina', subtitle: 'A full month of concerts, theater, and open-air magic.', date: '12 - AUG<br>04' },
-      { id: 3, image: '/images/aperitvo.png', tag: 'SEP', title: 'White Party<br>Florence', subtitle: 'The iconic all-white celebration is back.', date: '10 - 15' }
-    ];
+    const DEFAULT_EVENTS_COMING = [];
 
-    const DEFAULT_NEWEST_GUIDES = [
-      { id: 1, image: '/images/aperitvo.png', tag: 'DRINKS GUIDE', title: 'The Best Negronis<br>in Florence', subtitle: '', date: 'June 12, 2024' },
-      { id: 2, image: '/images/hidden gem.png', tag: 'LOCAL GUIDE', title: 'Hidden Gardens<br>Locals Love', subtitle: '', date: 'June 9, 2024' },
-      { id: 3, image: '/images/space_club.png', tag: 'EXPERIENCE GUIDE', title: 'Live Music<br>This Week', subtitle: '', date: 'June 8, 2024' },
-      { id: 4, image: '/images/real_people.png', tag: 'FOOD GUIDE', title: 'The Best Pasta<br>Right Now', subtitle: '', date: 'June 6, 2024' },
-      { id: 5, image: '/images/hero_bg.png', tag: 'CITY GUIDE', title: "A Local's Guide<br>to Ponte Vecchio", subtitle: '', date: 'June 4, 2024' },
-      { id: 6, image: '/images/la_loggia.png', tag: 'ROOFTOP GUIDE', title: 'New Rooftop<br>Openings', subtitle: '', date: 'June 2, 2024' }
-    ];
+    const DEFAULT_NEWEST_GUIDES = [];
 
-    const DEFAULT_AD_FEATURED_MAIN = [
-      { id: 1, image: '/images/real_people.png', tag: 'PEOPLE', title: "The Faces Behind<br>Florence's Nightlife", subtitle: 'Conversations with the visionaries, DJs, creatives, and entrepreneurs shaping the city after dark.' }
-    ];
+    const DEFAULT_AD_FEATURED_MAIN = [];
 
-    const DEFAULT_AD_FEATURED_LIST = [
-      { id: 1, image: '/images/space_club.png', tag: 'CULTURE', title: 'Inside FLORENTINA: The Underground Art Collective Redefining Florence', subtitle: '', date: 'MAY 14, 2024' },
-      { id: 2, image: '/images/xo_club.png', tag: 'FASHION', title: "Midnight Style: Florence's New Generation of Designers", subtitle: '', date: 'MAY 10, 2024' },
-      { id: 3, image: '/images/babylone_club.png', tag: 'MUSIC', title: "Lucrezia's Playlist: 10 Tracks for a Florentine Night", subtitle: '', date: 'MAY 8, 2024' },
-      { id: 4, image: '/images/la_loggia.png', tag: 'PHOTOGRAPHY', title: 'Night Frames: Florence Through My Lens', subtitle: '', date: 'MAY 6, 2024' }
-    ];
+    const DEFAULT_AD_FEATURED_LIST = [];
 
-    const DEFAULT_AD_SCENE = [
-      { id: 1, image: '/images/yab_club.png', tag: 'CLUB CULTURE', title: 'Where the city dances', subtitle: '' },
-      { id: 2, image: '/images/sesto_arnol.png', tag: 'BARS & COCKTAILS', title: 'The best pours in Florence', subtitle: '' },
-      { id: 3, image: '/images/real_people.png', tag: 'CITY LIFE', title: 'Streets, people and stories', subtitle: '' },
-      { id: 4, image: '/images/main.jpeg', tag: 'ART & CULTURE', title: 'Late nights, creative minds', subtitle: '' },
-      { id: 5, image: '/images/guides.png', tag: 'LIVE MUSIC', title: 'The sounds of the night', subtitle: '' }
-    ];
+    const DEFAULT_AD_SCENE = [];
 
-    const DEFAULT_AD_EDITORS_PICK = [
-      { id: 1, image: '/images/hidden gem.png', tag: "EDITOR'S PICK", title: 'Locale: More Than a Cocktail Bar', subtitle: "A closer look at the space, the people, and the energy behind one of Florence's most iconic nightlife spots." }
-    ];
+    const DEFAULT_AD_EDITORS_PICK = [];
 
-    const DEFAULT_HG_THISWEEK = [
-      { id: 1, image: '/images/hidden gem.png', tag: 'HIDDEN BAR', title: "The Courtyard You'll Probably Walk Past", subtitle: 'A candlelit courtyard bar with perfect Negronis and no sign out front.', location: 'Via delle Oche, 14' },
-      { id: 2, image: '/images/after dark.png', tag: 'WINE WINDOW', title: "The Wine Window Locals Don't Gatekeep", subtitle: 'A tiny window, incredible wines, and the best people-watching in the city.', location: 'Borgo San Frediano, 24<br>(Oltrarno)' },
-      { id: 3, image: '/images/real_people.png', tag: 'LATE NIGHT EAT', title: 'Pici at Midnight', subtitle: 'Handmade pasta, zero pretension, open late for those perfect post-dinner moments.', location: 'Via dei Macci, 75R' }
-    ];
+    const DEFAULT_HG_THISWEEK = [];
 
-    const DEFAULT_HG_MORE = [
-      { id: 1, image: '/images/aperitvo.png', tag: 'SECRET GARDEN', title: 'A Garden in the City', subtitle: 'A peaceful garden oasis steps from Piazza della Signoria.' },
-      { id: 2, image: '/images/la_loggia.png', tag: 'VINTAGE BOUTIQUE', title: 'Timeless Finds', subtitle: 'Curated vintage pieces in a tiny shop full of character.' },
-      { id: 3, image: '/images/space_club.png', tag: 'ARTIST STUDIO', title: 'Art You Can Afford', subtitle: 'Local artists, original pieces, and a story behind every work.' }
-    ];
+    const DEFAULT_HG_MORE = [];
 
-    const DEFAULT_HG_STORIES = [
-      { id: 1, image: '/images/la_loggia.png', tag: 'GUIDE', title: 'How to Find Hidden Gems in Florence', subtitle: "Our local guide to discovering the city's best-kept secrets.", date: 'June 8, 2024' },
-      { id: 2, image: '/images/real_people.png', tag: 'INTERVIEW', title: 'The Florentine Who Knows Everyone', subtitle: 'We talked to the local behind the best tips.', date: 'June 3, 2024' },
-      { id: 3, image: '/images/hidden gem.png', tag: 'LIST', title: '10 Hidden Spots Worth Finding', subtitle: 'From secret bars to quiet terraces and more.', date: 'May 28, 2024' },
-      { id: 4, image: '/images/after dark.png', tag: 'CITY LIFE', title: 'The Beauty of Getting Lost', subtitle: 'Why wandering is still the best way to experience Florence.', date: 'May 20, 2024' }
-    ];
+    const DEFAULT_HG_STORIES = [];
 
-    const DEFAULT_AP_HIGHLIGHTS = [
-      { id: 1, image: '/images/guides.png', tag: 'ROOFTOP BARS', title: 'Best Rooftops<br>for Golden Hour', subtitle: '' },
-      { id: 2, image: '/images/real_people.png', tag: 'PIAZZA FAVORITES', title: 'Where Locals Go<br>for Aperitivo', subtitle: '' },
-      { id: 3, image: '/images/aperitvo.png', tag: 'COCKTAIL BARS', title: 'The Best Negronis<br>in Florence', subtitle: '' },
-      { id: 4, image: '/images/la_loggia.png', tag: 'WINE BARS', title: 'Great Wine,<br>Better Company', subtitle: '' }
-    ];
+    const DEFAULT_AP_HIGHLIGHTS = [];
 
-    const DEFAULT_AP_TIME = [
-      { id: 1, image: '/images/guides.png', tag: '', title: 'Before Sunset', subtitle: 'The perfect spots to start your evening.' },
-      { id: 2, image: '/images/hero_bg.png', tag: '', title: 'Golden Hour', subtitle: 'Drinks, views, and the best light in the city.' },
-      { id: 3, image: '/images/after dark.png', tag: '', title: 'After Dark', subtitle: 'Keep the night going with drinks that last.' }
-    ];
+    const DEFAULT_AP_TIME = [];
 
-    const DEFAULT_AP_LATEST = [
-      { id: 1, image: '/images/aperitvo.png', tag: 'GUIDE', title: '10 Spots for the Perfect Aperitivo in Florence', subtitle: '', date: 'June 10, 2024' },
-      { id: 2, image: '/images/real_people.png', tag: 'FOOD GUIDE', title: 'The Best Aperitivo Plates in the City', subtitle: '', date: 'June 7, 2024' },
-      { id: 3, image: '/images/hidden gem.png', tag: 'CITY GUIDE', title: 'Hidden Terraces Worth Discovering', subtitle: '', date: 'June 4, 2024' },
-      { id: 4, image: '/images/la_loggia.png', tag: 'INTERVIEW', title: 'Meet the Bartender Behind Gucci Garden', subtitle: '', date: 'June 1, 2024' }
-    ];
+    const DEFAULT_AP_LATEST = [];
 
     function doLogin() {
       const code = document.getElementById('login-code').value;
@@ -1150,7 +1085,7 @@
 
     var _cachedData = {}; // in-memory cache loaded at init
 
-    function getEvents() { return _cachedData['ft-events'] || DEFAULT_EVENTS; }
+    function getEvents() { return _cachedData['ft-events'] || []; }
     function saveEvents(evs) {
       _cachedData['ft-events'] = evs;
       var now = new Date().toLocaleString();
@@ -1461,7 +1396,7 @@
       renderMessages();
     }
 
-    function getGuides() { return _cachedData['ft-guides'] || DEFAULT_GUIDES; }
+    function getGuides() { return _cachedData['ft-guides'] || []; }
     function saveGuides(gs) {
       _cachedData['ft-guides'] = gs;
       var now = new Date().toLocaleString();
