@@ -1,4 +1,3 @@
-import { Redis } from '@upstash/redis';
 import { createClient } from '@supabase/supabase-js';
 
 // All valid content keys
@@ -10,35 +9,18 @@ const VALID_KEYS = [
   'ft-subscribers', 'ft-messages', 'ft-updated'
 ];
 
-// Lazy Redis instance — initialized only when first needed, not at module load.
-// This prevents a crash when env vars are missing.
-let _redis = null;
-function getRedis() {
-  if (_redis) return _redis;
-
-  const url = process.env.UPSTASH_REDIS_REST_URL;
-  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
-
-  if (!url || !token) {
-    throw new Error(
-      'Missing Upstash env vars. In Vercel go to: project → Settings → Environment Variables. ' +
-      'Add UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN. ' +
-      'Get values from https://console.upstash.com then Redeploy.'
-    );
-  }
-
-  _redis = new Redis({ url, token });
-  return _redis;
-}
-
 let _supabase = null;
 function getSupabase() {
   if (_supabase) return _supabase;
   const url = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY;
-  if (url && key) {
-    _supabase = createClient(url, key);
+  if (!url || !key) {
+    throw new Error(
+      'Missing Supabase env vars. In Vercel go to: project → Settings → Environment Variables. ' +
+      'Add SUPABASE_URL and SUPABASE_ANON_KEY then Redeploy.'
+    );
   }
+  _supabase = createClient(url, key);
   return _supabase;
 }
 
@@ -53,97 +35,64 @@ export default async function handler(req, res) {
   // Debug endpoint — visit /api/content?debug=1 to check env var status
   if (req.method === 'GET' && req.query.debug === '1') {
     return res.status(200).json({
-      UPSTASH_REDIS_REST_URL: process.env.UPSTASH_REDIS_REST_URL ? 'SET ✓' : 'MISSING ✗',
-      UPSTASH_REDIS_REST_TOKEN: process.env.UPSTASH_REDIS_REST_TOKEN ? 'SET ✓' : 'MISSING ✗',
+      SUPABASE_URL: process.env.SUPABASE_URL ? 'SET ✓' : (process.env.VITE_SUPABASE_URL ? 'SET via VITE_SUPABASE_URL ✓' : 'MISSING ✗'),
+      SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY ? 'SET ✓' : (process.env.VITE_SUPABASE_ANON_KEY ? 'SET via VITE_SUPABASE_ANON_KEY ✓' : 'MISSING ✗'),
+      SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY ? 'SET ✓' : 'NOT SET (optional)',
       NODE_ENV: process.env.NODE_ENV || 'unknown'
     });
   }
 
   try {
     const supabase = getSupabase();
-    
+
     // GET — fetch one or all content keys
     if (req.method === 'GET') {
       const { key } = req.query;
 
-      if (supabase) {
-        if (key) {
-           if (!VALID_KEYS.includes(key)) return res.status(400).json({ error: 'Invalid key' });
-           const { data } = await supabase.from('content').select('value').eq('key', key).single();
-           return res.status(200).json({ key, value: data ? data.value : null });
-        }
-        const { data } = await supabase.from('content').select('*');
-        const results = {};
-        if (data) {
-          data.forEach(row => { results[row.key] = row.value; });
-        }
-        return res.status(200).json(results);
-      }
-
-      // Redis Fallback
-      const redis = getRedis();
       if (key) {
-        if (!VALID_KEYS.includes(key)) {
-          return res.status(400).json({ error: 'Invalid key' });
+        if (!VALID_KEYS.includes(key)) return res.status(400).json({ error: 'Invalid key' });
+        const { data, error } = await supabase.from('content').select('value').eq('key', key).single();
+        // PGRST116 = row not found — that's fine, just return null
+        if (error && error.code !== 'PGRST116') {
+          return res.status(500).json({ error: error.message, hint: 'Supabase query failed. Check RLS policies on the content table in Supabase dashboard.' });
         }
-        const value = await redis.get(`content:${key}`);
-        return res.status(200).json({ key, value });
+        return res.status(200).json({ key, value: data ? data.value : null });
       }
 
-      // All keys — fetch everything at once for content-loader
-      const pipeline = redis.pipeline();
-      VALID_KEYS.forEach(k => pipeline.get(`content:${k}`));
-      const results = await pipeline.exec();
-
-      const data = {};
-      VALID_KEYS.forEach((k, i) => {
-        if (results[i] !== null && results[i] !== undefined) {
-          data[k] = results[i];
-        }
-      });
-
-      return res.status(200).json(data);
+      // Fetch all keys at once
+      const { data, error } = await supabase.from('content').select('*');
+      if (error) {
+        return res.status(500).json({ error: error.message, hint: 'Supabase query failed. Check RLS policies on the content table.' });
+      }
+      const results = {};
+      if (data) {
+        data.forEach(row => { results[row.key] = row.value; });
+      }
+      return res.status(200).json(results);
     }
 
     // POST — save one or multiple content keys
     if (req.method === 'POST') {
       const { key, value, batch } = req.body;
 
-      if (supabase) {
-        if (batch && typeof batch === 'object') {
-           const rows = Object.entries(batch).filter(([k]) => VALID_KEYS.includes(k)).map(([k, v]) => {
-             let parsed = v;
-             if (typeof v === 'string') { try { parsed = JSON.parse(v); } catch(e) { parsed = v; } }
-             return { key: k, value: parsed };
-           });
-           await supabase.from('content').upsert(rows, { onConflict: 'key' });
-           return res.status(200).json({ ok: true, saved: rows.length });
-        }
-        if (!key || !VALID_KEYS.includes(key)) return res.status(400).json({ error: 'Invalid or missing key' });
-        let parsedValue = value;
-        if (typeof value === 'string') { try { parsedValue = JSON.parse(value); } catch(e) { parsedValue = value; } }
-        await supabase.from('content').upsert({ key, value: parsedValue }, { onConflict: 'key' });
-        return res.status(200).json({ ok: true, key });
-      }
-
-      // Redis Fallback
-      const redis = getRedis();
-      // Batch save (multiple keys at once)
       if (batch && typeof batch === 'object') {
-        const pipeline = redis.pipeline();
-        for (const [k, v] of Object.entries(batch)) {
-          if (!VALID_KEYS.includes(k)) continue;
-          pipeline.set(`content:${k}`, typeof v === 'string' ? v : JSON.stringify(v));
-        }
-        await pipeline.exec();
-        return res.status(200).json({ ok: true, saved: Object.keys(batch).length });
+        const rows = Object.entries(batch)
+          .filter(([k]) => VALID_KEYS.includes(k))
+          .map(([k, v]) => {
+            let parsed = v;
+            if (typeof v === 'string') { try { parsed = JSON.parse(v); } catch(e) { parsed = v; } }
+            return { key: k, value: parsed };
+          });
+        const { error } = await supabase.from('content').upsert(rows, { onConflict: 'key' });
+        if (error) return res.status(500).json({ error: error.message, hint: 'Supabase upsert failed. Check RLS policies (INSERT/UPDATE must be allowed).' });
+        return res.status(200).json({ ok: true, saved: rows.length });
       }
 
-      // Single key save
-      if (!key || !VALID_KEYS.includes(key)) {
-        return res.status(400).json({ error: 'Invalid or missing key' });
-      }
-      await redis.set(`content:${key}`, typeof value === 'string' ? value : JSON.stringify(value));
+      if (!key || !VALID_KEYS.includes(key)) return res.status(400).json({ error: 'Invalid or missing key' });
+      let parsedValue = value;
+      if (typeof value === 'string') { try { parsedValue = JSON.parse(value); } catch(e) { parsedValue = value; } }
+      const { error } = await supabase.from('content').upsert({ key, value: parsedValue }, { onConflict: 'key' });
+      if (error) return res.status(500).json({ error: error.message, hint: 'Supabase upsert failed. Check RLS policies.' });
       return res.status(200).json({ ok: true, key });
     }
 
@@ -153,7 +102,7 @@ export default async function handler(req, res) {
     console.error('Content API error:', err.message);
     return res.status(500).json({
       error: err.message,
-      hint: 'Go to Vercel → project → Settings → Environment Variables. Add UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN from https://console.upstash.com'
+      hint: 'Visit your-site.vercel.app/api/content?debug=1 to see which env vars are set. Then go to Vercel → project → Settings → Environment Variables and add SUPABASE_URL + SUPABASE_ANON_KEY, then Redeploy.'
     });
   }
 }
