@@ -967,7 +967,11 @@
       { id: 1004, image: '/images/aperitvo.png', tag: 'FOOD GUIDE', title: 'Best Restaurants in Florence', subtitle: 'Our favorite places to eat right now, from trattorias to fine dining.' }
     ];
 
-    const DEFAULT_EVENTS_COMING = [];
+    const DEFAULT_EVENTS_COMING = [
+      { id: 3001, image: '/images/featured events.png', tag: 'JUN', date: '28 - 30', title: 'Firenze Rocks 2024', subtitle: "The city's biggest music festival returns this summer." },
+      { id: 3002, image: '/images/hidden gem.png', tag: 'JUL', date: '12 - AUG 04', title: 'Estate Fiorentina', subtitle: 'A full month of concerts, theater, and open-air magic.' },
+      { id: 3003, image: '/images/aperitvo.png', tag: 'SEP', date: '10 - 15', title: 'White Party Florence', subtitle: 'The iconic all-white celebration is back.' }
+    ];
 
     const DEFAULT_NEWEST_GUIDES = [];
 
@@ -1000,11 +1004,26 @@
 
     const DEFAULT_HG_STORIES = [];
 
-    const DEFAULT_AP_HIGHLIGHTS = [];
+    const DEFAULT_AP_HIGHLIGHTS = [
+      { id: 4001, image: '/images/guides.png', tag: 'ROOFTOP BARS', title: 'Best Rooftops for Golden Hour', subtitle: '' },
+      { id: 4002, image: '/images/real_people.png', tag: 'PIAZZA FAVORITES', title: 'Where Locals Go for Aperitivo', subtitle: '' },
+      { id: 4003, image: '/images/aperitvo.png', tag: 'COCKTAIL BARS', title: 'The Best Negronis in Florence', subtitle: '' },
+      { id: 4004, image: '/images/la_loggia.png', tag: 'WINE BARS', title: 'Great Wine, Better Company', subtitle: '' }
+    ];
 
-    const DEFAULT_AP_TIME = [];
+    const DEFAULT_AP_TIME = [
+      { id: 4005, image: '/images/guides.png', tag: '', title: 'Before Sunset', subtitle: 'The perfect spots to start your evening.' },
+      { id: 4006, image: '/images/hero_bg.png', tag: '', title: 'Golden Hour', subtitle: 'Drinks, views, and the best light in the city.' },
+      { id: 4007, image: '/images/after dark.png', tag: '', title: 'After Dark', subtitle: 'Keep the night going with drinks that last.' }
+    ];
 
-    const DEFAULT_AP_LATEST = [];
+    const DEFAULT_AP_LATEST = [
+      { id: 4008, image: '/images/aperitvo.png', tag: 'GUIDE', title: '10 Spots for the Perfect Aperitivo in Florence', date: 'June 10, 2024', subtitle: '' },
+      { id: 4009, image: '/images/real_people.png', tag: 'FOOD GUIDE', title: 'The Best Aperitivo Plates in the City', date: 'June 7, 2024', subtitle: '' },
+      { id: 4010, image: '/images/hidden gem.png', tag: 'CITY GUIDE', title: 'Hidden Terraces Worth Discovering', date: 'June 4, 2024', subtitle: '' },
+      { id: 4011, image: '/images/la_loggia.png', tag: 'INTERVIEW', title: 'Meet the Bartender Behind Gucci Garden', date: 'June 1, 2024', subtitle: '' },
+      { id: 4012, image: '/images/guides.png', tag: 'WINE GUIDE', title: "6 Natural Wine Bars You'll Love", date: 'May 28, 2024', subtitle: '' }
+    ];
 
     function doLogin() {
       const code = document.getElementById('login-code').value;
