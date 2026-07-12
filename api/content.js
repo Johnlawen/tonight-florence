@@ -1,5 +1,17 @@
 import { createClient } from '@supabase/supabase-js';
 
+// Polyfill WebSocket for Vercel serverless — Supabase realtime-js requires it at
+// module load time even though we only use REST queries in this API handler.
+if (typeof globalThis.WebSocket === 'undefined') {
+  globalThis.WebSocket = class {
+    constructor() { this.readyState = 3; }
+    addEventListener() {}
+    removeEventListener() {}
+    close() {}
+    send() {}
+  };
+}
+
 // All valid content keys
 const VALID_KEYS = [
   'ft-events', 'ft-hero', 'ft-guides', 'ft-newest-guides',
@@ -20,7 +32,14 @@ function getSupabase() {
       'Add SUPABASE_URL and SUPABASE_ANON_KEY then Redeploy.'
     );
   }
-  _supabase = createClient(url, key);
+  // Configure for server-side REST use only — no session persistence, no realtime
+  _supabase = createClient(url, key, {
+    auth: {
+      persistSession: false,
+      autoRefreshToken: false,
+      detectSessionInUrl: false,
+    },
+  });
   return _supabase;
 }
 
