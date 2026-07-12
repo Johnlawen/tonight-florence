@@ -960,7 +960,12 @@
     // DEFAULT EVENTS
     const DEFAULT_EVENTS = [];
 
-    const DEFAULT_GUIDES = [];
+    const DEFAULT_GUIDES = [
+      { id: 1001, image: '/images/la_loggia.png', tag: 'ITINERARY', title: 'The Perfect Weekend in Florence', subtitle: 'Your 48-hour guide to the very best of the city.' },
+      { id: 1002, image: '/images/guides.png', tag: 'ROOFTOP GUIDE', title: 'Best Rooftops in Florence', subtitle: 'Sunset views, great cocktails, and unforgettable nights.' },
+      { id: 1003, image: '/images/hidden gem.png', tag: 'NEIGHBORHOOD GUIDE', title: 'Santo Spirito Neighborhood Guide', subtitle: 'Where to eat, drink, shop, and wander.' },
+      { id: 1004, image: '/images/aperitvo.png', tag: 'FOOD GUIDE', title: 'Best Restaurants in Florence', subtitle: 'Our favorite places to eat right now, from trattorias to fine dining.' }
+    ];
 
     const DEFAULT_EVENTS_COMING = [];
 
@@ -1409,7 +1414,7 @@
       renderMessages();
     }
 
-    function getGuides() { return _cachedData['ft-guides'] || []; }
+    function getGuides() { return (_cachedData['ft-guides'] && _cachedData['ft-guides'].length > 0) ? _cachedData['ft-guides'] : DEFAULT_GUIDES; }
     function saveGuides(gs) {
       _cachedData['ft-guides'] = gs;
       var now = new Date().toLocaleString();

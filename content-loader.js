@@ -268,7 +268,7 @@ async function initApp() {
     // -- LOAD GUIDES --
     function loadGuides(raw) {
         var guides = parse(raw);
-        if (!guides) return;
+        if (!guides || guides.length === 0) return; // preserve hardcoded HTML fallback
         var guidesGrid = document.querySelector('.guides-grid-4');
         if (!guidesGrid) return;
         guidesGrid.innerHTML = '';

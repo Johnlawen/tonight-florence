@@ -116,13 +116,13 @@ export default async function handler(req, res) {
              if (typeof v === 'string') { try { parsed = JSON.parse(v); } catch(e) { parsed = v; } }
              return { key: k, value: parsed };
            });
-           await supabase.from('content').upsert(rows);
+           await supabase.from('content').upsert(rows, { onConflict: 'key' });
            return res.status(200).json({ ok: true, saved: rows.length });
         }
         if (!key || !VALID_KEYS.includes(key)) return res.status(400).json({ error: 'Invalid or missing key' });
         let parsedValue = value;
         if (typeof value === 'string') { try { parsedValue = JSON.parse(value); } catch(e) { parsedValue = value; } }
-        await supabase.from('content').upsert({ key, value: parsedValue });
+        await supabase.from('content').upsert({ key, value: parsedValue }, { onConflict: 'key' });
         return res.status(200).json({ ok: true, key });
       }
 
