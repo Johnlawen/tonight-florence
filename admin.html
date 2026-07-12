@@ -1047,8 +1047,12 @@
         if (r.ok) {
           setCloudStatus(true, 'Saved to cloud successfully!');
         } else {
-          r.text().then(t => console.error('Cloud save error body:', t));
-          setCloudStatus(false, 'API error ' + r.status + ' — check Vercel env vars (UPSTASH_REDIS_REST_URL, UPSTASH_REDIS_REST_TOKEN)');
+          r.json().then(data => {
+            console.error('Cloud save error body:', data);
+            setCloudStatus(false, 'API Error: ' + (data.error || r.statusText) + ' - ' + (data.hint || ''));
+          }).catch(() => {
+            setCloudStatus(false, 'API error ' + r.status + ' (See console for details)');
+          });
         }
       }).catch(function (e) {
         setCloudStatus(false, 'Cannot reach API — is the site deployed on Vercel? (' + e.message + ')');
@@ -1084,7 +1088,7 @@
           return data;
         })
         .catch(function (e) {
-          setCloudStatus(false, 'Cannot load from cloud (' + e.message + ') — Check UPSTASH env vars in Vercel. Using local fallback.');
+          setCloudStatus(false, 'Cannot load from cloud (' + e.message + '). Using local fallback.');
           const local = {};
           const keys = [
             'ft-events', 'ft-hero', 'ft-guides', 'ft-newest-guides',
